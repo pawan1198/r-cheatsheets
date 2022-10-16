@@ -1,0 +1,39 @@
+#+TITLE: Top R Packages For Data Visualization 
+
+Top R Packages For Data Visualization That You Should Know: The popular data visualization tools that are available are Tableau, Plotly, R, Google Charts, Infogram, and Kibana. The various data visualization platforms have different capabilities, functionality, and use cases. They also require a different skill set. This article discusses the use of the top R packages for data visualization. R is a language that is designed for statistical computing, graphical data analysis, and scientific research. As per study reports, data scientists and practitioners prefer R as the language for statistical modelling. Also, R dominates the preference scale, with a combined figure of 81.9% utilisation for statistical modelling among those surveyed.
+
+Below here, we listed the top R packages for data visualisation that you should know:
+
+* 1. GGPLOT2
+
+While it’s relatively easy to create standard plots in R, if you need to make a custom plot, things can get hairy fast. That’s why ggplot2 was born: to make building custom plots easier. ggplot2 is based on The Grammar of Graphics, a system for understanding graphics as composed of various layers that together create a complete plot. With ggplot2, you can, for instance, start building your plot with axes, then add points, then a line, a confidence interval, and so on. The drawback of ggplot2 is that it may be slower than base R, and new programmers may find the learning curve to be a bit steep.
+
+
+* 2. Colourpicker
+
+Colourpicker is a tool for the Shiny framework and for selecting colours in plots. This tool supports various options, such as alpha opacity, custom colour palettes, and more. The most common uses of this tool include the utilisation of the colourInput() function to create a colour input in Shiny as well as the use of the plotHelper() function/RStudio Addin to select colours for a plot.
+
+
+* 3. Highcharter
+
+Highcharter makes dynamic charting easy. It uses a single function, hchart(), to draw plots for all kinds of R object classes, from data frame to dendrogram to phylo. It also gives R coders a handy way to access the other popular Highcharts plot types, Highstock (for financial charting) and Highmaps (for schematic maps in web-based projects). The package has easy-to-customize themes, along with built-in themes like “economist,” “financial times,” and “538,” in case you want to borrow a look for your chart from the pros.
+
+
+* 4. Esquisse
+
+The esquisse package allows a user to interactively explore data by visualising it with the ggplot2 package. It allows a user to draw bar graphs, curves, scatter plots, and histograms, export the graphs, and retrieve the code generating the graph. With the help of esquisse, one can quickly visualise the data according to their type, export it to PNG or PowerPoint, and retrieve the code to reproduce the chart.
+
+
+* 5. Plotly
+
+You might know Plotly as an online platform for data visualization, but did you know you can access its capabilities from an R or Python Notebook? Like highcharter, Plotly’s forte is making interactive plots, but it offers some charts you won’t find in most packages, like contour plots, candlestick charts, and 3D charts.
+
+
+* 6. Quantmod
+
+Quantmod is an R package that provides a framework for quantitative financial modelling and trading. It provides a rapid prototyping environment that makes modelling easier by removing the repetitive workflow issues surrounding data management and visualisation.
+
+
+* 7. Leaflet
+
+Leaflet offers a lightweight but powerful way to build interactive maps, which you’ve probably seen in action (in their JS form) on sites ranging from The New York Times and The Washington Post to GitHub and GIS specialists like Mapbox and CartoDB. The R interface for Leaflet was developed using the htmlwidgets framework, which makes it easy to control and integrate Leaflet maps right in R Markdown documents (v2), RStudio, or Shiny apps.
