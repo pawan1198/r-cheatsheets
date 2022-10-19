@@ -8,26 +8,27 @@ R is one of the most popular programming languages in data science and is widely
 This cheat sheet will cover an overview of getting started with R. 
 
 # Download and Install R and Rstudio
-[Rstudio](https://www.rstudio.com/products/rstudio/download/)
+[Rstudio](https://www.rstudio.com/products/rstudio/download/)  
+
 [R](https://cran.r-project.org/)
 
-## Installing R and RStudio on Linux
+### Installing R and RStudio on Linux
 Install the R-base package using the following code or Use your package manager to install R and R-studio.
 
 ### Debian/Ubuntu/Linux Mint
-`apt-get install r-base` (as superuser)
+`apt-get install r-base` (as superuser)  
+or  
+`sudo apt-get install r-base`
+
+### Install RStudio on Linux
+Next comes installing RStudio. To install RStudio, go to download RStudio, click on the download button for RStudio desktop, click the link for the latest R version for your OS and save the .deb file.
 
 Download the correct version of R-Studio from https://www.rstudio.com/products/rstudio/download/#download
 
 `apt install -f ./filename.deb` (as superuser)
 
-### Arch Linux/Manjaro
-`pacman -S r (as superuser)`
 
-`pacman -S rstudio-desktop`
-
-
-## Install R on windows
+### Install R on windows
 Step – 1: Go to CRAN R project website.  
 Step – 2: Click on the Download R for Windows link.  
 Step – 3: Click on the base subdirectory link or install R for the first time link.  
@@ -40,7 +41,7 @@ Step – 5: Run the .exe file and follow the installation instructions.
 - 5.e. Select additional tasks like creating desktop shortcuts etc. then click Next.  
 - 5.g. Click on Finish to complete the installation.  
 
-## Install RStudio on Windows
+### Install RStudio on Windows
 Step – 1: With R-base installed, let’s move on to installing RStudio. To begin, go to download RStudio and click on the download button for RStudio desktop.  
 Step – 2: Click on the link for the windows version of RStudio and save the .exe file.  
 Step – 3: Run the .exe and follow the installation instructions.  
@@ -50,7 +51,7 @@ Step – 3: Run the .exe and follow the installation instructions.
 - 3.d. Wait for the installation process to complete.
 - 3.e. Click Finish to end the installation.
 
-## Installing R and RStudio on Mac OS X
+### Installing R and RStudio on Mac OS X
 To install R and RStudio on Mac OS X, go through the following steps:
 
 ### Install R on Mac
@@ -64,7 +65,6 @@ Step – 1: With the r-base installed, you need to install RStudio. To do that, 
 Step – 2: Click on the link for the Mac OS X version of RStudio and save the .dmg file.  
 Step – 3: Double click the downloaded file and then drag-and-drop it into your applications folder.  
 
-Now with R and RStudio installed in your system, let’s look at a few packages that might help you in learning as well as using R to its fullest potential!
 
 # Using Packages in R
 R packages are collections of functions and tools developed by the R community. They increase the power of R by improving existing base R functionalities, or by adding new ones.
@@ -86,34 +86,34 @@ setwd("/file/path")
 ```
 # Operators in R
 ## Arithmetic Operators in R
-Operator|Description
---|-- 
-a + b|Sums two variables  
-a - b|Subtracts two variables  
-a * b|Multiply two variables  
-a / b|Divide two variables  
-a ^ b|Exponentiation of a variable  
-a %% b|The remainder of a variable  
-a %/% b|Integer division of variables
+|Operator|Description|
+|--|--|
+|a + b|Sums two variables|  
+|a - b|Subtracts two variables|  
+|a * b|Multiply two variables|  
+|a / b|Divide two variables|  
+|a ^ b|Exponentiation of a variable|  
+|a %% b|The remainder of a variable|  
+|a %/% b|Integer division of variables|
 
 ## Relational Operators in R
-Operator|Description
---|--
-a == b|Tests for equality
-a != b|Tests for inequality
-a > b|Tests for greater than
-a < b|Tests for smaller than
-a >= b|Tests for greater or equal than
-a <= b|Tests for smaller or equal than
+|Operator|Description|
+|--|--|
+|a == b|Tests for equality|
+|a != b|Tests for inequality|
+|a > b|Tests for greater than|
+|a < b|Tests for smaller than|
+|a >= b|Tests for greater or equal than|
+|a <= b|Tests for smaller or equal than|
 
 ## Logical Operators in R
-Operator|Description
---|--
-!|Logical NOT
-&|Element-wise Logical AND
-&&|Logical AND
-\| |Element-wise Logical OR
-\|\| |Logical OR
+|Operator|Description|
+|--|--|
+|!|Logical NOT|
+|&|Element-wise Logical AND|
+|&&|Logical AND|
+|\| |Element-wise Logical OR|
+|\|\| |Logical OR|
 
 ## Assignment Operators in R
 Operator|Description
