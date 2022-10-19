@@ -30,9 +30,9 @@ Step – 5: Run the .exe file and follow the installation instructions.
 - 5.g. Click on Finish to complete the installation.  
 
 ## Install RStudio on Windows
-Step – 1: With R-base installed, let’s move on to installing RStudio. To begin, go to download RStudio and click on the download button for RStudio desktop.
-Step – 2: Click on the link for the windows version of RStudio and save the .exe file.
-Step – 3: Run the .exe and follow the installation instructions.
+Step – 1: With R-base installed, let’s move on to installing RStudio. To begin, go to download RStudio and click on the download button for RStudio desktop.  
+Step – 2: Click on the link for the windows version of RStudio and save the .exe file.  
+Step – 3: Run the .exe and follow the installation instructions.  
 - 3.a. Click Next on the welcome window.
 - 3.b. Enter/browse the path to the installation folder and click Next to proceed.
 - 3.c. Select the folder for the start menu shortcut or click on do not create shortcuts and then click Next.
