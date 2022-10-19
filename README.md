@@ -9,12 +9,23 @@ This cheat sheet will cover an overview of getting started with R.
 
 # Download and Install R and Rstudio
 [Rstudio](https://www.rstudio.com/products/rstudio/download/)
-[R]
+[R](https://cran.r-project.org/)
 
 ## Installing R and RStudio on Linux
-Install the R-base package using the following code
+Install the R-base package using the following code or Use your package manager to install R and R-studio.
 
-`sudo apt-get update`
+### Debian/Ubuntu/Linux Mint
+`apt-get install r-base` (as superuser)
+
+Download the correct version of R-Studio from https://www.rstudio.com/products/rstudio/download/#download
+
+`apt install -f ./filename.deb` (as superuser)
+
+### Arch Linux/Manjaro
+`pacman -S r (as superuser)`
+
+`pacman -S rstudio-desktop`
+
 
 ## Install R on windows
 Step – 1: Go to CRAN R project website.  
