@@ -9,6 +9,12 @@ This cheat sheet will cover an overview of getting started with R.
 
 # Download and Install R and Rstudio
 [Rstudio](https://www.rstudio.com/products/rstudio/download/)
+[R]
+
+## Installing R and RStudio on Linux
+Install the R-base package using the following code
+
+`sudo apt-get update`
 
 # Using Packages in R
 R packages are collections of functions and tools developed by the R community. They increase the power of R by improving existing base R functionalities, or by adding new ones.
