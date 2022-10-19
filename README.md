@@ -87,7 +87,6 @@ setwd("/file/path")
 # Operators in R
 ## Arithmetic Operators in R
 |Operator|Description|
-|--|--|
 |a + b|Sums two variables|  
 |a - b|Subtracts two variables|  
 |a * b|Multiply two variables|  
