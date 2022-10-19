@@ -8,7 +8,7 @@ R is one of the most popular programming languages in data science and is widely
 This cheat sheet will cover an overview of getting started with R. 
 
 # Download and Install R and Rstudio
-[Rstudio(https://www.rstudio.com/products/rstudio/download/)]
+[Rstudio](https://www.rstudio.com/products/rstudio/download/)
 
 # Using Packages in R
 R packages are collections of functions and tools developed by the R community. They increase the power of R by improving existing base R functionalities, or by adding new ones.
