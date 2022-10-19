@@ -86,15 +86,15 @@ setwd("/file/path")
 ```
 # Operators in R
 ## Arithmetic Operators in R
-|Operator|Description|
-|-|-|
-|a + b|Sums two variables|  
-|a - b|Subtracts two variables|  
-|a * b|Multiply two variables|  
-|a / b|Divide two variables|  
-|a ^ b|Exponentiation of a variable|  
-|a %% b|The remainder of a variable|  
-|a %/% b|Integer division of variables|
+|Operator|Description                  |
+|:-------|:--------------------------- |
+|a + b   |Sums two variables           |  
+|a - b   |Subtracts two variables      |  
+|a * b   |Multiply two variables       |  
+|a / b   |Divide two variables         |  
+|a ^ b   |Exponentiation of a variable |  
+|a %% b  |The remainder of a variable  |  
+|a %/% b |Integer division of variables|
 
 ## Relational Operators in R
 |Operator|Description|
