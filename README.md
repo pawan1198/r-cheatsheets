@@ -56,18 +56,18 @@ To install R and RStudio on Mac OS X, go through the following steps:
 
 ### Install R on Mac
 Step – 1: Go to CRAN R Project Website.  
-Step – 2: Click on the Download for (Mac) OS X link.  
+Step – 2: Click the Download for (Mac) OS X link.  
 Step – 3: Click on the link for the pkg file of the latest R version and save it.  
-Step – 4: Double click the downloaded file and follow installation instructions.  
+Step – 4: Double-click the downloaded file and follow the installation instructions.  
 
 ### Install RStudio on Mac OS X
-Step – 1: With the r-base installed, you need to install RStudio. To do that, go to download RStudio and click on the download button for the RStudio desktop.  
+Step – 1: With the r-base installed, you must install RStudio. To do that, go to download RStudio and click on the download button for the RStudio desktop.  
 Step – 2: Click on the link for the Mac OS X version of RStudio and save the .dmg file.  
-Step – 3: Double click the downloaded file and then drag-and-drop it into your applications folder.  
+Step – 3: Double-click the downloaded file and then drag-and-drop it into your applications folder.  
 
 
 # Using Packages in R
-R packages are collections of functions and tools developed by the R community. They increase the power of R by improving existing base R functionalities, or by adding new ones.
+R packages are collections of functions and tools developed by the R community. They increase the power of R by improving existing base R functionalities or adding new ones.
 ``` r
 ## Lets you install new packages (e.g., tidyverse package)
 install.packages("tidyverse")
@@ -227,11 +227,11 @@ str_sub(string, start = 1L, end = -1L)
 ```r
 str_subset(string, pattern, negate = FALSE) 
 ```
-+ Returns first pattern match in each string as a vector  
++ Returns the first pattern match in each string as a vector  
 ```r
 str_extract(string, pattern) 
 ```
-+ Returns first pattern match in each string as a matrix with a column for each group in the pattern  
++ Returns the first pattern match in each string as a matrix with a column for each group in the pattern  
 ```r
 str_match(string, pattern)
 ```
@@ -308,11 +308,11 @@ df[2,3]
 #>13
 ```
 # Manipulating Data Frames in R
-+ Takes a sequence of vector, matrix or data-frame arguments and combines them by columns  
++ Takes a sequence of vector, matrix, or data-frame arguments and combines them with columns  
 ```r
 cbind(df1,df2)
 ```
-+ Takes a sequence of vector, matrix or data frame arguments and combines them by rows  
++ Takes a sequence of vector, matrix, or data frame arguments and combines them with rows  
 ```r
 rbind(df1,df2)
 ```
