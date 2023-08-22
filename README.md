@@ -143,11 +143,11 @@ c(1:59)
 Here c called the command  
 Within the brackets, the things called elements, and in starting of elements inside the square bracket [] is the position of the element or the indicate the row number  
 
-There are types of vector
-Numeric vector -  1,2,3,4 
-Character vector - "A", "a", "b", "ram"
-Logical - True, False
-
+There are types of vector  
+Numeric vector -  1,2,3,4   
+Character vector - "A", "a", "b", "ram"  
+Logical - True, False  
+  
 - Creates a vector using elements separated by commas
 ```r 
 c(1,3,5)
