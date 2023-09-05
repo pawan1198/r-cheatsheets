@@ -8,7 +8,7 @@ R is one of the most popular programming languages in data science and is widely
 This cheat sheet will cover an overview of getting started with R. 
 
 There are some cheatsheet:  
-[a][Sampling-Strata](SamplingStrata.pdf)  
+[Sampling-Strata](SamplingStrata.pdf)  
 [Advanced-R](advancedR.pdf)    
 [Arrow](arrow-cheatsheet.pdf)  
 [base-r](base-r.pdf)  
