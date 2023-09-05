@@ -1,5 +1,5 @@
 [<img src="https://www.r-project.org/Rlogo.png" align="right" width="200">](https://www.r-project.org/about.html)
-# Auther
+## Author
 [Pawan](www.linkedin.com/in/pawanjangra1198)
 # Getting Started with R Cheat Sheet
 
