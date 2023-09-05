@@ -1,6 +1,5 @@
 [<img src="https://www.r-project.org/Rlogo.png" align="right" width="200">](https://www.r-project.org/about.html)
 
-[pdf1](base-r.pdf)
 # Getting Started with R Cheat Sheet
 
 R is one of the most popular programming languages in data science and is widely used across various industries and in academia. Given that it’s open-source, easy to learn, and capable of handling complex data and statistical manipulations, R has become the preferred computing environment for many data scientists today.
@@ -8,7 +7,74 @@ R is one of the most popular programming languages in data science and is widely
 This cheat sheet will cover an overview of getting started with R. 
 
 There are some cheatsheet:  
-[Sampling Strata](SamplingStrata.pdf)   [Advanced R](advancedR.pdf)   [Arrow](arrow-cheatsheet.pdf)
+[Sampling-Strata](SamplingStrata.pdf)  
+[Advanced-R](advancedR.pdf)    
+[Arrow](arrow-cheatsheet.pdf)  
+base-r.pdf
+bayesplot.pdf
+bcea.pdf
+caret.pdf
+cartography.pdf
+collapse.pdf
+data-import.pdf
+data-transformation.pdf
+data-visualization.pdf
+datatable.pdf
+declaredesign.pdf
+distr6.pdf
+estimatr.pdf
+eurostat.pdf
+factors.pdf
+gganimate.pdf
+ggplot.jpeg
+golem.pdf
+gwasrapidd.pdf
+h2o.pdf
+how-big-is-your-graph.pdf
+imputeTS.pdf
+jfa.pdf
+keras.pdf
+labelled.pdf
+latexsheet-a4.pdf
+leaflet.pdf
+lubridate.pdf
+mlr.pdf
+nardl.pdf
+nimble.pdf
+oSCR.pdf
+overviewR.pdf
+package-development.pdf
+packagefinder.pdf
+parallel_computation.pdf
+plumber.pdf
+purrr.pdf
+quanteda.pdf
+quincunx.pdf
+randomizr.pdf
+regex.pdf
+reticulate.pdf
+rmarkdown.pdf
+rphylopic.pdf
+rstudio-ide.pdf
+sas-r.pdf
+sf.pdf
+shiny.pdf
+sjmisc.pdf
+slackr.pdf
+sparklyr.pdf
+stata2r.pdf
+strings.pdf
+survminer.pdf
+syntax.pdf
+teachR.pdf
+tidyr.pdf
+time-series.pdf
+tsbox.pdf
+vegan.pdf
+vtree.pdf
+what-is-ggplot.jpeg
+xplain.pdf
+
 
 # Download and Install R and Rstudio
 [Rstudio](https://www.rstudio.com/products/rstudio/download/)  
