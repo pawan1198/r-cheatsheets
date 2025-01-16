@@ -387,4 +387,4 @@ df %>%
     summarise(total = sum(x))  
 summarise  
 ```
-![Next](episodes/00-intro-eported.pdf)
+[Next](episodes/00-intro-eported.pdf)
