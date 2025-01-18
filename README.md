@@ -3,11 +3,11 @@
 [Pawan](www.linkedin.com/in/pawanjangra1198)
 # Getting Started with R Cheat Sheet
 
-R is one of the most popular programming languages in data science and is widely used across various industries and in academia. Given that it’s open-source, easy to learn, and capable of handling complex data and statistical manipulations, R has become the preferred computing environment for many data scientists today.
+R is one of the most popular programming languages in data science and is widely used across various industries and academia. It’s open-source, easy to learn, and capable of handling complex data and statistical manipulations, making it the preferred computing environment for many data scientists today.
 
 This cheat sheet will cover an overview of getting started with R. 
 
-You can find some usefull cheatsheet [here](cheatsheets.md)  
+You can find some useful cheatsheets [here](cheatsheets.md)  
 
 
 # Download and Install R and Rstudio
@@ -49,7 +49,7 @@ Step – 2: Click on the link for the Windows version of RStudio and save the .e
 Step – 3: Run the .exe and follow the installation instructions.  
 - 3.a. Click Next on the welcome window.
 - 3.b. Enter/browse the path to the installation folder and click Next to proceed.
-- 3.c. Select the folder for the start menu shortcut, click on do not create shortcuts, and click Next.
+- 3.c. Select the folder for the start menu shortcut, click on Do not Create shortcuts, and click Next.
 - 3.d. Wait for the installation process to complete.
 - 3.e. Click Finish to end the installation.
 
