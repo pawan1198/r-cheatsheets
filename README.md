@@ -1,6 +1,6 @@
 [<img src="https://www.r-project.org/Rlogo.png" align="right" width="200">](https://www.r-project.org/about.html)
 ## Author
-[Pawan](www.linkedin.com/in/pawanjangra1198)
+[Pawan](https://www.linkedin.com/in/pawanjangra1198/)
 # Getting Started with R Cheat Sheet
 
 R is one of the most popular programming languages in data science and is widely used across various industries and academia. It’s open-source, easy to learn, and capable of handling complex data and statistical manipulations, making it the preferred computing environment for many data scientists today.
