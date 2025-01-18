@@ -9,9 +9,9 @@ This cheat sheet will cover an overview of getting started with R.
 
 You can find some useful cheatsheets [here](cheatsheets.md)  
 
-[Data Types in R](episodes/data-types-exported.html)
-[Data Types in R](episodes/data-frame-exported.html)
-[Data Types in R](episodes/reshaping-data-exported.html)
+[Data Types in R](episodes/data-types-exported.html)  
+[Data Types in R](episodes/data-frame-exported.html)  
+[Data Types in R](episodes/reshaping-data-exported.html)  
 
 
 # Download and Install R and Rstudio
