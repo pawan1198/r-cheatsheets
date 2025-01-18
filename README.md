@@ -9,6 +9,10 @@ This cheat sheet will cover an overview of getting started with R.
 
 You can find some useful cheatsheets [here](cheatsheets.md)  
 
+[Data Types in R](episodes/data-types-exported.html)
+[Data Types in R](episodes/data-frame-exported.html)
+[Data Types in R](episodes/reshaping-data-exported.html)
+
 
 # Download and Install R and Rstudio
 [Rstudio](https://www.rstudio.com/products/rstudio/download/)  
@@ -16,7 +20,7 @@ You can find some useful cheatsheets [here](cheatsheets.md)
 [R](https://cran.r-project.org/)
 
 ## Installing R and RStudio on Linux
-Install the R-base package using the following code or Use your package manager to install R and R-studio.
+You can just install the R-base package using the following code or Use your package manager to install R and R-studio.
 
 ## Debian/Ubuntu/Linux Mint
 `apt-get install r-base` (as superuser)  
