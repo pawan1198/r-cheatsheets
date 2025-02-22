@@ -1,10 +1,6 @@
-// NPM
-"scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+{
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
 }
-// YARN
-"scripts": {
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build",
-}
+
