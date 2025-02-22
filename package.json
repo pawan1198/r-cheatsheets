@@ -1,0 +1,10 @@
+// NPM
+"scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+}
+// YARN
+"scripts": {
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
+}
