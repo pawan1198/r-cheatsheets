@@ -49,6 +49,7 @@ Access Items
 We can use single brackets [ ], double brackets [[ ]] or $ to access columns from a data frame:
 
 Example
+```{r}
 Data_Frame <- data.frame (
   Training = c("Strength", "Stamina", "Other"),
   Pulse = c(100, 150, 120),
@@ -60,10 +61,12 @@ Data_Frame[1]
 Data_Frame[["Training"]]
 
 Data_Frame$Training
+```
 Add Rows
 Use the rbind() function to add new rows in a Data Frame:
 
 Example
+```{r}
 Data_Frame <- data.frame (
   Training = c("Strength", "Stamina", "Other"),
   Pulse = c(100, 150, 120),
@@ -75,10 +78,13 @@ New_row_DF <- rbind(Data_Frame, c("Strength", 110, 110))
 
 # Print the new row
 New_row_DF
+```
+
 Add Columns
 Use the cbind() function to add new columns in a Data Frame:
 
 Example
+```{r}
 Data_Frame <- data.frame (
   Training = c("Strength", "Stamina", "Other"),
   Pulse = c(100, 150, 120),
@@ -90,10 +96,13 @@ New_col_DF <- cbind(Data_Frame, Steps = c(1000, 6000, 2000))
 
 # Print the new column
 New_col_DF
+```
+
 Remove Rows and Columns
 Use the c() function to remove rows and columns in a Data Frame:
 
 Example
+```{r}
 Data_Frame <- data.frame (
   Training = c("Strength", "Stamina", "Other"),
   Pulse = c(100, 150, 120),
@@ -105,10 +114,13 @@ Data_Frame_New <- Data_Frame[-c(1), -c(1)]
 
 # Print the new data frame
 Data_Frame_New
+```
+
 Amount of Rows and Columns
 Use the dim() function to find the amount of rows and columns in a Data Frame:
 
 Example
+```{r}
 Data_Frame <- data.frame (
   Training = c("Strength", "Stamina", "Other"),
   Pulse = c(100, 150, 120),
@@ -116,9 +128,11 @@ Data_Frame <- data.frame (
 )
 
 dim(Data_Frame)
+```
 You can also use the ncol() function to find the number of columns and nrow() to find the number of rows:
 
 Example
+```{r}
 Data_Frame <- data.frame (
   Training = c("Strength", "Stamina", "Other"),
   Pulse = c(100, 150, 120),
@@ -127,10 +141,12 @@ Data_Frame <- data.frame (
 
 ncol(Data_Frame)
 nrow(Data_Frame)
+```
 Data Frame Length
 Use the length() function to find the number of columns in a Data Frame (similar to ncol()):
 
 Example
+```{r}
 Data_Frame <- data.frame (
   Training = c("Strength", "Stamina", "Other"),
   Pulse = c(100, 150, 120),
@@ -138,10 +154,13 @@ Data_Frame <- data.frame (
 )
 
 length(Data_Frame)
+```
+
 Combining Data Frames
 Use the rbind() function to combine two or more data frames in R vertically:
 
 Example
+```{r}
 Data_Frame1 <- data.frame (
   Training = c("Strength", "Stamina", "Other"),
   Pulse = c(100, 150, 120),
@@ -156,9 +175,12 @@ Data_Frame2 <- data.frame (
 
 New_Data_Frame <- rbind(Data_Frame1, Data_Frame2)
 New_Data_Frame
+```
+
 And use the cbind() function to combine two or more data frames in R horizontally:
 
 Example
+```{r}
 Data_Frame3 <- data.frame (
   Training = c("Strength", "Stamina", "Other"),
   Pulse = c(100, 150, 120),
@@ -172,3 +194,4 @@ Data_Frame4 <- data.frame (
 
 New_Data_Frame1 <- cbind(Data_Frame3, Data_Frame4)
 New_Data_Frame1
+```
