@@ -1,0 +1,689 @@
+Skip to content
+DEV Community
+Find related posts...
+Powered by  Algolia
+Log in
+Create account
+
+34
+Jump to Comments
+
+243
+Save
+
+Boost
+
+Cover image for Create A Sidebar Menu using HTML and CSS only
+CodingNepal
+CodingNepal
+Posted on 10 Jun 2024 • Edited on 19 Jul 2024 • Originally published at codingnepalweb.com
+
+
+277
+
+5
+
+7
+
+6
+
+8
+Create A Sidebar Menu using HTML and CSS only
+#
+html
+#
+css
+#
+webdev
+#
+javascript
+Create A Sidebar Menu using HTML and CSS only
+
+This article was originally published at https://www.codingnepalweb.com.
+
+As a website visitor, you’ve probably noticed sidebars on various sites. But as a beginner web developer, have you ever wondered how to create one using only HTML and CSS? Yes, just HTML and CSS! Creating a sidebar helps the beginner to gain a solid understanding of HTML basics, improve CSS styling skills, and get practical experience in web design.
+
+In this blog post, I’ll show you how to make a responsive sidebar using just HTML and CSS. The sidebar will start hidden, showing only icons for each link. When you hover over it, the sidebar will smoothly expand to show the links.
+
+We'll use basic HTML elements like <aside>, <ul>, <li>, and <a>, and simple CSS properties to style it. This CSS sidebar project is straightforward, so you should find it easy to follow and understand the code.
+
+Video Tutorial of Responsive Sidebar Menu in HTML & CSS
+
+
+The YouTube video above is a great resource if you prefer learning from video tutorials. In this video, I explain each line of code and provide informative comments to make the process of creating your HTML sidebar easy to follow, especially for beginners.
+
+However, if you prefer reading blog posts or need a step-by-step guide for this project, you can keep reading this post.
+
+Steps to Create Responsive Sidebar in HTML and CSS
+To create a responsive sidebar using HTML and CSS only, follow these simple step-by-step instructions:
+
+First, create a folder with any name you like. Then, make the necessary files inside it.
+Create a file called index.html to serve as the main file.
+Create a file called style.css for the CSS code.
+Finally, download the Images folder and place it in your project directory. This folder contains the logo and user images used for this sidebar project.
+To start, add the following HTML codes to your index.html file: This code contains essential HTML markup with different semantic tags like <aside>, <ul>, <li>, and <a> to create our sidebar layout.
+
+
+
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sidebar Menu HTML and CSS | CodingNepal</title>
+  <!-- Linking Google Font Link For Icons -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="images/logo.png" alt="logo" />
+      <h2>CodingLab</h2>
+    </div>
+    <ul class="sidebar-links">
+      <h4>
+        <span>Main Menu</span>
+        <div class="menu-separator"></div>
+      </h4>
+      <li>
+        <a href="#">
+          <span class="material-symbols-outlined"> dashboard </span>Dashboard</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> overview </span>Overview</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> monitoring </span>Analytic</a>
+      </li>
+      <h4>
+        <span>General</span>
+        <div class="menu-separator"></div>
+      </h4>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> folder </span>Projects</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> groups </span>Groups</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> move_up </span>Transfer</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> flag </span>All Reports</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined">
+            notifications_active </span>Notifications</a>
+      </li>
+      <h4>
+        <span>Account</span>
+        <div class="menu-separator"></div>
+      </h4>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> account_circle </span>Profile</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> settings </span>Settings</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> logout </span>Logout</a>
+      </li>
+    </ul>
+    <div class="user-account">
+      <div class="user-profile">
+        <img src="images/profile-img.jpg" alt="Profile Image" />
+        <div class="user-detail">
+          <h3>Eva Murphy</h3>
+          <span>Web Developer</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+</body>
+</html>
+
+
+Next, add the following CSS codes to your style.css file to make your sidebar functional and visually appealing. Feel free to experiment with different CSS properties, such as colors, fonts, backgrounds, etc., to make your sidebar even more attractive.
+
+
+
+/* Importing Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: #F0F4FF;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 85px;
+  display: flex;
+  overflow-x: hidden;
+  flex-direction: column;
+  background: #161a2d;
+  padding: 25px 20px;
+  transition: all 0.4s ease;
+}
+
+.sidebar:hover {
+  width: 260px;
+}
+
+.sidebar .sidebar-header {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .sidebar-header img {
+  width: 42px;
+  border-radius: 50%;
+}
+
+.sidebar .sidebar-header h2 {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: 23px;
+}
+
+.sidebar-links h4 {
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
+  margin: 10px 0;
+  position: relative;
+}
+
+.sidebar-links h4 span {
+  opacity: 0;
+}
+
+.sidebar:hover .sidebar-links h4 span {
+  opacity: 1;
+}
+
+.sidebar-links .menu-separator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(1);
+  transform: translateY(-50%);
+  background: #4f52ba;
+  transform-origin: right;
+  transition-delay: 0.2s;
+}
+
+.sidebar:hover .sidebar-links .menu-separator {
+  transition-delay: 0s;
+  transform: scaleX(0);
+}
+
+.sidebar-links {
+  list-style: none;
+  margin-top: 20px;
+  height: 80%;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.sidebar-links::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar-links li a {
+  display: flex;
+  align-items: center;
+  gap: 0 20px;
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 15px 10px;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.sidebar-links li a:hover {
+  color: #161a2d;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.user-account {
+  margin-top: auto;
+  padding: 12px 10px;
+  margin-left: -10px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  color: #161a2d;
+}
+
+.user-profile img {
+  width: 42px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.user-profile h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.user-profile span {
+  font-size: 0.775rem;
+  font-weight: 600;
+}
+
+.user-detail {
+  margin-left: 23px;
+  white-space: nowrap;
+}
+
+.sidebar:hover .user-account {
+  background: #fff;
+  border-radius: 4px;
+}
+
+
+That's it! If you've added the code correctly, you're ready to see your sidebar. Open the index.html file in your preferred browser to view the sidebar in action.
+
+Conclusion and final words
+Creating a sidebar using HTML and CSS is an achievable task for beginners in web development. By following the steps and code provided in this blog post, you successfully created your sidebar. This project helped you grasp the essentials of HTML structure and CSS styling, giving you a foundational understanding of how sidebars are structured and designed.
+
+To further boost your web development skills, especially with sidebars, consider recreating other attractive sidebars showcased on this website. Many of these sidebars utilize JavaScript to implement advanced features such as dark mode, dropdown menus, and more.
+
+If you encounter any problems while creating your sidebar, you can download the source code files for this project for free by clicking the “Download” button. You can also view a live demo of it by clicking the “View Live” button.
+
+View Live Demo
+
+Download Code Files
+
+If you’ve found my content helpful, please consider buying me a coffee to support me in creating more content.
+
+Buy Me A Coffee
+
+Top comments (34)
+Subscribe
+pic
+Add to the discussion
+ 
+ 
+menelion profile image
+André Polykanine
+•
+13 Jun 24
+
+Sorry, I didn't test your solution thoroughly, but I see from the code that it's a bit… messy accessibility-wise, sorry for the word. first, headings inside lists seems not to be a good practice; then, your menu items repeat twice. Would a screen reader repeat them twice also? Sorry again, I can't tell anything more without real testing.
+
+
+3
+ likes
+Like
+Reply
+ 
+ 
+sandeepkumarkuanar profile image
+Sandeep Kumar Kuanar
+•
+11 Jun 24
+
+This works, thanks for your efforts!! I am really grateful
+
+
+3
+ likes
+Like
+Reply
+ 
+ 
+codingnepal profile image
+CodingNepal 
+•
+20 Jun 24
+
+You're welcome! I'm glad it works for you!
+
+
+1
+ like
+Like
+Reply
+ 
+ 
+alexanderwalsh profile image
+Alexander Walsh
+•
+2 Jul 24
+
+Really useful. Will implement it for my future Projects. Thanks man 👍
+
+
+2
+ likes
+Like
+Reply
+ 
+ 
+codingnepal profile image
+CodingNepal 
+•
+2 Jul 24
+
+Glad you found it useful! Good luck with your future projects! 👍
+
+
+1
+ like
+Like
+Reply
+ 
+ 
+best_codes profile image
+Best Codes
+•
+11 Jun 24
+
+This is awesome, I'm saving this for future reference! Keep up the good work!
+
+
+5
+ likes
+Like
+Reply
+ 
+ 
+codingnepal profile image
+CodingNepal 
+•
+11 Jun 24
+
+Thanks a lot! Glad you found it useful!
+
+
+4
+ likes
+Like
+Reply
+ 
+ 
+wiley19 profile image
+Wilson Anorue
+•
+11 Jun 24
+
+Awesome, I really need this knowledge for some project I'm working on.
+
+
+5
+ likes
+Like
+Reply
+ 
+ 
+codingnepal profile image
+CodingNepal 
+•
+11 Jun 24
+
+Glad to help! Good luck with your project!
+
+
+3
+ likes
+Like
+Reply
+ 
+ 
+sanjuly profile image
+Sandra Córdoba
+•
+12 Jun 24
+
+Thank
+
+
+3
+ likes
+Like
+Reply
+ 
+ 
+codingnepal profile image
+CodingNepal 
+•
+15 Jun 24
+
+Thanks! I'm glad you're learning a lot!
+
+
+1
+ like
+Like
+Reply
+ 
+ 
+youjean83 profile image
+Eugen Hildt
+•
+11 Jun 24
+
+A good one. Thank you for the inspiration.
+
+
+3
+ likes
+Like
+Reply
+ 
+ 
+codingnepal profile image
+CodingNepal 
+•
+11 Jun 24
+
+Glad you liked it! You're welcome!
+
+
+2
+ likes
+Like
+Reply
+ 
+ 
+muhammadanas8 profile image
+MuhammadAnas8
+•
+11 Jun 24
+
+Amazing
+
+
+3
+ likes
+Like
+Reply
+ 
+ 
+codingnepal profile image
+CodingNepal 
+•
+11 Jun 24
+
+Thank you :)
+
+
+2
+ likes
+Like
+Reply
+ 
+ 
+albertobarrago profile image
+alBz
+•
+11 Jun 24
+
+great job ;-)
+
+
+3
+ likes
+Like
+Reply
+ 
+ 
+codingnepal profile image
+CodingNepal 
+•
+12 Jun 24
+
+Thank you :)
+
+
+1
+ like
+Like
+Reply
+View full discussion (34 comments)
+Code of Conduct • Report abuse
+DEV Community
+
+Need a better mental model for async/await?
+
+Check out this classic DEV post on the subject.
+
+⭐️🎀 JavaScript Visualized: Promises & Async/Await
+async await
+
+Read next
+dpc profile image
+Daily JavaScript Challenge #JS-73: Validate Palindrome Permutation
+DPC - Jan 15
+
+midhunkrishnan profile image
+Installing your react.js local package registry to your project
+Midhun Krishnan R - Dec 14 '24
+
+chris_devto profile image
+Scandinavian Airlines were fined $100,000 for accessibility bugs
+Chris - Dec 14 '24
+
+aryprogrammer profile image
+Comprehensive Guide: Creating and Running the "Sample Video Generator" with Daytona
+Arya Pratap Singh - Dec 12 '24
+
+
+CodingNepal
+Follow
+CodingNepal is a blog dedicated to providing valuable and informative content about web development technologies such as HTML, CSS, JavaScript, and PHP.
+Location
+Nepal
+Joined
+10 Jun 2024
+More from CodingNepal
+How to Create Card Slider in HTML CSS & JavaScript | Step-by-Step Guide
+#html #css #javascript #webdev
+⛅ Build A Weather App in HTML CSS and JavaScript
+#webdev #javascript #html #css
+Build A Google Gemini Chatbot with HTML CSS and JavaScript
+#webdev #javascript #html #css
+
+
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sidebar Menu HTML and CSS | CodingNepal</title>
+  <!-- Linking Google Font Link For Icons -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="images/logo.png" alt="logo" />
+      <h2>CodingLab</h2>
+    </div>
+    <ul class="sidebar-links">
+      <h4>
+        <span>Main Menu</span>
+        <div class="menu-separator"></div>
+      </h4>
+      <li>
+        <a href="#">
+          <span class="material-symbols-outlined"> dashboard </span>Dashboard</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> overview </span>Overview</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> monitoring </span>Analytic</a>
+      </li>
+      <h4>
+        <span>General</span>
+        <div class="menu-separator"></div>
+      </h4>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> folder </span>Projects</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> groups </span>Groups</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> move_up </span>Transfer</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> flag </span>All Reports</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined">
+            notifications_active </span>Notifications</a>
+      </li>
+      <h4>
+        <span>Account</span>
+        <div class="menu-separator"></div>
+      </h4>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> account_circle </span>Profile</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> settings </span>Settings</a>
+      </li>
+      <li>
+        <a href="#"><span class="material-symbols-outlined"> logout </span>Logout</a>
+      </li>
+    </ul>
+    <div class="user-account">
+      <div class="user-profile">
+        <img src="images/profile-img.jpg" alt="Profile Image" />
+        <div class="user-detail">
+          <h3>Eva Murphy</h3>
+          <span>Web Developer</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+</body>
+</html>
