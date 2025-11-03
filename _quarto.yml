@@ -3,9 +3,9 @@ project:
   output-dir: docs
 
 book:
-  title: "r"
+  title: "R Cheatsheets"
   author: "Pawan"
-  date: "11/03/2025"
+  date: "11/09/2022"
   chapters:
     - index.qmd
     - getting-start-with-R.md
