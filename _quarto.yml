@@ -1,0 +1,26 @@
+project:
+  type: book
+
+book:
+  title: "r"
+  author: "Pawan"
+  date: "11/03/2025"
+  chapters:
+    - index.qmd
+    - 00-intro.Rmd
+    - 01-intro-to-r.Rmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    documentclass: scrreprt
+
+
+

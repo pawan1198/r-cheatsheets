@@ -1,0 +1,290 @@
+---
+title: "data in R"
+output: html_document
+date: "2023-09-14"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Data types
+
+In any programming language there are some basic types of data; numeric, character, integer, and logical.
+
+## Numeric data type
+
+A numeric type  of data consists the whole number and also number with decimal. In other words we can say a numeric types data consists a numeric with decimal. for example
+
+```{r}
+c(2,3,2.3,5.7,8.9,0,78,80)->num
+num
+class(num)
+```
+## Integer data type
+An integer type of data consists only the whole number. Or we can say an integer type of data having number without decimal 
+
+## Character data type
+
+A character type of data represented a alphabetic string values. A special type of character string is "factor" which is likely in an order.
+
+```{r}
+c("a","hello","B","world")->chr
+chr
+class(chr)
+```
+## Logical data type
+A logical type of data consists the value either True or False.
+
+```{r}
+c(TRUE,FALSE)->logi
+logi
+class(logi)
+```
+
+Note: You can also specify the class of any vector or variable using 
+
+`as.numeric()`  for numeric type of data
+`as.character`  for character type of data
+`as.factor`  
+`as.logical`
+
+# Data Structure
+A data structure is a particular way of organizing data in a computer so that it can be used effectively. Data structures are known to make data accessing and operations easier. They are also selected or designed to be used with different algorithms.
+
+In other words a data structure is essentially a way to organize data in a system to facilitate effective usage of the same. The whole idea is to reduce the complexities of space and time in various tasks. 
+
+While using a programming language, different variables are essential to store different data. These variables are reserved in a memory location for storing values. Once a variable is created, some area in the memory is reserved. 
+
+Data structures are the objects that are manipulated regularly in R. They are used to store data in an organized fashion to make data manipulation and other data operations more efficient. R has many data structures. The following section will discuss them in detail.
+
+## Vector
+A vector is an ordered collection of basic data types of a given length. The only key thing here is all the elements of a vector must be of the identical data type e.g homogeneous data structures. Vectors are one-dimensional data structures.
+
+Vector is one of the basic data structures in R. It is homogeneous, which means that it only contains elements of the same data type. Data types can be numeric, integer, character, complex, or logical.
+
+Vectors are created by using the `c()` function. Coercion takes place in a vector, from bottom to top, if the elements passed are of different data types, from logical to integer to double to character.
+
+The `class()` function is used to check the class of the vector.
+
+```{r}
+# Vectors(ordered collection of same data type)
+X = c(1, 3, 5, 7, 8)
+X
+Vec1 <- c(44, 25, 64, 96, 30)
+Vec1
+Vec2 <- c(1, FALSE, 9.8, "hello world")
+Vec2
+class(X)
+class(Vec1)
+class(Vec2)
+```
+
+Elements of a vector can be accessed by using their respective indexes. [ ] brackets are used to specify indexes of the elements to be accessed.
+For example:
+
+```{r}
+x <- c("Jan","Feb","March","Apr","May","June","July")
+x
+y <- x[c(3,2,7)]
+y
+```
+
+
+### Vector Arithmetic
+
+You can perform addition, subtraction, multiplication, and division on the vectors having the same number of elements in the following ways:
+```{r}
+v1 <- c(4,6,7,31,45)
+v1
+v2 <- c(54,1,10,86,14,57)
+v2
+addv <- v1+v2
+addv
+subv <- v1-v2
+subv
+multiv <- v1*v2
+multiv
+diviv <- v1/v2
+diviv
+```
+
+### Sorting a Vector
+
+You can sort the elements of a vector by using the sort() function in the following way:
+
+```{r}
+v <- c(4,78,-45,6,89,678)
+sortv <- sort(v)
+sortv
+
+#Sort the elements in the reverse order
+revsortv <- sort(v, decreasing = TRUE)
+revsortv
+#Sorting character vectors
+v <- c("Jan","Feb","March","April")
+sortv <- sort(v)
+sortv 
+#Sorting character vectors in reverse order
+revsortv <- sort(v, decreasing = TRUE)
+revsortv
+```
+
+
+## Lists
+A list is a generic object consisting of an ordered collection of objects. Lists are heterogeneous data structures. These are also one-dimensional data structures. A list can be a list of vectors, list of matrices, a list of characters and a list of functions and so on.
+
+A list is a non-homogeneous data structure, which implies that it can contain elements of different data types. It accepts numbers, characters, lists, and even matrices and functions inside it. It is created by using the list() function.
+
+
+
+```{r}
+# The first attributes is a numeric vector containing the IDs which is created using the 'c' command here
+Id = c(1, 2, 3, 4)
+ 
+# The second attribute is the name which is created using this line of code here which is the character vector
+Name = c("Debi", "Sandeep", "Subham", "Shiba")
+ 
+# The third attribute is the number of which is a single numeric variable.
+number = 4
+ 
+# We can combine all these three different data types into a list which can be done using a list command
+List = list(Id, Name, number)
+List
+
+list1<- list("Sam", "Green", c(8,2,67), TRUE, 51.99, 11.78,FALSE)
+list1
+```
+
+## Accessing the Elements of a List
+
+The elements of a list can be accessed by using the indices of those elements.
+
+For example:
+```{r}
+list2 <- list(matrix(c(3,9,5,1,-2,8), nrow = 2), c("Jan","Feb","Mar"), list(3,4,5))
+list2[1]
+list2[2]
+list2[3]
+```
+
+
+## Dataframes
+Dataframes are generic data objects of R which are used to store the tabular data. Data frame is a two-dimensional structure, in which each column contains values of one variable and each row contains one set of values from each column.
+
+
+A data frame has the following characteristics:
+
+A data-frame must have column names and every row should have a unique name.
+Each column must have the identical number of items.
+Each item in a single column must be of the same data type.
+Different columns may have different data types.
+The column names of a data frame should not be empty.
+The row names of a data frame should be unique.
+The data stored in a data frame can be a numeric, factor, or character type.
+To create a data frame we use the data.frame() function.
+
+
+
+```{r}
+##A vector which is a character vector
+Name = c("Amiya", "Raj", "Asish")
+ 
+# A vector which is a character vector
+Language = c("R", "Python", "Java")
+ 
+# A vector which is a numeric vector
+Age = c(22, 25, 45)
+ 
+# To create dataframe use data.frame command and then pass each of the vectors we have created as arguments to the function data.frame()
+df = data.frame(Name, Language, Age)
+df
+```
+
+## Matrices
+A matrix is a rectangular arrangement of numbers in rows and columns. In a matrix, as we know rows are the ones that run horizontally and columns are the ones that run vertically. Matrices are two-dimensional, homogeneous data structures.
+Now, let’s see how to create a matrix in R. To create a matrix in R you need to use the function called matrix. The arguments to this `matrix()` are the set of elements in the vector. You have to pass how many numbers of rows and how many numbers of columns you want to have in your matrix and this is the important point you have to remember that by default, matrices are in column-wise order. 
+
+The basic syntax to create a matrix is given below:
+
+`matrix(data, nrow, ncol, byrow, dimnames)`
+where,
+`data` = the input element of a matrix given as a vector.
+`nrow` = the number of rows to be created.
+`ncol` = the number of columns to be created.
+`byrow` = the row-wise arrangement of the elements instead of column-wise
+`dimnames` = the names of columns or rows to be created.
+
+
+```{r}
+A = matrix(
+     # Taking sequence of elements
+    c(1, 2, 3, 4, 5, 6, 7, 8, 9),
+     
+    # No of rows and columns
+    nrow = 3, ncol = 3, 
+ 
+    # By default matrices are in column-wise order So this parameter decide how to arrange the matrix         
+    byrow = TRUE                            
+)
+A
+M1 <- matrix(c(1:9), nrow = 3, ncol =3, byrow= TRUE)
+M1
+M2 <-  matrix(c(1:9), nrow = 3, ncol =3, byrow= FALSE)
+M2
+```
+
+By using row and column names, a matrix can be created as follows:
+
+```{r}
+rownames = c("row1", "row2", "row3")
+colnames = c("col1", "col2", "col3")
+M3 <- matrix(c(1:9), nrow = 3, byrow = TRUE, dimnames = list(rownames, colnames))
+M3
+```
+
+### Accessing the Elements of a Matrix
+
+To access the elements of a matrix, row and column indices are used in the following ways:
+For accessing the elements of the matrix M3 created above, use the following syntax:
+
+```{r}
+M3[1,1] # first argument represent row number and second argument represent column number
+M3[3,3]
+M3[2,3]
+```
+
+## Arrays
+Arrays are the R data objects which store the data in more than two dimensions. Arrays are n-dimensional data structures. For example, if we create an array of dimensions (2, 3, 3) then it creates 3 rectangular matrices each with 2 rows and 3 columns. They are homogeneous data structures.
+
+Now, let’s see how to create arrays in R. To create an array in R you need to use the function called array(). The arguments to this array() are the set of elements in vectors and you have to pass a vector containing the dimensions of the array. 
+
+```{r}
+A = array(
+    # Taking sequence of elements
+    c(1, 2, 3, 4, 5, 6, 7, 8),
+ 
+    # Creating two rectangular matrices each with two rows and two columns
+    dim = c(2, 2, 2)                       
+)
+A
+```
+## Factors
+Factors are the data objects which are used to categorize the data and store it as levels. They are useful for storing categorical data. They can store both strings and integers. They are useful to categorize unique values in columns like `TRUE` or `FALSE`, or `MALE` or `FEMALE`, etc.. They are useful in data analysis for statistical modeling.
+
+
+Factors can be created using the as.factor() function and they take vectors as inputs.
+For example:
+
+```{r}
+fac = factor(c("Male", "Female", "Male",
+               "Male", "Female", "Male", "Female"))
+fac 
+data <- c("Male","Female","Male","Child","Child","Male","Female","Female")
+data
+factordata <- as.factor(data)
+factordata
+
+```
+Now, let’s see how to create factors in R. To create a factor in R you need to use the function called factor(). The argument to this factor() is the vector. 

@@ -1,0 +1,26 @@
+---
+title: "About Me"
+about:
+  template: jolla
+  image: ""
+  links:
+    - icon: twitter
+      text: Twitter
+      href: ""
+    - icon: github
+      text: Github
+      href: "https://github.com/pawan1198"
+    - icon: linkedin
+      text: LinkedIn
+      href: "https://www.linkedin.com/in/pawanjangra1198/"
+    - icon: envelope-at-fill
+      text: e-Mail
+      href: "mailto:pawanjangra1198@proton.me"
+sidebar: false
+---
+
+Currently pursuing a Master of Science in Applied Statistics from Indira Gandhi National Open University (IGNOU), complemented by a Bachelor of Science (Non-Medical) from Kurukshetra University, I possess a robust foundation in quantitative methods and statistical analysis. My proficiency in data analysis tools such as R, Python, and Microsoft Office has enabled me to effectively manage and analyze large datasets, including extracting and analyzing data from PLFS and compiling and analyzing union budget data to identify expenditure trends. I am adept at data scraping from various secondary sources, ensuring comprehensive data collection for research projects.
+
+My professional experience, particularly as a Research Assistant at the Society for Social and Economic Research (SSER) and a Course Assistant at IDEAs, has provided me with invaluable hands-on experience in the entire research lifecycle. I have actively participated in and assisted with numerous field surveys across diverse regions and topics, including rural households, industrial workers, farmers during protests and crises, and health financing studies. My responsibilities included data compilation, analysis, visualization using R, and meticulous data entry for primary surveys.
+
+Beyond my analytical capabilities, I bring strong administrative and technical skills. I am proficient in managing virtual learning platforms like Zoom, OBS-Studio, and YouTube streaming, ensuring seamless hybrid classroom environments. My administrative experience includes classroom management, accounts maintenance, inventory management, and general office functioning. Furthermore, I am proficient in operating systems such as Linux, Windows, and macOS, with expertise in troubleshooting and software management. I am a highly motivated and detail-oriented professional with a proven ability to contribute to research initiatives, manage complex datasets, and coordinate field activities effectively. My diverse skill set and practical experience make me a strong candidate for a role that demands both analytical rigor and operational efficiency.
