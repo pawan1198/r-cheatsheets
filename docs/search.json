@@ -1,0 +1,222 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "r",
+    "section": "",
+    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "00-intro.html",
+    "href": "00-intro.html",
+    "title": "1  Before we Start",
+    "section": "",
+    "text": "1.1 What is R? What is RStudio?\nThe term “R” is used to refer to both the programming language and the software that interprets the scripts written using it.\nRStudio is currently a very popular way to not only write your R scripts but also to interact with the R software. To function correctly, RStudio needs R and therefore both need to be installed on your computer.\nTo make it easier to interact with R, we will use RStudio. RStudio is the most popular IDE (Integrated Development Environment) for R. An IDE is a piece of software that provides tools to make programming easier.\nYou can also use the R Presentations feature to present your work in an HTML5 presentation mixing Markdown and R code. You can display these within R Studio or your browser. There are many options for customising your presentation slides, including an option for showing LaTeX equations. This can help you collaborate with others and also has an application in teaching and classroom use.\nBecause the install process accesses the CRAN repository, you will need an Internet connection to install packages.\nIt is also possible to install packages from other repositories, as well as Github or the local file system, but we won’t be looking at these options in this lesson.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Before we Start</span>"
+    ]
+  },
+  {
+    "objectID": "00-intro.html#why-learn-r",
+    "href": "00-intro.html#why-learn-r",
+    "title": "1  Before we Start",
+    "section": "1.2 Why learn R?",
+    "text": "1.2 Why learn R?\n\n1.2.1 R does not involve lots of pointing and clicking, and that’s a good thing\nThe learning curve might be steeper than with other software but with R, the results of your analysis do not rely on remembering a succession of pointing and clicking, but instead on a series of written commands, and that’s a good thing! So, if you want to redo your analysis because you collected more data, you don’t have to remember which button you clicked in which order to obtain your results; you just have to run your script again.\nWorking with scripts makes the steps you used in your analysis clear, and the code you write can be inspected by someone else who can give you feedback and spot mistakes.\nWorking with scripts forces you to have a deeper understanding of what you are doing, and facilitates your learning and comprehension of the methods you use.\n\n\n1.2.2 R code is great for reproducibility\nReproducibility is when someone else (including your future self) can obtain the same results from the same dataset when using the same analysis.\nR integrates with other tools to generate manuscripts from your code. If you collect more data, or fix a mistake in your dataset, the figures and the statistical tests in your manuscript are updated automatically.\nAn increasing number of journals and funding agencies expect analyses to be reproducible, so knowing R will give you an edge with these requirements.\nTo further support reproducibility and transparency, there are also packages that help you with dependency management: keeping track of which packages we are loading and how they depend on the package version you are using. This helps you make sure existing workflows work consistently and continue doing what they did before.\nPackages like renv let you “save” and “load” the state of your project library, also keeping track of the package version you use and the source it can be retrieved from.\n\n\n1.2.3 R is interdisciplinary and extensible\nWith 10,000+ packages that can be installed to extend its capabilities, R provides a framework that allows you to combine statistical approaches from many scientific disciplines to best suit the analytical framework you need to analyze your data. For instance, R has packages for image analysis, GIS, time series, population genetics, and a lot more.\n\n\n1.2.4 R works on data of all shapes and sizes\nThe skills you learn with R scale easily with the size of your dataset. Whether your dataset has hundreds or millions of lines, it won’t make much difference to you.\nR is designed for data analysis. It comes with special data structures and data types that make handling of missing data and statistical factors convenient.\nR can connect to spreadsheets, databases, and many other data formats, on your computer or on the web.\n\n\n1.2.5 R produces high-quality graphics\nThe plotting functionalities in R are endless, and allow you to adjust any aspect of your graph to convey most effectively the message from your data.\n\n\n1.2.6 R has a large and welcoming community\nThousands of people use R daily. Many of them are willing to help you through mailing lists and websites such as Stack Overflow, or on the RStudio community. Questions which are backed up with short, reproducible code snippets are more likely to attract knowledgeable responses.\n\n\n1.2.7 Not only is R free, but it is also open-source and cross-platform\nAnyone can inspect the source code to see how R works. Because of this transparency, there is less chance for mistakes, and if you (or someone else) find some, you can report and fix bugs.\nBecause R is open source and is supported by a large community of developers and users, there is a very large selection of third-party add-on packages which are freely available to extend R’s native capabilities.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRStudio extends what R can do, and makes it easier to write R code and interact with R. Left photo credit; Right photo credit.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Before we Start</span>"
+    ]
+  },
+  {
+    "objectID": "00-intro.html#a-tour-of-rstudio",
+    "href": "00-intro.html#a-tour-of-rstudio",
+    "title": "1  Before we Start",
+    "section": "1.3 A tour of RStudio",
+    "text": "1.3 A tour of RStudio",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Before we Start</span>"
+    ]
+  },
+  {
+    "objectID": "00-intro.html#knowing-your-way-around-rstudio",
+    "href": "00-intro.html#knowing-your-way-around-rstudio",
+    "title": "1  Before we Start",
+    "section": "1.4 Knowing your way around RStudio",
+    "text": "1.4 Knowing your way around RStudio\nLet’s start by learning about RStudio, which is an Integrated Development Environment (IDE) for working with R.\nThe RStudio IDE open-source product is free under the Affero General Public License (AGPL) v3. The RStudio IDE is also available with a commercial license and priority email support from RStudio, Inc.\nWe will use the RStudio IDE to write code, navigate the files on our computer, inspect the variables we create, and visualize the plots we generate. RStudio can also be used for other things (e.g., version control, developing packages, writing Shiny apps) that we will not cover during the workshop.\nOne of the advantages of using RStudio is that all the information you need to write code is available in a single window. Additionally, RStudio provides many shortcuts, autocompletion, and highlighting for the major file types you use while developing in R. RStudio makes typing easier and less error-prone.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Before we Start</span>"
+    ]
+  },
+  {
+    "objectID": "00-intro.html#getting-set-up",
+    "href": "00-intro.html#getting-set-up",
+    "title": "1  Before we Start",
+    "section": "1.5 Getting set up",
+    "text": "1.5 Getting set up\nIt is good practice to keep a set of related data, analyses, and text self-contained in a single folder called the working directory. All of the scripts within this folder can then use relative paths to files. Relative paths indicate where inside the project a file is located (as opposed to absolute paths, which point to where a file is on a specific computer). Working this way makes it a lot easier to move your project around on your computer and share it with others without having to directly modify file paths in the individual scripts.\nRStudio provides a helpful set of tools to do this through its “Projects” interface, which not only creates a working directory for you but also remembers its location (allowing you to quickly navigate to it). The interface also (optionally) preserves custom settings and open files to make it easier to resume work after a break.\n\n1.5.1 Create a new project\n\nUnder the File menu, click on New project, choose New directory, then New project\nEnter a name for this new folder (or “directory”) and choose a convenient location for it. This will be your working directory for the rest of the day (e.g., ~/data-carpentry)\nClick on Create project\nCreate a new file where we will type our scripts. Go to File &gt; New File &gt; R script. Click the save icon on your toolbar and save your script as “script.R”.\n\nThe simplest way to open an RStudio project once it has been created is to navigate through your files to where the project was saved and double click on the .Rproj (blue cube) file. This will open RStudio and start your R session in the same directory as the .Rproj file. All your data, plots and scripts will now be relative to the project directory. RStudio projects have the added benefit of allowing you to open multiple projects at the same time each open to its own project directory. This allows you to keep multiple projects open without them interfering with each other.\n\n\n1.5.2 The RStudio Interface\nLet’s take a quick tour of RStudio.\n\nRStudio is divided into four “panes”. The placement of these panes and their content can be customized (see menu, Tools -&gt; Global Options -&gt; Pane Layout).\nThe Default Layout is:\n\nTop Left - Source: your scripts and documents\nBottom Left - Console: what R would look and be like without RStudio\nTop Right - Environment/History: look here to see what you have done\nBottom Right - Files and more: see the contents of the project/working directory here, like your Script.R file\n\n\n\n1.5.3 Organizing your working directory\nUsing a consistent folder structure across your projects will help keep things organized and make it easy to find/file things in the future. This can be especially helpful when you have multiple projects. In general, you might create directories (folders) for scripts, data, and documents. Here are some examples of suggested directories:\n\ndata/ Use this folder to store your raw data and intermediate datasets. For the sake of transparency and provenance, you should always keep a copy of your raw data accessible and do as much of your data cleanup and preprocessing programmatically (i.e., with scripts, rather than manually) as possible.\ndata_output/ When you need to modify your raw data, it might be useful to store the modified versions of the datasets in a different folder.\ndocuments/ Used for outlines, drafts, and other text.\nfig_output/ This folder can store the graphics that are generated by your scripts.\nscripts/ A place to keep your R scripts for different analyses or plotting.\n\nYou may want additional directories or subdirectories depending on your project needs, but these should form the backbone of your working directory.\n\n\n\n1.5.4 The working directory\nThe working directory is an important concept to understand. It is the place where R will look for and save files. When you write code for your project, your scripts should refer to files in relation to the root of your working directory and only to files within this structure.\nUsing RStudio projects makes this easy and ensures that your working directory is set up properly. If you need to check it, you can use getwd(). If for some reason your working directory is not the same as the location of your RStudio project, it is likely that you opened an R script or RMarkdown file not your .Rproj file. You should close out of RStudio and open the .Rproj file by double clicking on the blue cube! If you ever need to modify your working directory in a script, setwd('my/path') changes the working directory. This should be used with caution since it makes analyses hard to share across devices and with other users.\n\n\n1.5.5 Downloading the data and getting set up\nFor this lesson we will use the following folders in our working directory: data/, data_output/ and fig_output/. Let’s write them all in lowercase to be consistent. We can create them using the RStudio interface by clicking on the “New Folder” button in the file pane (bottom right), or directly from R by typing at console:\n\ndir.create(\"data\")\ndir.create(\"data_output\")\ndir.create(\"fig_output\")\n\nYou can either download the data used for this lesson from GitHub or with R. You can copy the data from this GitHub link and paste it into a file called SAFI_clean.csv in the data/ directory you just created. Or you can do this directly from R by copying and pasting this in your terminal (your instructor can place this chunk of code in the Etherpad):\n\ndownload.file(\n  \"https://raw.githubusercontent.com/datacarpentry/r-socialsci/main/episodes/data/SAFI_clean.csv\",\n  \"data/SAFI_clean.csv\", mode = \"wb\"\n  )",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Before we Start</span>"
+    ]
+  },
+  {
+    "objectID": "00-intro.html#interacting-with-r",
+    "href": "00-intro.html#interacting-with-r",
+    "title": "1  Before we Start",
+    "section": "1.6 Interacting with R",
+    "text": "1.6 Interacting with R\nThe basis of programming is that we write down instructions for the computer to follow, and then we tell the computer to follow those instructions. We write, or code, instructions in R because it is a common language that both the computer and we can understand. We call the instructions commands and we tell the computer to follow the instructions by executing (also called running) those commands.\nThere are two main ways of interacting with R: by using the console or by using script files (plain text files that contain your code). The console pane (in RStudio, the bottom left panel) is the place where commands written in the R language can be typed and executed immediately by the computer. It is also where the results will be shown for commands that have been executed. You can type commands directly into the console and press Enter to execute those commands, but they will be forgotten when you close the session.\nBecause we want our code and workflow to be reproducible, it is better to type the commands we want in the script editor and save the script. This way, there is a complete record of what we did, and anyone (including our future selves!) can easily replicate the results on their computer.\nRStudio allows you to execute commands directly from the script editor by using the Ctrl + Enter shortcut (on Mac, Cmd + Return will work). The command on the current line in the script (indicated by the cursor) or all of the commands in selected text will be sent to the console and executed when you press Ctrl + Enter. If there is information in the console you do not need anymore, you can clear it with Ctrl + L. You can find other keyboard shortcuts in this RStudio cheatsheet about the RStudio IDE.\nAt some point in your analysis, you may want to check the content of a variable or the structure of an object without necessarily keeping a record of it in your script. You can type these commands and execute them directly in the console. RStudio provides the Ctrl + 1 and Ctrl + 2 shortcuts allow you to jump between the script and the console panes.\nIf R is ready to accept commands, the R console shows a &gt; prompt. If R receives a command (by typing, copy-pasting, or sent from the script editor using Ctrl + Enter), R will try to execute it and, when ready, will show the results and come back with a new &gt; prompt to wait for new commands.\nIf R is still waiting for you to enter more text, the console will show a + prompt. It means that you haven’t finished entering a complete command. This is likely because you have not ‘closed’ a parenthesis or quotation, i.e. you don’t have the same number of left-parentheses as right-parentheses or the same number of opening and closing quotation marks. When this happens, and you thought you finished typing your command, click inside the console window and press Esc; this will cancel the incomplete command and return you to the &gt; prompt. You can then proofread the command(s) you entered and correct the error.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Before we Start</span>"
+    ]
+  },
+  {
+    "objectID": "00-intro.html#installing-additional-packages-using-the-packages-tab",
+    "href": "00-intro.html#installing-additional-packages-using-the-packages-tab",
+    "title": "1  Before we Start",
+    "section": "1.7 Installing additional packages using the packages tab",
+    "text": "1.7 Installing additional packages using the packages tab\nIn addition to the core R installation, there are in excess of 10,000 additional packages which can be used to extend the functionality of R. Many of these have been written by R users and have been made available in central repositories, like the one hosted at CRAN, for anyone to download and install into their own R environment. You should have already installed the packages ‘ggplot2’ and ’dplyr. If you have not, please do so now using these instructions.\nYou can see if you have a package installed by looking in the packages tab (on the lower-right by default). You can also type the command installed.packages() into the console and examine the output.\n\nAdditional packages can be installed from the ‘packages’ tab. On the packages tab, click the ‘Install’ icon and start typing the name of the package you want in the text box. As you type, packages matching your starting characters will be displayed in a drop-down list so that you can select them.\n\nAt the bottom of the Install Packages window is a check box to ‘Install’ dependencies. This is ticked by default, which is usually what you want. Packages can (and do) make use of functionality built into other packages, so for the functionality contained in the package you are installing to work properly, there may be other packages which have to be installed with them. The ‘Install dependencies’ option makes sure that this happens.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Before we Start</span>"
+    ]
+  },
+  {
+    "objectID": "00-intro.html#exercise",
+    "href": "00-intro.html#exercise",
+    "title": "1  Before we Start",
+    "section": "1.8 Exercise",
+    "text": "1.8 Exercise\nUse both the Console and the Packages tab to confirm that you have the tidyverse installed.\n\nSolution (Solution). Scroll through packages tab down to ‘tidyverse’. You can also type a few characters into the searchbox. The ‘tidyverse’ package is really a package of packages, including ‘ggplot2’ and ‘dplyr’, both of which require other packages to run correctly. All of these packages will be installed automatically. Depending on what packages have previously been installed in your R environment, the install of ‘tidyverse’ could be very quick or could take several minutes. As the install proceeds, messages relating to its progress will be written to the console. You will be able to see all of the packages which are actually being installed.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Before we Start</span>"
+    ]
+  },
+  {
+    "objectID": "00-intro.html#installing-additional-packages-using-r-code",
+    "href": "00-intro.html#installing-additional-packages-using-r-code",
+    "title": "1  Before we Start",
+    "section": "1.9 Installing additional packages using R code",
+    "text": "1.9 Installing additional packages using R code\nIf you were watching the console window when you started the install of ‘tidyverse’, you may have noticed that the line\n\ninstall.packages(\"tidyverse\")\n\nwas written to the console before the start of the installation messages.\nYou could also have installed the tidyverse packages by running this command directly at the R terminal.\nWe will be using another package called here throughout the workshop to manage paths and directories. We will discuss it more detail in a later episode, but we will install it now in the console:\n\ninstall.packages(\"here\")\n\n\n\nUse RStudio to write and run R programs.\nUse install.packages() to install packages (libraries).",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Before we Start</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro-to-r.html",
+    "href": "01-intro-to-r.html",
+    "title": "2  Introduction to R",
+    "section": "",
+    "text": "2.1 Creating objects in R\nYou can get output from R simply by typing math in the console:\n3 + 5\n\n[1] 8\n\n12 / 7\n\n[1] 1.714286\nEverything that exists in R is an objects: from simple numerical values, to strings, to more complex objects like vectors, matrices, and lists. Even expressions and functions are objects in R.\nHowever, to do useful and interesting things, we need to name objects. To do so, we need to give a name followed by the assignment operator &lt;-, and the object we want to be named:\narea_hectares &lt;- 1.0\n&lt;- is the assignment operator. It assigns values (objects) on the right to names (also called symbols) on the left. So, after executing x &lt;- 3, the value of x is 3. The arrow can be read as 3 goes into x. For historical reasons, you can also use = for assignments, but not in every context. Because of the slight differences in syntax, it is good practice to always use &lt;- for assignments. More generally we prefer the &lt;- syntax over = because it makes it clear what direction the assignment is operating (left assignment), and it increases the read-ability of the code.\nIn RStudio, typing Alt + - (push Alt at the same time as the - key) will write &lt;- in a single keystroke in a PC, while typing Option + - (push Option at the same time as the - key) does the same in a Mac.\nObjects can be given any name such as x, current_temperature, or subject_id. You want your object names to be explicit and not too long. They cannot start with a number (2x is not valid, but x2 is). R is case sensitive (e.g., age is different from Age). There are some names that cannot be used because they are the names of fundamental objects in R (e.g., if, else, for, see here for a complete list). In general, even if it’s allowed, it’s best to not use them (e.g., c, T, mean, data, df, weights). If in doubt, check the help to see if the name is already in use. It’s also best to avoid dots (.) within an object name as in my.dataset. There are many objects in R with dots in their names for historical reasons, but because dots have a special meaning in R (for methods) and other programming languages, it’s best to avoid them. The recommended writing style is called snake_case, which implies using only lowercaseletters and numbers and separating each word with underscores (e.g., animals_weight, average_income). It is also recommended to use nouns for object names, and verbs for function names. It’s important to be consistent in the styling of your code (where you put spaces, how you name objects, etc.). Using a consistent coding style makes your code clearer to read for your future self and your collaborators. In R, three popular style guides are Google’s, Jean Fan’s and the tidyverse’s. The tidyverse’s is very comprehensive and may seem overwhelming at first. You can install the lintr package to automatically check for issues in the styling of your code.\nWhen assigning an value to a name, R does not print anything. You can force R to print the value by using parentheses or by typing the object name:\narea_hectares &lt;- 1.0    # doesn't print anything\n(area_hectares &lt;- 1.0)  # putting parenthesis around the call prints the value of `area_hectares`\n\n[1] 1\n\narea_hectares         # and so does typing the name of the object\n\n[1] 1\nNow that R has area_hectares in memory, we can do arithmetic with it. For instance, we may want to convert this area into acres (area in acres is 2.47 times the area in hectares):\n2.47 * area_hectares\n\n[1] 2.47\nWe can also change an the value assigned to an name by assigning it a new one:\narea_hectares &lt;- 2.5\n2.47 * area_hectares\n\n[1] 6.175\nThis means that assigning a value to one name does not change the values of other names. For example, let’s name the plot’s area in acres area_acres:\narea_acres &lt;- 2.47 * area_hectares\nand then change (reassign) area_hectares to 50.\narea_hectares &lt;- 50\nNow that we have learned how to write scripts, and the basics of R’s data structures, we are ready to start working with the SAFI dataset we have been using in the other lessons, and learn about data frames.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro-to-r.html#creating-objects-in-r",
+    "href": "01-intro-to-r.html#creating-objects-in-r",
+    "title": "2  Introduction to R",
+    "section": "",
+    "text": "NoneObjects vs. variables\n\n\n\nThe naming of objects in R is somehow related to variables in many other programming languages. In many programming languages, a variable has three aspects: a name, a memory location, and the current value stored in this location. R abstracts from modifiable memory locations. In R we only have objects which cn be named. Depending on the context, name (of an object) and variable can have drastically different meanings. However, in this lesson, the two words are used synonymously. For more information see: https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro-to-r.html#exercise",
+    "href": "01-intro-to-r.html#exercise",
+    "title": "2  Introduction to R",
+    "section": "2.2 Exercise",
+    "text": "2.2 Exercise\nWhat do you think is the current value of area_acres? 123.5 or 6.175?\n\nSolution (Solution). The value of area_acres is still 6.175 because you have not re-run the line area_acres &lt;- 2.47 * area_hectares since changing the value of area_hectares.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro-to-r.html#comments",
+    "href": "01-intro-to-r.html#comments",
+    "title": "2  Introduction to R",
+    "section": "2.3 Comments",
+    "text": "2.3 Comments\nAll programming languages allow the programmer to include comments in their code. Including comments to your code has many advantages: it helps you explain your reasoning and it forces you to be tidy. A commented code is also a great tool not only to your collaborators, but to your future self. Comments are the key to a reproducible analysis.\nTo do this in R we use the # character. Anything to the right of the # sign and up to the end of the line is treated as a comment and is ignored by R. You can start lines with comments or include them after any code on the line.\n\narea_hectares &lt;- 1.0            # land area in hectares\narea_acres &lt;- area_hectares * 2.47  # convert to acres\narea_acres              # print land area in acres.\n\n[1] 2.47\n\n\nRStudio makes it easy to comment or uncomment a paragraph: after selecting the lines you want to comment, press at the same time on your keyboard Ctrl + Shift + C. If you only want to comment out one line, you can put the cursor at any location of that line (i.e. no need to select the whole line), then press Ctrl + Shift + C.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro-to-r.html#exercise-1",
+    "href": "01-intro-to-r.html#exercise-1",
+    "title": "2  Introduction to R",
+    "section": "2.4 Exercise",
+    "text": "2.4 Exercise\nCreate two variables r_length and r_width and assign them values. It should be noted that, because length is a built-in R function, R Studio might add “()” after you type length and if you leave the parentheses you will get unexpected results. This is why you might see other programmers abbreviate common words. Create a third variable r_area and give it a value based on the current values of r_length and r_width. Show that changing the values of either r_length and r_width does not affect the value of r_area.\n\nSolution (Solution). \n\nr_length &lt;- 2.5\nr_width &lt;- 3.2\nr_area &lt;- r_length * r_width\nr_area\n\n[1] 8\n\n# change the values of r_length and r_width\nr_length &lt;- 7.0\nr_width &lt;- 6.5\n# the value of r_area isn't changed\nr_area\n\n[1] 8",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro-to-r.html#exercise-2",
+    "href": "01-intro-to-r.html#exercise-2",
+    "title": "2  Introduction to R",
+    "section": "2.5 Exercise",
+    "text": "2.5 Exercise\nType in ?round at the console and then look at the output in the Help pane. What other functions exist that are similar to round? How do you use the digits parameter in the round function?",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro-to-r.html#vectors-and-data-types",
+    "href": "01-intro-to-r.html#vectors-and-data-types",
+    "title": "2  Introduction to R",
+    "section": "2.6 Vectors and data types",
+    "text": "2.6 Vectors and data types\nA vector is the most common and basic data type in R, and is pretty much the workhorse of R. A vector is composed by a series of values, which can be either numbers or characters. We can assign a series of values to a vector using the c() function. For example we can create a vector of the number of household members for the households we’ve interviewed and assign it to hh_members:\n\nhh_members &lt;- c(3, 7, 10, 6)\nhh_members\n\n[1]  3  7 10  6\n\n\nA vector can also contain characters. For example, we can have a vector of the building material used to construct our interview respondents’ walls (respondent_wall_type):\n\nrespondent_wall_type &lt;- c(\"muddaub\", \"burntbricks\", \"sunbricks\")\nrespondent_wall_type\n\n[1] \"muddaub\"     \"burntbricks\" \"sunbricks\"  \n\n\nThe quotes around “muddaub”, etc. are essential here. Without the quotes R will assume there are objects called muddaub, burntbricks and sunbricks. As these names don’t exist in R’s memory, there will be an error message.\nThere are many functions that allow you to inspect the content of a vector. length() tells you how many elements are in a particular vector:\n\nlength(hh_members)\n\n[1] 4\n\nlength(respondent_wall_type)\n\n[1] 3\n\n\nAn important feature of a vector, is that all of the elements are the same type of data. The function typeof() indicates the type of an object:\n\ntypeof(hh_members)\n\n[1] \"double\"\n\ntypeof(respondent_wall_type)\n\n[1] \"character\"\n\n\nThe function str() provides an overview of the structure of an object and its elements. It is a useful function when working with large and complex objects:\n\nstr(hh_members)\n\n num [1:4] 3 7 10 6\n\nstr(respondent_wall_type)\n\n chr [1:3] \"muddaub\" \"burntbricks\" \"sunbricks\"\n\n\nYou can use the c() function to add other elements to your vector:\n\npossessions &lt;- c(\"bicycle\", \"radio\", \"television\")\npossessions &lt;- c(possessions, \"mobile_phone\") # add to the end of the vector\npossessions &lt;- c(\"car\", possessions) # add to the beginning of the vector\npossessions\n\n[1] \"car\"          \"bicycle\"      \"radio\"        \"television\"   \"mobile_phone\"\n\n\nIn the first line, we take the original vector possessions, add the value \"mobile_phone\" to the end of it, and save the result back into possessions. Then we add the value \"car\" to the beginning, again saving the result back into possessions.\nWe can do this over and over again to grow a vector, or assemble a dataset. As we program, this may be useful to add results that we are collecting or calculating.\nAn atomic vector is the simplest R data type and is a linear vector of a single type. Above, we saw 2 of the 6 main atomic vector types that R uses: \"character\" and \"numeric\" (or \"double\"). These are the basic building blocks that all R objects are built from. The other 4 atomic vector types are:\n\n\"logical\" for TRUE and FALSE (the boolean data type)\n\"integer\" for integer numbers (e.g., 2L, the L indicates to R that it’s an integer)\n\"complex\" to represent complex numbers with real and imaginary parts (e.g., 1 + 4i) and that’s all we’re going to say about them\n\"raw\" for bitstreams that we won’t discuss further\n\nYou can check the type of your vector using the typeof() function and inputting your vector as the argument.\nVectors are one of the many data structures that R uses. Other important ones are lists (list), matrices (matrix), data frames (data.frame), factors (factor) and arrays (array).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro-to-r.html#exercise-3",
+    "href": "01-intro-to-r.html#exercise-3",
+    "title": "2  Introduction to R",
+    "section": "2.7 Exercise",
+    "text": "2.7 Exercise\nWe’ve seen that atomic vectors can be of type character, numeric (or double), integer, and logical. But what happens if we try to mix these types in a single vector?\n\nSolution (Solution). R implicitly converts them to all be the same type.\n\nWhat will happen in each of these examples? (hint: use class() to check the data type of your objects):\n\nnum_char &lt;- c(1, 2, 3, \"a\")\nnum_logical &lt;- c(1, 2, 3, TRUE)\nchar_logical &lt;- c(\"a\", \"b\", \"c\", TRUE)\ntricky &lt;- c(1, 2, 3, \"4\")\n\nWhy do you think it happens?\n\nSolution (Solution). Vectors can be of only one data type. R tries to convert (coerce) the content of this vector to find a “common denominator” that doesn’t lose any information.\n\nHow many values in combined_logical are \"TRUE\" (as a character) in the following example:\n\nnum_logical &lt;- c(1, 2, 3, TRUE)\nchar_logical &lt;- c(\"a\", \"b\", \"c\", TRUE)\ncombined_logical &lt;- c(num_logical, char_logical)\n\n\nSolution (Solution). Only one. There is no memory of past data types, and the coercion happens the first time the vector is evaluated. Therefore, the TRUE in num_logical gets converted into a 1 before it gets converted into \"1\" in combined_logical.\n\nYou’ve probably noticed that objects of different types get converted into a single, shared type within a vector. In R, we call converting objects from one class into another class coercion. These conversions happen according to a hierarchy, whereby some types get preferentially coerced into other types. Can you draw a diagram that represents the hierarchy of how these data types are coerced?",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro-to-r.html#subsetting-vectors",
+    "href": "01-intro-to-r.html#subsetting-vectors",
+    "title": "2  Introduction to R",
+    "section": "2.8 Subsetting vectors",
+    "text": "2.8 Subsetting vectors\nSubsetting (sometimes referred to as extracting or indexing) involves accessing out one or more values based on their numeric placement or “index” within a vector. If we want to subset one or several values from a vector, we must provide one index or several indices in square brackets. For instance:\n\nrespondent_wall_type &lt;- c(\"muddaub\", \"burntbricks\", \"sunbricks\")\nrespondent_wall_type[2]\n\n[1] \"burntbricks\"\n\nrespondent_wall_type[c(3, 2)]\n\n[1] \"sunbricks\"   \"burntbricks\"\n\n\nWe can also repeat the indices to create an object with more elements than the original one:\n\nmore_respondent_wall_type &lt;- respondent_wall_type[c(1, 2, 3, 2, 1, 3)]\nmore_respondent_wall_type\n\n[1] \"muddaub\"     \"burntbricks\" \"sunbricks\"   \"burntbricks\" \"muddaub\"    \n[6] \"sunbricks\"  \n\n\nR indices start at 1. Programming languages like Fortran, MATLAB, Julia, and R start counting at 1, because that’s what human beings typically do. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that’s simpler for computers to do.\n\n2.8.1 Conditional subsetting\nAnother common way of subsetting is by using a logical vector. TRUE will select the element with the same index, while FALSE will not:\n\nhh_members &lt;- c(3, 7, 10, 6)\nhh_members[c(TRUE, FALSE, TRUE, TRUE)]\n\n[1]  3 10  6\n\n\nTypically, these logical vectors are not typed by hand, but are the output of other functions or logical tests. For instance, if you wanted to select only the values above 5:\n\nhh_members &gt; 5    # will return logicals with TRUE for the indices that meet the condition\n\n[1] FALSE  TRUE  TRUE  TRUE\n\n## so we can use this to select only the values above 5\nhh_members[hh_members &gt; 5]\n\n[1]  7 10  6\n\n\nYou can combine multiple tests using & (both conditions are true, AND) or | (at least one of the conditions is true, OR):\n\nhh_members[hh_members &lt; 4 | hh_members &gt; 7]\n\n[1]  3 10\n\nhh_members[hh_members &gt;= 4 & hh_members &lt;= 7]\n\n[1] 7 6\n\n\nHere, &lt; stands for “less than”, &gt; for “greater than”, &gt;= for “greater than or equal to”, and == for “equal to”. The double equal sign == is a test for numerical equality between the left and right hand sides, and should not be confused with the single = sign, which performs variable assignment (similar to &lt;-).\nA common task is to search for certain strings in a vector. One could use the “or” operator | to test for equality to multiple values, but this can quickly become tedious.\n\npossessions &lt;- c(\"car\", \"bicycle\", \"radio\", \"television\", \"mobile_phone\")\npossessions[possessions == \"car\" | possessions == \"bicycle\"] # returns both car and bicycle\n\n[1] \"car\"     \"bicycle\"\n\n\nThe function %in% allows you to test if any of the elements of a search vector (on the left hand side) are found in the target vector (on the right hand side):\n\npossessions %in% c(\"car\", \"bicycle\")\n\n[1]  TRUE  TRUE FALSE FALSE FALSE\n\n\nNote that the output is the same length as the search vector on the left hand side, because %in% checks whether each element of the search vector is found somewhere in the target vector. Thus, you can use %in% to select the elements in the search vector that appear in your target vector:\n\npossessions %in% c(\"car\", \"bicycle\", \"motorcycle\", \"truck\", \"boat\", \"bus\")\n\n[1]  TRUE  TRUE FALSE FALSE FALSE\n\npossessions[possessions %in% c(\"car\", \"bicycle\", \"motorcycle\", \"truck\", \"boat\", \"bus\")]\n\n[1] \"car\"     \"bicycle\"",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro-to-r.html#missing-data",
+    "href": "01-intro-to-r.html#missing-data",
+    "title": "2  Introduction to R",
+    "section": "2.9 Missing data",
+    "text": "2.9 Missing data\nAs R was designed to analyze datasets, it includes the concept of missing data (which is uncommon in other programming languages). Missing data are represented in vectors as NA.\nWhen doing operations on numbers, most functions will return NA if the data you are working with include missing values. This feature makes it harder to overlook the cases where you are dealing with missing data. You can add the argument na.rm=TRUE to calculate the result while ignoring the missing values.\n\nrooms &lt;- c(2, 1, 1, NA, 7)\nmean(rooms)\n\n[1] NA\n\nmax(rooms)\n\n[1] NA\n\nmean(rooms, na.rm = TRUE)\n\n[1] 2.75\n\nmax(rooms, na.rm = TRUE)\n\n[1] 7\n\n\nIf your data include missing values, you may want to become familiar with the functions is.na(), na.omit(), and complete.cases(). See below for examples.\n\n## Extract those elements which are not missing values.\n## The ! character is also called the NOT operator\nrooms[!is.na(rooms)]\n\n[1] 2 1 1 7\n\n## Count the number of missing values.\n## The output of is.na() is a logical vector (TRUE/FALSE equivalent to 1/0) so the sum() function here is effectively counting\nsum(is.na(rooms))\n\n[1] 1\n\n## Returns the object with incomplete cases removed. The returned object is an atomic vector of type `\"numeric\"` (or `\"double\"`).\nna.omit(rooms)\n\n[1] 2 1 1 7\nattr(,\"na.action\")\n[1] 4\nattr(,\"class\")\n[1] \"omit\"\n\n## Extract those elements which are complete cases. The returned object is an atomic vector of type `\"numeric\"` (or `\"double\"`).\nrooms[complete.cases(rooms)]\n\n[1] 2 1 1 7\n\n\nRecall that you can use the typeof() function to find the type of your atomic vector.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro-to-r.html#exercise-4",
+    "href": "01-intro-to-r.html#exercise-4",
+    "title": "2  Introduction to R",
+    "section": "2.10 Exercise",
+    "text": "2.10 Exercise\n\nUsing this vector of rooms, create a new vector with the NAs removed.\n\nrooms &lt;- c(1, 2, 1, 1, NA, 3, 1, 3, 2, 1, 1, 8, 3, 1, NA, 1)\n\nUse the function median() to calculate the median of the rooms vector.\nUse R to figure out how many households in the set use more than 2 rooms for sleeping.\n\n\nSolution (Solution). \n\nrooms &lt;- c(1, 2, 1, 1, NA, 3, 1, 3, 2, 1, 1, 8, 3, 1, NA, 1)\nrooms_no_na &lt;- rooms[!is.na(rooms)]\n# or\nrooms_no_na &lt;- na.omit(rooms)\n# 2.\nmedian(rooms, na.rm = TRUE)\n\n[1] 1\n\n# 3.\nrooms_above_2 &lt;- rooms_no_na[rooms_no_na &gt; 2]\nlength(rooms_above_2)\n\n[1] 4",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "3  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Summary</span>"
+    ]
+  }
+]
