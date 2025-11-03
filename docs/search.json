@@ -12,11 +12,11 @@
   {
     "objectID": "getting-start-with-R.html",
     "href": "getting-start-with-R.html",
-    "title": "1  Getting Started with R Cheat Sheet",
+    "title": "2  Getting Started with R Cheat Sheet",
     "section": "",
-    "text": "2 Using Packages in R\nR is one of the most popular programming languages in data science and is widely used across various industries and academia. It’s open-source, easy to learn, and capable of handling complex data and statistical manipulations, making it the preferred computing environment for many data scientists today.\nThis cheat sheet will cover an overview of getting started with R.\nR packages are collections of functions and tools developed by the R community. They increase the power of R by improving existing base R functionalities or adding new ones.",
+    "text": "2.1 Using Packages in R\nR is one of the most popular programming languages in data science and is widely used across various industries and academia. It’s open-source, easy to learn, and capable of handling complex data and statistical manipulations, making it the preferred computing environment for many data scientists today.\nThis cheat sheet will cover an overview of getting started with R.\nR packages are collections of functions and tools developed by the R community. They increase the power of R by improving existing base R functionalities or adding new ones.\n## Lets you install new packages (e.g., tidyverse package)\n #install.packages(\"tidyverse\")\n\n##Lets you load and use packages (e.g., tidyverse package)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R Cheat Sheet</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Getting Started with R Cheat Sheet</span>"
     ]
   },
   {
@@ -82,21 +82,21 @@
   {
     "objectID": "getting-start-with-R.html#vector-functions-in-r",
     "href": "getting-start-with-R.html#vector-functions-in-r",
-    "title": "1  Getting Started with R Cheat Sheet",
-    "section": "5.2 Vector Functions in R",
-    "text": "5.2 Vector Functions in R\n\nsort(my_vector) : Returns my_vector sorted\nrev(my_vector) : Reverses the order of my_vector\ntable(my_vector) : Count the values in a vector\nunique(my_vector) : Distinct elements in a vector",
+    "title": "2  Getting Started with R Cheat Sheet",
+    "section": "2.5 Vector Functions in R",
+    "text": "2.5 Vector Functions in R\n\nsort(my_vector) : Returns my_vector sorted\nrev(my_vector) : Reverses the order of my_vector\ntable(my_vector) : Count the values in a vector\nunique(my_vector) : Distinct elements in a vector",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R Cheat Sheet</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Getting Started with R Cheat Sheet</span>"
     ]
   },
   {
     "objectID": "getting-start-with-R.html#selecting-vector-elements-in-r",
     "href": "getting-start-with-R.html#selecting-vector-elements-in-r",
-    "title": "1  Getting Started with R Cheat Sheet",
-    "section": "5.3 Selecting Vector Elements in R",
-    "text": "5.3 Selecting Vector Elements in R\n\nmy_vector[6] : Returns the sixth element of my_vector\nmy_vector[-6] : Returns all but the sixth element\nmy_vector[2:6] : Returns elements two to six\nmy_vector[-(2:6)] : Returns all elements except those between the second and the sixth\nmy_vector[c(2,6)] : Returns the second and sixth elements\nmy_vector[x == 5] : Returns elements equal to 5\nmy_vector[x &lt; 5 ] : Returns elements less than 5\nmy_vector[x %in% c(2, 5 ,8 )] : Returns elements in the set {2, 5, 8}",
+    "title": "2  Getting Started with R Cheat Sheet",
+    "section": "2.6 Selecting Vector Elements in R",
+    "text": "2.6 Selecting Vector Elements in R\n\nmy_vector[6] : Returns the sixth element of my_vector\nmy_vector[-6] : Returns all but the sixth element\nmy_vector[2:6] : Returns elements two to six\nmy_vector[-(2:6)] : Returns all elements except those between the second and the sixth\nmy_vector[c(2,6)] : Returns the second and sixth elements\nmy_vector[x == 5] : Returns elements equal to 5\nmy_vector[x &lt; 5 ] : Returns elements less than 5\nmy_vector[x %in% c(2, 5 ,8 )] : Returns elements in the set {2, 5, 8}",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with R Cheat Sheet</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Getting Started with R Cheat Sheet</span>"
     ]
   },
   {
@@ -142,111 +142,111 @@
   {
     "objectID": "01-intro-to-r.html",
     "href": "01-intro-to-r.html",
-    "title": "2  Introduction to R",
+    "title": "3  Introduction to R",
     "section": "",
-    "text": "2.1 Creating objects in R\nYou can get output from R simply by typing math in the console:\n3 + 5\n\n[1] 8\n\n12 / 7\n\n[1] 1.714286\nEverything that exists in R is an objects: from simple numerical values, to strings, to more complex objects like vectors, matrices, and lists. Even expressions and functions are objects in R.\nHowever, to do useful and interesting things, we need to name objects. To do so, we need to give a name followed by the assignment operator &lt;-, and the object we want to be named:\narea_hectares &lt;- 1.0\n&lt;- is the assignment operator. It assigns values (objects) on the right to names (also called symbols) on the left. So, after executing x &lt;- 3, the value of x is 3. The arrow can be read as 3 goes into x. For historical reasons, you can also use = for assignments, but not in every context. Because of the slight differences in syntax, it is good practice to always use &lt;- for assignments. More generally we prefer the &lt;- syntax over = because it makes it clear what direction the assignment is operating (left assignment), and it increases the read-ability of the code.\nIn RStudio, typing Alt + - (push Alt at the same time as the - key) will write &lt;- in a single keystroke in a PC, while typing Option + - (push Option at the same time as the - key) does the same in a Mac.\nObjects can be given any name such as x, current_temperature, or subject_id. You want your object names to be explicit and not too long. They cannot start with a number (2x is not valid, but x2 is). R is case sensitive (e.g., age is different from Age). There are some names that cannot be used because they are the names of fundamental objects in R (e.g., if, else, for, see here for a complete list). In general, even if it’s allowed, it’s best to not use them (e.g., c, T, mean, data, df, weights). If in doubt, check the help to see if the name is already in use. It’s also best to avoid dots (.) within an object name as in my.dataset. There are many objects in R with dots in their names for historical reasons, but because dots have a special meaning in R (for methods) and other programming languages, it’s best to avoid them. The recommended writing style is called snake_case, which implies using only lowercaseletters and numbers and separating each word with underscores (e.g., animals_weight, average_income). It is also recommended to use nouns for object names, and verbs for function names. It’s important to be consistent in the styling of your code (where you put spaces, how you name objects, etc.). Using a consistent coding style makes your code clearer to read for your future self and your collaborators. In R, three popular style guides are Google’s, Jean Fan’s and the tidyverse’s. The tidyverse’s is very comprehensive and may seem overwhelming at first. You can install the lintr package to automatically check for issues in the styling of your code.\nWhen assigning an value to a name, R does not print anything. You can force R to print the value by using parentheses or by typing the object name:\narea_hectares &lt;- 1.0    # doesn't print anything\n(area_hectares &lt;- 1.0)  # putting parenthesis around the call prints the value of `area_hectares`\n\n[1] 1\n\narea_hectares         # and so does typing the name of the object\n\n[1] 1\nNow that R has area_hectares in memory, we can do arithmetic with it. For instance, we may want to convert this area into acres (area in acres is 2.47 times the area in hectares):\n2.47 * area_hectares\n\n[1] 2.47\nWe can also change an the value assigned to an name by assigning it a new one:\narea_hectares &lt;- 2.5\n2.47 * area_hectares\n\n[1] 6.175\nThis means that assigning a value to one name does not change the values of other names. For example, let’s name the plot’s area in acres area_acres:\narea_acres &lt;- 2.47 * area_hectares\nand then change (reassign) area_hectares to 50.\narea_hectares &lt;- 50\nNow that we have learned how to write scripts, and the basics of R’s data structures, we are ready to start working with the SAFI dataset we have been using in the other lessons, and learn about data frames.",
+    "text": "3.1 Creating objects in R\nYou can get output from R simply by typing math in the console:\n3 + 5\n\n[1] 8\n\n12 / 7\n\n[1] 1.714286\nEverything that exists in R is an objects: from simple numerical values, to strings, to more complex objects like vectors, matrices, and lists. Even expressions and functions are objects in R.\nHowever, to do useful and interesting things, we need to name objects. To do so, we need to give a name followed by the assignment operator &lt;-, and the object we want to be named:\narea_hectares &lt;- 1.0\n&lt;- is the assignment operator. It assigns values (objects) on the right to names (also called symbols) on the left. So, after executing x &lt;- 3, the value of x is 3. The arrow can be read as 3 goes into x. For historical reasons, you can also use = for assignments, but not in every context. Because of the slight differences in syntax, it is good practice to always use &lt;- for assignments. More generally we prefer the &lt;- syntax over = because it makes it clear what direction the assignment is operating (left assignment), and it increases the read-ability of the code.\nIn RStudio, typing Alt + - (push Alt at the same time as the - key) will write &lt;- in a single keystroke in a PC, while typing Option + - (push Option at the same time as the - key) does the same in a Mac.\nObjects can be given any name such as x, current_temperature, or subject_id. You want your object names to be explicit and not too long. They cannot start with a number (2x is not valid, but x2 is). R is case sensitive (e.g., age is different from Age). There are some names that cannot be used because they are the names of fundamental objects in R (e.g., if, else, for, see here for a complete list). In general, even if it’s allowed, it’s best to not use them (e.g., c, T, mean, data, df, weights). If in doubt, check the help to see if the name is already in use. It’s also best to avoid dots (.) within an object name as in my.dataset. There are many objects in R with dots in their names for historical reasons, but because dots have a special meaning in R (for methods) and other programming languages, it’s best to avoid them. The recommended writing style is called snake_case, which implies using only lowercaseletters and numbers and separating each word with underscores (e.g., animals_weight, average_income). It is also recommended to use nouns for object names, and verbs for function names. It’s important to be consistent in the styling of your code (where you put spaces, how you name objects, etc.). Using a consistent coding style makes your code clearer to read for your future self and your collaborators. In R, three popular style guides are Google’s, Jean Fan’s and the tidyverse’s. The tidyverse’s is very comprehensive and may seem overwhelming at first. You can install the lintr package to automatically check for issues in the styling of your code.\nWhen assigning an value to a name, R does not print anything. You can force R to print the value by using parentheses or by typing the object name:\narea_hectares &lt;- 1.0    # doesn't print anything\n(area_hectares &lt;- 1.0)  # putting parenthesis around the call prints the value of `area_hectares`\n\n[1] 1\n\narea_hectares         # and so does typing the name of the object\n\n[1] 1\nNow that R has area_hectares in memory, we can do arithmetic with it. For instance, we may want to convert this area into acres (area in acres is 2.47 times the area in hectares):\n2.47 * area_hectares\n\n[1] 2.47\nWe can also change an the value assigned to an name by assigning it a new one:\narea_hectares &lt;- 2.5\n2.47 * area_hectares\n\n[1] 6.175\nThis means that assigning a value to one name does not change the values of other names. For example, let’s name the plot’s area in acres area_acres:\narea_acres &lt;- 2.47 * area_hectares\nand then change (reassign) area_hectares to 50.\narea_hectares &lt;- 50\nNow that we have learned how to write scripts, and the basics of R’s data structures, we are ready to start working with the SAFI dataset we have been using in the other lessons, and learn about data frames.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to R</span>"
     ]
   },
   {
     "objectID": "01-intro-to-r.html#creating-objects-in-r",
     "href": "01-intro-to-r.html#creating-objects-in-r",
-    "title": "2  Introduction to R",
+    "title": "3  Introduction to R",
     "section": "",
     "text": "NoneObjects vs. variables\n\n\n\nThe naming of objects in R is somehow related to variables in many other programming languages. In many programming languages, a variable has three aspects: a name, a memory location, and the current value stored in this location. R abstracts from modifiable memory locations. In R we only have objects which cn be named. Depending on the context, name (of an object) and variable can have drastically different meanings. However, in this lesson, the two words are used synonymously. For more information see: https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to R</span>"
     ]
   },
   {
     "objectID": "01-intro-to-r.html#exercise",
     "href": "01-intro-to-r.html#exercise",
-    "title": "2  Introduction to R",
-    "section": "2.2 Exercise",
-    "text": "2.2 Exercise\nWhat do you think is the current value of area_acres? 123.5 or 6.175?\n\nSolution (Solution). The value of area_acres is still 6.175 because you have not re-run the line area_acres &lt;- 2.47 * area_hectares since changing the value of area_hectares.",
+    "title": "3  Introduction to R",
+    "section": "3.2 Exercise",
+    "text": "3.2 Exercise\nWhat do you think is the current value of area_acres? 123.5 or 6.175?\n\nSolution (Solution). The value of area_acres is still 6.175 because you have not re-run the line area_acres &lt;- 2.47 * area_hectares since changing the value of area_hectares.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to R</span>"
     ]
   },
   {
     "objectID": "01-intro-to-r.html#comments",
     "href": "01-intro-to-r.html#comments",
-    "title": "2  Introduction to R",
-    "section": "2.3 Comments",
-    "text": "2.3 Comments\nAll programming languages allow the programmer to include comments in their code. Including comments to your code has many advantages: it helps you explain your reasoning and it forces you to be tidy. A commented code is also a great tool not only to your collaborators, but to your future self. Comments are the key to a reproducible analysis.\nTo do this in R we use the # character. Anything to the right of the # sign and up to the end of the line is treated as a comment and is ignored by R. You can start lines with comments or include them after any code on the line.\n\narea_hectares &lt;- 1.0            # land area in hectares\narea_acres &lt;- area_hectares * 2.47  # convert to acres\narea_acres              # print land area in acres.\n\n[1] 2.47\n\n\nRStudio makes it easy to comment or uncomment a paragraph: after selecting the lines you want to comment, press at the same time on your keyboard Ctrl + Shift + C. If you only want to comment out one line, you can put the cursor at any location of that line (i.e. no need to select the whole line), then press Ctrl + Shift + C.",
+    "title": "3  Introduction to R",
+    "section": "3.3 Comments",
+    "text": "3.3 Comments\nAll programming languages allow the programmer to include comments in their code. Including comments to your code has many advantages: it helps you explain your reasoning and it forces you to be tidy. A commented code is also a great tool not only to your collaborators, but to your future self. Comments are the key to a reproducible analysis.\nTo do this in R we use the # character. Anything to the right of the # sign and up to the end of the line is treated as a comment and is ignored by R. You can start lines with comments or include them after any code on the line.\n\narea_hectares &lt;- 1.0            # land area in hectares\narea_acres &lt;- area_hectares * 2.47  # convert to acres\narea_acres              # print land area in acres.\n\n[1] 2.47\n\n\nRStudio makes it easy to comment or uncomment a paragraph: after selecting the lines you want to comment, press at the same time on your keyboard Ctrl + Shift + C. If you only want to comment out one line, you can put the cursor at any location of that line (i.e. no need to select the whole line), then press Ctrl + Shift + C.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to R</span>"
     ]
   },
   {
     "objectID": "01-intro-to-r.html#exercise-1",
     "href": "01-intro-to-r.html#exercise-1",
-    "title": "2  Introduction to R",
-    "section": "2.4 Exercise",
-    "text": "2.4 Exercise\nCreate two variables r_length and r_width and assign them values. It should be noted that, because length is a built-in R function, R Studio might add “()” after you type length and if you leave the parentheses you will get unexpected results. This is why you might see other programmers abbreviate common words. Create a third variable r_area and give it a value based on the current values of r_length and r_width. Show that changing the values of either r_length and r_width does not affect the value of r_area.\n\nSolution (Solution). \n\nr_length &lt;- 2.5\nr_width &lt;- 3.2\nr_area &lt;- r_length * r_width\nr_area\n\n[1] 8\n\n# change the values of r_length and r_width\nr_length &lt;- 7.0\nr_width &lt;- 6.5\n# the value of r_area isn't changed\nr_area\n\n[1] 8",
+    "title": "3  Introduction to R",
+    "section": "3.4 Exercise",
+    "text": "3.4 Exercise\nCreate two variables r_length and r_width and assign them values. It should be noted that, because length is a built-in R function, R Studio might add “()” after you type length and if you leave the parentheses you will get unexpected results. This is why you might see other programmers abbreviate common words. Create a third variable r_area and give it a value based on the current values of r_length and r_width. Show that changing the values of either r_length and r_width does not affect the value of r_area.\n\nSolution (Solution). \n\nr_length &lt;- 2.5\nr_width &lt;- 3.2\nr_area &lt;- r_length * r_width\nr_area\n\n[1] 8\n\n# change the values of r_length and r_width\nr_length &lt;- 7.0\nr_width &lt;- 6.5\n# the value of r_area isn't changed\nr_area\n\n[1] 8",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to R</span>"
     ]
   },
   {
     "objectID": "01-intro-to-r.html#exercise-2",
     "href": "01-intro-to-r.html#exercise-2",
-    "title": "2  Introduction to R",
-    "section": "2.5 Exercise",
-    "text": "2.5 Exercise\nType in ?round at the console and then look at the output in the Help pane. What other functions exist that are similar to round? How do you use the digits parameter in the round function?",
+    "title": "3  Introduction to R",
+    "section": "3.5 Exercise",
+    "text": "3.5 Exercise\nType in ?round at the console and then look at the output in the Help pane. What other functions exist that are similar to round? How do you use the digits parameter in the round function?",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to R</span>"
     ]
   },
   {
     "objectID": "01-intro-to-r.html#vectors-and-data-types",
     "href": "01-intro-to-r.html#vectors-and-data-types",
-    "title": "2  Introduction to R",
-    "section": "2.6 Vectors and data types",
-    "text": "2.6 Vectors and data types\nA vector is the most common and basic data type in R, and is pretty much the workhorse of R. A vector is composed by a series of values, which can be either numbers or characters. We can assign a series of values to a vector using the c() function. For example we can create a vector of the number of household members for the households we’ve interviewed and assign it to hh_members:\n\nhh_members &lt;- c(3, 7, 10, 6)\nhh_members\n\n[1]  3  7 10  6\n\n\nA vector can also contain characters. For example, we can have a vector of the building material used to construct our interview respondents’ walls (respondent_wall_type):\n\nrespondent_wall_type &lt;- c(\"muddaub\", \"burntbricks\", \"sunbricks\")\nrespondent_wall_type\n\n[1] \"muddaub\"     \"burntbricks\" \"sunbricks\"  \n\n\nThe quotes around “muddaub”, etc. are essential here. Without the quotes R will assume there are objects called muddaub, burntbricks and sunbricks. As these names don’t exist in R’s memory, there will be an error message.\nThere are many functions that allow you to inspect the content of a vector. length() tells you how many elements are in a particular vector:\n\nlength(hh_members)\n\n[1] 4\n\nlength(respondent_wall_type)\n\n[1] 3\n\n\nAn important feature of a vector, is that all of the elements are the same type of data. The function typeof() indicates the type of an object:\n\ntypeof(hh_members)\n\n[1] \"double\"\n\ntypeof(respondent_wall_type)\n\n[1] \"character\"\n\n\nThe function str() provides an overview of the structure of an object and its elements. It is a useful function when working with large and complex objects:\n\nstr(hh_members)\n\n num [1:4] 3 7 10 6\n\nstr(respondent_wall_type)\n\n chr [1:3] \"muddaub\" \"burntbricks\" \"sunbricks\"\n\n\nYou can use the c() function to add other elements to your vector:\n\npossessions &lt;- c(\"bicycle\", \"radio\", \"television\")\npossessions &lt;- c(possessions, \"mobile_phone\") # add to the end of the vector\npossessions &lt;- c(\"car\", possessions) # add to the beginning of the vector\npossessions\n\n[1] \"car\"          \"bicycle\"      \"radio\"        \"television\"   \"mobile_phone\"\n\n\nIn the first line, we take the original vector possessions, add the value \"mobile_phone\" to the end of it, and save the result back into possessions. Then we add the value \"car\" to the beginning, again saving the result back into possessions.\nWe can do this over and over again to grow a vector, or assemble a dataset. As we program, this may be useful to add results that we are collecting or calculating.\nAn atomic vector is the simplest R data type and is a linear vector of a single type. Above, we saw 2 of the 6 main atomic vector types that R uses: \"character\" and \"numeric\" (or \"double\"). These are the basic building blocks that all R objects are built from. The other 4 atomic vector types are:\n\n\"logical\" for TRUE and FALSE (the boolean data type)\n\"integer\" for integer numbers (e.g., 2L, the L indicates to R that it’s an integer)\n\"complex\" to represent complex numbers with real and imaginary parts (e.g., 1 + 4i) and that’s all we’re going to say about them\n\"raw\" for bitstreams that we won’t discuss further\n\nYou can check the type of your vector using the typeof() function and inputting your vector as the argument.\nVectors are one of the many data structures that R uses. Other important ones are lists (list), matrices (matrix), data frames (data.frame), factors (factor) and arrays (array).",
+    "title": "3  Introduction to R",
+    "section": "3.6 Vectors and data types",
+    "text": "3.6 Vectors and data types\nA vector is the most common and basic data type in R, and is pretty much the workhorse of R. A vector is composed by a series of values, which can be either numbers or characters. We can assign a series of values to a vector using the c() function. For example we can create a vector of the number of household members for the households we’ve interviewed and assign it to hh_members:\n\nhh_members &lt;- c(3, 7, 10, 6)\nhh_members\n\n[1]  3  7 10  6\n\n\nA vector can also contain characters. For example, we can have a vector of the building material used to construct our interview respondents’ walls (respondent_wall_type):\n\nrespondent_wall_type &lt;- c(\"muddaub\", \"burntbricks\", \"sunbricks\")\nrespondent_wall_type\n\n[1] \"muddaub\"     \"burntbricks\" \"sunbricks\"  \n\n\nThe quotes around “muddaub”, etc. are essential here. Without the quotes R will assume there are objects called muddaub, burntbricks and sunbricks. As these names don’t exist in R’s memory, there will be an error message.\nThere are many functions that allow you to inspect the content of a vector. length() tells you how many elements are in a particular vector:\n\nlength(hh_members)\n\n[1] 4\n\nlength(respondent_wall_type)\n\n[1] 3\n\n\nAn important feature of a vector, is that all of the elements are the same type of data. The function typeof() indicates the type of an object:\n\ntypeof(hh_members)\n\n[1] \"double\"\n\ntypeof(respondent_wall_type)\n\n[1] \"character\"\n\n\nThe function str() provides an overview of the structure of an object and its elements. It is a useful function when working with large and complex objects:\n\nstr(hh_members)\n\n num [1:4] 3 7 10 6\n\nstr(respondent_wall_type)\n\n chr [1:3] \"muddaub\" \"burntbricks\" \"sunbricks\"\n\n\nYou can use the c() function to add other elements to your vector:\n\npossessions &lt;- c(\"bicycle\", \"radio\", \"television\")\npossessions &lt;- c(possessions, \"mobile_phone\") # add to the end of the vector\npossessions &lt;- c(\"car\", possessions) # add to the beginning of the vector\npossessions\n\n[1] \"car\"          \"bicycle\"      \"radio\"        \"television\"   \"mobile_phone\"\n\n\nIn the first line, we take the original vector possessions, add the value \"mobile_phone\" to the end of it, and save the result back into possessions. Then we add the value \"car\" to the beginning, again saving the result back into possessions.\nWe can do this over and over again to grow a vector, or assemble a dataset. As we program, this may be useful to add results that we are collecting or calculating.\nAn atomic vector is the simplest R data type and is a linear vector of a single type. Above, we saw 2 of the 6 main atomic vector types that R uses: \"character\" and \"numeric\" (or \"double\"). These are the basic building blocks that all R objects are built from. The other 4 atomic vector types are:\n\n\"logical\" for TRUE and FALSE (the boolean data type)\n\"integer\" for integer numbers (e.g., 2L, the L indicates to R that it’s an integer)\n\"complex\" to represent complex numbers with real and imaginary parts (e.g., 1 + 4i) and that’s all we’re going to say about them\n\"raw\" for bitstreams that we won’t discuss further\n\nYou can check the type of your vector using the typeof() function and inputting your vector as the argument.\nVectors are one of the many data structures that R uses. Other important ones are lists (list), matrices (matrix), data frames (data.frame), factors (factor) and arrays (array).",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to R</span>"
     ]
   },
   {
     "objectID": "01-intro-to-r.html#exercise-3",
     "href": "01-intro-to-r.html#exercise-3",
-    "title": "2  Introduction to R",
-    "section": "2.7 Exercise",
-    "text": "2.7 Exercise\nWe’ve seen that atomic vectors can be of type character, numeric (or double), integer, and logical. But what happens if we try to mix these types in a single vector?\n\nSolution (Solution). R implicitly converts them to all be the same type.\n\nWhat will happen in each of these examples? (hint: use class() to check the data type of your objects):\n\nnum_char &lt;- c(1, 2, 3, \"a\")\nnum_logical &lt;- c(1, 2, 3, TRUE)\nchar_logical &lt;- c(\"a\", \"b\", \"c\", TRUE)\ntricky &lt;- c(1, 2, 3, \"4\")\n\nWhy do you think it happens?\n\nSolution (Solution). Vectors can be of only one data type. R tries to convert (coerce) the content of this vector to find a “common denominator” that doesn’t lose any information.\n\nHow many values in combined_logical are \"TRUE\" (as a character) in the following example:\n\nnum_logical &lt;- c(1, 2, 3, TRUE)\nchar_logical &lt;- c(\"a\", \"b\", \"c\", TRUE)\ncombined_logical &lt;- c(num_logical, char_logical)\n\n\nSolution (Solution). Only one. There is no memory of past data types, and the coercion happens the first time the vector is evaluated. Therefore, the TRUE in num_logical gets converted into a 1 before it gets converted into \"1\" in combined_logical.\n\nYou’ve probably noticed that objects of different types get converted into a single, shared type within a vector. In R, we call converting objects from one class into another class coercion. These conversions happen according to a hierarchy, whereby some types get preferentially coerced into other types. Can you draw a diagram that represents the hierarchy of how these data types are coerced?",
+    "title": "3  Introduction to R",
+    "section": "3.7 Exercise",
+    "text": "3.7 Exercise\nWe’ve seen that atomic vectors can be of type character, numeric (or double), integer, and logical. But what happens if we try to mix these types in a single vector?\n\nSolution (Solution). R implicitly converts them to all be the same type.\n\nWhat will happen in each of these examples? (hint: use class() to check the data type of your objects):\n\nnum_char &lt;- c(1, 2, 3, \"a\")\nnum_logical &lt;- c(1, 2, 3, TRUE)\nchar_logical &lt;- c(\"a\", \"b\", \"c\", TRUE)\ntricky &lt;- c(1, 2, 3, \"4\")\n\nWhy do you think it happens?\n\nSolution (Solution). Vectors can be of only one data type. R tries to convert (coerce) the content of this vector to find a “common denominator” that doesn’t lose any information.\n\nHow many values in combined_logical are \"TRUE\" (as a character) in the following example:\n\nnum_logical &lt;- c(1, 2, 3, TRUE)\nchar_logical &lt;- c(\"a\", \"b\", \"c\", TRUE)\ncombined_logical &lt;- c(num_logical, char_logical)\n\n\nSolution (Solution). Only one. There is no memory of past data types, and the coercion happens the first time the vector is evaluated. Therefore, the TRUE in num_logical gets converted into a 1 before it gets converted into \"1\" in combined_logical.\n\nYou’ve probably noticed that objects of different types get converted into a single, shared type within a vector. In R, we call converting objects from one class into another class coercion. These conversions happen according to a hierarchy, whereby some types get preferentially coerced into other types. Can you draw a diagram that represents the hierarchy of how these data types are coerced?",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to R</span>"
     ]
   },
   {
     "objectID": "01-intro-to-r.html#subsetting-vectors",
     "href": "01-intro-to-r.html#subsetting-vectors",
-    "title": "2  Introduction to R",
-    "section": "2.8 Subsetting vectors",
-    "text": "2.8 Subsetting vectors\nSubsetting (sometimes referred to as extracting or indexing) involves accessing out one or more values based on their numeric placement or “index” within a vector. If we want to subset one or several values from a vector, we must provide one index or several indices in square brackets. For instance:\n\nrespondent_wall_type &lt;- c(\"muddaub\", \"burntbricks\", \"sunbricks\")\nrespondent_wall_type[2]\n\n[1] \"burntbricks\"\n\nrespondent_wall_type[c(3, 2)]\n\n[1] \"sunbricks\"   \"burntbricks\"\n\n\nWe can also repeat the indices to create an object with more elements than the original one:\n\nmore_respondent_wall_type &lt;- respondent_wall_type[c(1, 2, 3, 2, 1, 3)]\nmore_respondent_wall_type\n\n[1] \"muddaub\"     \"burntbricks\" \"sunbricks\"   \"burntbricks\" \"muddaub\"    \n[6] \"sunbricks\"  \n\n\nR indices start at 1. Programming languages like Fortran, MATLAB, Julia, and R start counting at 1, because that’s what human beings typically do. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that’s simpler for computers to do.\n\n2.8.1 Conditional subsetting\nAnother common way of subsetting is by using a logical vector. TRUE will select the element with the same index, while FALSE will not:\n\nhh_members &lt;- c(3, 7, 10, 6)\nhh_members[c(TRUE, FALSE, TRUE, TRUE)]\n\n[1]  3 10  6\n\n\nTypically, these logical vectors are not typed by hand, but are the output of other functions or logical tests. For instance, if you wanted to select only the values above 5:\n\nhh_members &gt; 5    # will return logicals with TRUE for the indices that meet the condition\n\n[1] FALSE  TRUE  TRUE  TRUE\n\n## so we can use this to select only the values above 5\nhh_members[hh_members &gt; 5]\n\n[1]  7 10  6\n\n\nYou can combine multiple tests using & (both conditions are true, AND) or | (at least one of the conditions is true, OR):\n\nhh_members[hh_members &lt; 4 | hh_members &gt; 7]\n\n[1]  3 10\n\nhh_members[hh_members &gt;= 4 & hh_members &lt;= 7]\n\n[1] 7 6\n\n\nHere, &lt; stands for “less than”, &gt; for “greater than”, &gt;= for “greater than or equal to”, and == for “equal to”. The double equal sign == is a test for numerical equality between the left and right hand sides, and should not be confused with the single = sign, which performs variable assignment (similar to &lt;-).\nA common task is to search for certain strings in a vector. One could use the “or” operator | to test for equality to multiple values, but this can quickly become tedious.\n\npossessions &lt;- c(\"car\", \"bicycle\", \"radio\", \"television\", \"mobile_phone\")\npossessions[possessions == \"car\" | possessions == \"bicycle\"] # returns both car and bicycle\n\n[1] \"car\"     \"bicycle\"\n\n\nThe function %in% allows you to test if any of the elements of a search vector (on the left hand side) are found in the target vector (on the right hand side):\n\npossessions %in% c(\"car\", \"bicycle\")\n\n[1]  TRUE  TRUE FALSE FALSE FALSE\n\n\nNote that the output is the same length as the search vector on the left hand side, because %in% checks whether each element of the search vector is found somewhere in the target vector. Thus, you can use %in% to select the elements in the search vector that appear in your target vector:\n\npossessions %in% c(\"car\", \"bicycle\", \"motorcycle\", \"truck\", \"boat\", \"bus\")\n\n[1]  TRUE  TRUE FALSE FALSE FALSE\n\npossessions[possessions %in% c(\"car\", \"bicycle\", \"motorcycle\", \"truck\", \"boat\", \"bus\")]\n\n[1] \"car\"     \"bicycle\"",
+    "title": "3  Introduction to R",
+    "section": "3.8 Subsetting vectors",
+    "text": "3.8 Subsetting vectors\nSubsetting (sometimes referred to as extracting or indexing) involves accessing out one or more values based on their numeric placement or “index” within a vector. If we want to subset one or several values from a vector, we must provide one index or several indices in square brackets. For instance:\n\nrespondent_wall_type &lt;- c(\"muddaub\", \"burntbricks\", \"sunbricks\")\nrespondent_wall_type[2]\n\n[1] \"burntbricks\"\n\nrespondent_wall_type[c(3, 2)]\n\n[1] \"sunbricks\"   \"burntbricks\"\n\n\nWe can also repeat the indices to create an object with more elements than the original one:\n\nmore_respondent_wall_type &lt;- respondent_wall_type[c(1, 2, 3, 2, 1, 3)]\nmore_respondent_wall_type\n\n[1] \"muddaub\"     \"burntbricks\" \"sunbricks\"   \"burntbricks\" \"muddaub\"    \n[6] \"sunbricks\"  \n\n\nR indices start at 1. Programming languages like Fortran, MATLAB, Julia, and R start counting at 1, because that’s what human beings typically do. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that’s simpler for computers to do.\n\n3.8.1 Conditional subsetting\nAnother common way of subsetting is by using a logical vector. TRUE will select the element with the same index, while FALSE will not:\n\nhh_members &lt;- c(3, 7, 10, 6)\nhh_members[c(TRUE, FALSE, TRUE, TRUE)]\n\n[1]  3 10  6\n\n\nTypically, these logical vectors are not typed by hand, but are the output of other functions or logical tests. For instance, if you wanted to select only the values above 5:\n\nhh_members &gt; 5    # will return logicals with TRUE for the indices that meet the condition\n\n[1] FALSE  TRUE  TRUE  TRUE\n\n## so we can use this to select only the values above 5\nhh_members[hh_members &gt; 5]\n\n[1]  7 10  6\n\n\nYou can combine multiple tests using & (both conditions are true, AND) or | (at least one of the conditions is true, OR):\n\nhh_members[hh_members &lt; 4 | hh_members &gt; 7]\n\n[1]  3 10\n\nhh_members[hh_members &gt;= 4 & hh_members &lt;= 7]\n\n[1] 7 6\n\n\nHere, &lt; stands for “less than”, &gt; for “greater than”, &gt;= for “greater than or equal to”, and == for “equal to”. The double equal sign == is a test for numerical equality between the left and right hand sides, and should not be confused with the single = sign, which performs variable assignment (similar to &lt;-).\nA common task is to search for certain strings in a vector. One could use the “or” operator | to test for equality to multiple values, but this can quickly become tedious.\n\npossessions &lt;- c(\"car\", \"bicycle\", \"radio\", \"television\", \"mobile_phone\")\npossessions[possessions == \"car\" | possessions == \"bicycle\"] # returns both car and bicycle\n\n[1] \"car\"     \"bicycle\"\n\n\nThe function %in% allows you to test if any of the elements of a search vector (on the left hand side) are found in the target vector (on the right hand side):\n\npossessions %in% c(\"car\", \"bicycle\")\n\n[1]  TRUE  TRUE FALSE FALSE FALSE\n\n\nNote that the output is the same length as the search vector on the left hand side, because %in% checks whether each element of the search vector is found somewhere in the target vector. Thus, you can use %in% to select the elements in the search vector that appear in your target vector:\n\npossessions %in% c(\"car\", \"bicycle\", \"motorcycle\", \"truck\", \"boat\", \"bus\")\n\n[1]  TRUE  TRUE FALSE FALSE FALSE\n\npossessions[possessions %in% c(\"car\", \"bicycle\", \"motorcycle\", \"truck\", \"boat\", \"bus\")]\n\n[1] \"car\"     \"bicycle\"",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to R</span>"
     ]
   },
   {
     "objectID": "01-intro-to-r.html#missing-data",
     "href": "01-intro-to-r.html#missing-data",
-    "title": "2  Introduction to R",
-    "section": "2.9 Missing data",
-    "text": "2.9 Missing data\nAs R was designed to analyze datasets, it includes the concept of missing data (which is uncommon in other programming languages). Missing data are represented in vectors as NA.\nWhen doing operations on numbers, most functions will return NA if the data you are working with include missing values. This feature makes it harder to overlook the cases where you are dealing with missing data. You can add the argument na.rm=TRUE to calculate the result while ignoring the missing values.\n\nrooms &lt;- c(2, 1, 1, NA, 7)\nmean(rooms)\n\n[1] NA\n\nmax(rooms)\n\n[1] NA\n\nmean(rooms, na.rm = TRUE)\n\n[1] 2.75\n\nmax(rooms, na.rm = TRUE)\n\n[1] 7\n\n\nIf your data include missing values, you may want to become familiar with the functions is.na(), na.omit(), and complete.cases(). See below for examples.\n\n## Extract those elements which are not missing values.\n## The ! character is also called the NOT operator\nrooms[!is.na(rooms)]\n\n[1] 2 1 1 7\n\n## Count the number of missing values.\n## The output of is.na() is a logical vector (TRUE/FALSE equivalent to 1/0) so the sum() function here is effectively counting\nsum(is.na(rooms))\n\n[1] 1\n\n## Returns the object with incomplete cases removed. The returned object is an atomic vector of type `\"numeric\"` (or `\"double\"`).\nna.omit(rooms)\n\n[1] 2 1 1 7\nattr(,\"na.action\")\n[1] 4\nattr(,\"class\")\n[1] \"omit\"\n\n## Extract those elements which are complete cases. The returned object is an atomic vector of type `\"numeric\"` (or `\"double\"`).\nrooms[complete.cases(rooms)]\n\n[1] 2 1 1 7\n\n\nRecall that you can use the typeof() function to find the type of your atomic vector.",
+    "title": "3  Introduction to R",
+    "section": "3.9 Missing data",
+    "text": "3.9 Missing data\nAs R was designed to analyze datasets, it includes the concept of missing data (which is uncommon in other programming languages). Missing data are represented in vectors as NA.\nWhen doing operations on numbers, most functions will return NA if the data you are working with include missing values. This feature makes it harder to overlook the cases where you are dealing with missing data. You can add the argument na.rm=TRUE to calculate the result while ignoring the missing values.\n\nrooms &lt;- c(2, 1, 1, NA, 7)\nmean(rooms)\n\n[1] NA\n\nmax(rooms)\n\n[1] NA\n\nmean(rooms, na.rm = TRUE)\n\n[1] 2.75\n\nmax(rooms, na.rm = TRUE)\n\n[1] 7\n\n\nIf your data include missing values, you may want to become familiar with the functions is.na(), na.omit(), and complete.cases(). See below for examples.\n\n## Extract those elements which are not missing values.\n## The ! character is also called the NOT operator\nrooms[!is.na(rooms)]\n\n[1] 2 1 1 7\n\n## Count the number of missing values.\n## The output of is.na() is a logical vector (TRUE/FALSE equivalent to 1/0) so the sum() function here is effectively counting\nsum(is.na(rooms))\n\n[1] 1\n\n## Returns the object with incomplete cases removed. The returned object is an atomic vector of type `\"numeric\"` (or `\"double\"`).\nna.omit(rooms)\n\n[1] 2 1 1 7\nattr(,\"na.action\")\n[1] 4\nattr(,\"class\")\n[1] \"omit\"\n\n## Extract those elements which are complete cases. The returned object is an atomic vector of type `\"numeric\"` (or `\"double\"`).\nrooms[complete.cases(rooms)]\n\n[1] 2 1 1 7\n\n\nRecall that you can use the typeof() function to find the type of your atomic vector.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to R</span>"
     ]
   },
   {
     "objectID": "01-intro-to-r.html#exercise-4",
     "href": "01-intro-to-r.html#exercise-4",
-    "title": "2  Introduction to R",
-    "section": "2.10 Exercise",
-    "text": "2.10 Exercise\n\nUsing this vector of rooms, create a new vector with the NAs removed.\n\nrooms &lt;- c(1, 2, 1, 1, NA, 3, 1, 3, 2, 1, 1, 8, 3, 1, NA, 1)\n\nUse the function median() to calculate the median of the rooms vector.\nUse R to figure out how many households in the set use more than 2 rooms for sleeping.\n\n\nSolution (Solution). \n\nrooms &lt;- c(1, 2, 1, 1, NA, 3, 1, 3, 2, 1, 1, 8, 3, 1, NA, 1)\nrooms_no_na &lt;- rooms[!is.na(rooms)]\n# or\nrooms_no_na &lt;- na.omit(rooms)\n# 2.\nmedian(rooms, na.rm = TRUE)\n\n[1] 1\n\n# 3.\nrooms_above_2 &lt;- rooms_no_na[rooms_no_na &gt; 2]\nlength(rooms_above_2)\n\n[1] 4",
+    "title": "3  Introduction to R",
+    "section": "3.10 Exercise",
+    "text": "3.10 Exercise\n\nUsing this vector of rooms, create a new vector with the NAs removed.\n\nrooms &lt;- c(1, 2, 1, 1, NA, 3, 1, 3, 2, 1, 1, 8, 3, 1, NA, 1)\n\nUse the function median() to calculate the median of the rooms vector.\nUse R to figure out how many households in the set use more than 2 rooms for sleeping.\n\n\nSolution (Solution). \n\nrooms &lt;- c(1, 2, 1, 1, NA, 3, 1, 3, 2, 1, 1, 8, 3, 1, NA, 1)\nrooms_no_na &lt;- rooms[!is.na(rooms)]\n# or\nrooms_no_na &lt;- na.omit(rooms)\n# 2.\nmedian(rooms, na.rm = TRUE)\n\n[1] 1\n\n# 3.\nrooms_above_2 &lt;- rooms_no_na[rooms_no_na &gt; 2]\nlength(rooms_above_2)\n\n[1] 4",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to R</span>"
     ]
   },
   {
@@ -342,11 +342,11 @@
   {
     "objectID": "data-frame.html",
     "href": "data-frame.html",
-    "title": "4  data frame",
+    "title": "4  Data Frame",
     "section": "",
-    "text": "5 Data Frames\nData Frames are data displayed in a format as a table.\nData Frames can have different types of data inside it. While the first column can be character, the second and third can be numeric or logical. However, each column should have the same type of data.\nUse the data.frame() function to create a data frame:\nExample # Create a data frame\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n# Print the data frame\nData_Frame\n\n  Training Pulse Duration\n1 Strength   100       60\n2  Stamina   150       30\n3    Other   120       45\n\n\n\n\n6 Summarize the Data\nUse the summary() function to summarize the data from a Data Frame:\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\nData_Frame\n\n  Training Pulse Duration\n1 Strength   100       60\n2  Stamina   150       30\n3    Other   120       45\n\nsummary(Data_Frame)\n\n   Training             Pulse          Duration   \n Length:3           Min.   :100.0   Min.   :30.0  \n Class :character   1st Qu.:110.0   1st Qu.:37.5  \n Mode  :character   Median :120.0   Median :45.0  \n                    Mean   :123.3   Mean   :45.0  \n                    3rd Qu.:135.0   3rd Qu.:52.5  \n                    Max.   :150.0   Max.   :60.0  \n\n\nYou will learn more about the summary() function in the statistical part of the R tutorial.\nAccess Items We can use single brackets [ ], double brackets [[ ]] or $ to access columns from a data frame:\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\nData_Frame[1]\n\n  Training\n1 Strength\n2  Stamina\n3    Other\n\nData_Frame[[\"Training\"]]\n\n[1] \"Strength\" \"Stamina\"  \"Other\"   \n\nData_Frame$Training\n\n[1] \"Strength\" \"Stamina\"  \"Other\"   \n\n\nAdd Rows Use the rbind() function to add new rows in a Data Frame:\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\n# Add a new row\nNew_row_DF &lt;- rbind(Data_Frame, c(\"Strength\", 110, 110))\n\n# Print the new row\nNew_row_DF\n\n  Training Pulse Duration\n1 Strength   100       60\n2  Stamina   150       30\n3    Other   120       45\n4 Strength   110      110\n\n\nAdd Columns Use the cbind() function to add new columns in a Data Frame:\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\n# Add a new column\nNew_col_DF &lt;- cbind(Data_Frame, Steps = c(1000, 6000, 2000))\n\n# Print the new column\nNew_col_DF\n\n  Training Pulse Duration Steps\n1 Strength   100       60  1000\n2  Stamina   150       30  6000\n3    Other   120       45  2000\n\n\nRemove Rows and Columns Use the c() function to remove rows and columns in a Data Frame:\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\n# Remove the first row and column\nData_Frame_New &lt;- Data_Frame[-c(1), -c(1)]\n\n# Print the new data frame\nData_Frame_New\n\n  Pulse Duration\n2   150       30\n3   120       45\n\n\nAmount of Rows and Columns Use the dim() function to find the amount of rows and columns in a Data Frame:\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\ndim(Data_Frame)\n\n[1] 3 3\n\n\nYou can also use the ncol() function to find the number of columns and nrow() to find the number of rows:\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\nncol(Data_Frame)\n\n[1] 3\n\nnrow(Data_Frame)\n\n[1] 3\n\n\nData Frame Length Use the length() function to find the number of columns in a Data Frame (similar to ncol()):\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\nlength(Data_Frame)\n\n[1] 3\n\n\nCombining Data Frames Use the rbind() function to combine two or more data frames in R vertically:\nExample\n\nData_Frame1 &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\nData_Frame2 &lt;- data.frame (\n  Training = c(\"Stamina\", \"Stamina\", \"Strength\"),\n  Pulse = c(140, 150, 160),\n  Duration = c(30, 30, 20)\n)\n\nNew_Data_Frame &lt;- rbind(Data_Frame1, Data_Frame2)\nNew_Data_Frame\n\n  Training Pulse Duration\n1 Strength   100       60\n2  Stamina   150       30\n3    Other   120       45\n4  Stamina   140       30\n5  Stamina   150       30\n6 Strength   160       20\n\n\nAnd use the cbind() function to combine two or more data frames in R horizontally:\nExample\n\nData_Frame3 &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\nData_Frame4 &lt;- data.frame (\n  Steps = c(3000, 6000, 2000),\n  Calories = c(300, 400, 300)\n)\n\nNew_Data_Frame1 &lt;- cbind(Data_Frame3, Data_Frame4)\nNew_Data_Frame1\n\n  Training Pulse Duration Steps Calories\n1 Strength   100       60  3000      300\n2  Stamina   150       30  6000      400\n3    Other   120       45  2000      300",
+    "text": "4.1 Summarize the Data\nData Frames are data displayed in a format as a table.\nData Frames can have different types of data inside it. While the first column can be character, the second and third can be numeric or logical. However, each column should have the same type of data.\nUse the data.frame() function to create a data frame:\nExample\nCreate a data frame\nUse the summary() function to summarize the data from a Data Frame:\nExample\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\nData_Frame\n\n  Training Pulse Duration\n1 Strength   100       60\n2  Stamina   150       30\n3    Other   120       45\n\nsummary(Data_Frame)\n\n   Training             Pulse          Duration   \n Length:3           Min.   :100.0   Min.   :30.0  \n Class :character   1st Qu.:110.0   1st Qu.:37.5  \n Mode  :character   Median :120.0   Median :45.0  \n                    Mean   :123.3   Mean   :45.0  \n                    3rd Qu.:135.0   3rd Qu.:52.5  \n                    Max.   :150.0   Max.   :60.0\nYou will learn more about the summary() function in the statistical part of the R tutorial.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>data frame</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Frame</span>"
     ]
   },
   {
@@ -807,6 +807,146 @@
     "text": "In summary, this book has no content whatsoever.",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Summary</span>"
+    ]
+  },
+  {
+    "objectID": "data-frame.html#access-items",
+    "href": "data-frame.html#access-items",
+    "title": "4  Data Frame",
+    "section": "4.2 Access Items",
+    "text": "4.2 Access Items\nWe can use single brackets [ ], double brackets [[ ]] or $ to access columns from a data frame:\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\nData_Frame[1]\n\n  Training\n1 Strength\n2  Stamina\n3    Other\n\nData_Frame[[\"Training\"]]\n\n[1] \"Strength\" \"Stamina\"  \"Other\"   \n\nData_Frame$Training\n\n[1] \"Strength\" \"Stamina\"  \"Other\"   \n\n\nAdd Rows Use the rbind() function to add new rows in a Data Frame:\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\n# Add a new row\nNew_row_DF &lt;- rbind(Data_Frame, c(\"Strength\", 110, 110))\n\n# Print the new row\nNew_row_DF\n\n  Training Pulse Duration\n1 Strength   100       60\n2  Stamina   150       30\n3    Other   120       45\n4 Strength   110      110",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Frame</span>"
+    ]
+  },
+  {
+    "objectID": "data-frame.html#add-columns",
+    "href": "data-frame.html#add-columns",
+    "title": "4  Data Frame",
+    "section": "4.3 Add Columns",
+    "text": "4.3 Add Columns\nUse the cbind() function to add new columns in a Data Frame:\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\n# Add a new column\nNew_col_DF &lt;- cbind(Data_Frame, Steps = c(1000, 6000, 2000))\n\n# Print the new column\nNew_col_DF\n\n  Training Pulse Duration Steps\n1 Strength   100       60  1000\n2  Stamina   150       30  6000\n3    Other   120       45  2000\n\n\nRemove Rows and Columns Use the c() function to remove rows and columns in a Data Frame:\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\n# Remove the first row and column\nData_Frame_New &lt;- Data_Frame[-c(1), -c(1)]\n\n# Print the new data frame\nData_Frame_New\n\n  Pulse Duration\n2   150       30\n3   120       45",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Frame</span>"
+    ]
+  },
+  {
+    "objectID": "data-frame.html#amount-of-rows-and-columns",
+    "href": "data-frame.html#amount-of-rows-and-columns",
+    "title": "4  Data Frame",
+    "section": "4.4 Amount of Rows and Columns",
+    "text": "4.4 Amount of Rows and Columns\nUse the dim() function to find the amount of rows and columns in a Data Frame:\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\ndim(Data_Frame)\n\n[1] 3 3\n\n\nYou can also use the ncol() function to find the number of columns and nrow() to find the number of rows:\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\nncol(Data_Frame)\n\n[1] 3\n\nnrow(Data_Frame)\n\n[1] 3",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Frame</span>"
+    ]
+  },
+  {
+    "objectID": "data-frame.html#data-frame-length",
+    "href": "data-frame.html#data-frame-length",
+    "title": "4  Data Frame",
+    "section": "4.5 Data Frame Length",
+    "text": "4.5 Data Frame Length\nUse the length() function to find the number of columns in a Data Frame (similar to ncol()):\nExample\n\nData_Frame &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\nlength(Data_Frame)\n\n[1] 3",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Frame</span>"
+    ]
+  },
+  {
+    "objectID": "data-frame.html#combining-data-frames",
+    "href": "data-frame.html#combining-data-frames",
+    "title": "4  Data Frame",
+    "section": "4.6 Combining Data Frames",
+    "text": "4.6 Combining Data Frames\nUse the rbind() function to combine two or more data frames in R vertically:\nExample\n\nData_Frame1 &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\nData_Frame2 &lt;- data.frame (\n  Training = c(\"Stamina\", \"Stamina\", \"Strength\"),\n  Pulse = c(140, 150, 160),\n  Duration = c(30, 30, 20)\n)\n\nNew_Data_Frame &lt;- rbind(Data_Frame1, Data_Frame2)\nNew_Data_Frame\n\n  Training Pulse Duration\n1 Strength   100       60\n2  Stamina   150       30\n3    Other   120       45\n4  Stamina   140       30\n5  Stamina   150       30\n6 Strength   160       20\n\n\nAnd use the cbind() function to combine two or more data frames in R horizontally:\nExample\n\nData_Frame3 &lt;- data.frame (\n  Training = c(\"Strength\", \"Stamina\", \"Other\"),\n  Pulse = c(100, 150, 120),\n  Duration = c(60, 30, 45)\n)\n\nData_Frame4 &lt;- data.frame (\n  Steps = c(3000, 6000, 2000),\n  Calories = c(300, 400, 300)\n)\n\nNew_Data_Frame1 &lt;- cbind(Data_Frame3, Data_Frame4)\nNew_Data_Frame1\n\n  Training Pulse Duration Steps Calories\n1 Strength   100       60  3000      300\n2  Stamina   150       30  6000      400\n3    Other   120       45  2000      300",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Frame</span>"
+    ]
+  },
+  {
+    "objectID": "getting-start-with-R.html#the-working-directory",
+    "href": "getting-start-with-R.html#the-working-directory",
+    "title": "2  Getting Started with R Cheat Sheet",
+    "section": "2.2 The Working Directory",
+    "text": "2.2 The Working Directory\nThe working directory is a file path that R will use as the starting point for relative file paths. That is, it’s the default location for importing and exporting files. An example of a working directory looks like “/file/path”\n\n## Returns your current working directory\ngetwd()\n\n[1] \"/home/pawan/r-cheatsheets\"\n\n## Changes your current working directory to a desired file path\nsetwd(\"~/\")",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Getting Started with R Cheat Sheet</span>"
+    ]
+  },
+  {
+    "objectID": "getting-start-with-R.html#operators-in-r",
+    "href": "getting-start-with-R.html#operators-in-r",
+    "title": "2  Getting Started with R Cheat Sheet",
+    "section": "2.3 Operators in R",
+    "text": "2.3 Operators in R\n\n2.3.1 Arithmetic Operators in R\n\n\n\nOperator\nDescription\n\n\n\n\na + b\nSums two variables\n\n\na - b\nSubtracts two variables\n\n\na * b\nMultiply two variables\n\n\na / b\nDivide two variables\n\n\na ^ b\nExponentiation of a variable\n\n\na %% b\nThe remainder of a variable\n\n\na %/% b\nInteger division of variables\n\n\n\n\n\n2.3.2 Relational Operators in R\n\n\n\nOperator\nDescription\n\n\n\n\na == b\nTests for equality\n\n\na != b\nTests for inequality\n\n\na &gt; b\nTests for greater than\n\n\na &lt; b\nTests for smaller than\n\n\na &gt;= b\nTests for greater or equal than\n\n\na &lt;= b\nTests for smaller or equal than\n\n\n\n\n\n2.3.3 Logical Operators in R\n\n\n\nOperator\nDescription\n\n\n\n\n!\nLogical NOT\n\n\n&\nElement-wise Logical AND\n\n\n&&\nLogical AND\n\n\n|\nElement-wise Logical OR\n\n\n||\nLogical OR\n\n\n\n\n\n2.3.4 Assignment Operators in R\n\n\n\nOperator\nDescription\n\n\n\n\nx &lt;- 1, x = 1\nAssigns a variable to x\n\n\n\n\n\n2.3.5 Other Operators in R\n\n\n\nOperator\nDescription\n\n\n\n\n%in%\nIdentifies whether an element belongs to a vector\n\n\n$\nAllows you to access objects stored within an object\n\n\n%&gt;%\nPart of magrittr package, it’s used to pass objects to functions",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Getting Started with R Cheat Sheet</span>"
+    ]
+  },
+  {
+    "objectID": "getting-start-with-R.html#getting-started-with-vectors-in-r",
+    "href": "getting-start-with-R.html#getting-started-with-vectors-in-r",
+    "title": "2  Getting Started with R Cheat Sheet",
+    "section": "2.4 Getting Started with Vectors in R",
+    "text": "2.4 Getting Started with Vectors in R\nVectors are one-dimensional arrays that can hold numeric data, character data, or logical data. In other words, a vector is a simple tool to store data.\nA vector is a contiguous collection of objects of the same type. Common types of vectors include logical, integer, double, and character.\n\n2.4.1 Creating Vectors in R\nA vector is a one-dimensional data set or a single-column data set, that doesn’t have a row\n\nc(1:59)  \n\n [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25\n[26] 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50\n[51] 51 52 53 54 55 56 57 58 59\n\n\nHere c called the command\nWithin the brackets, the things called elements, and in the starting of elements inside the square bracket [] is the position of the element or the indicate the row number\nThere are types of vector\nNumeric vector - 1,2,3,4\nCharacter vector - “A”, “a”, “b”, “ram”\nLogical - True, False\n\nCreates a vector using elements separated by commas\n\n\nc(1,3,5)\n\n[1] 1 3 5\n\n\n\nCreates a vector of integers between two numbers\n\n\n1:7\n\n[1] 1 2 3 4 5 6 7\n\n\n\nCreates a vector between two numbers, with a specified interval between each element\n\n\nseq(2,8,by = 2)\n\n[1] 2 4 6 8\n\n\n\nCreates a vector of given elements repeated a number of times\n\n\nrep(2,8,times = 4)\n\n[1] 2 2 2 2 2 2 2 2\n\n\n\nCreates a vector of given elements repeating each element a number of times\n\n\nrep(2,8,each = 3)\n\n [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Getting Started with R Cheat Sheet</span>"
+    ]
+  },
+  {
+    "objectID": "getting-start-with-R.html#getting-started-with-strings-in-r",
+    "href": "getting-start-with-R.html#getting-started-with-strings-in-r",
+    "title": "2  Getting Started with R Cheat Sheet",
+    "section": "3.1 Getting Started with Strings in R",
+    "text": "3.1 Getting Started with Strings in R\nThe stringr package makes it easier to work with strings in R - you should install and load this package to use the following functions.\n\n3.1.1 Find matches\n\nLoad stringr packages\n\n\nlibrary(stringr)\n\n\nDetects the presence of a pattern match in a string\n\nstr_detect(string, pattern, negate = FALSE) \n\nDetects the presence of a pattern match at the beginning of a string\n\nstr_starts(string, pattern, negate = FALSE) \n\nFinds the index of strings that contain pattern match\n\nstr_which(string, pattern, negate = FALSE) \n\nLocates the positions of pattern matches in a string\n\nstr_locate(string, pattern)\n\nCounts the number of pattern matches in a string\n\nstr_count(string, pattern)\n\n\n3.1.2 Subset\n\nExtracts substrings from a character vector\n\nstr_sub(string, start = 1L, end = -1L)\n\nReturns strings that contain a pattern match\n\nstr_subset(string, pattern, negate = FALSE) \n\nReturns the first pattern match in each string as a vector\n\nstr_extract(string, pattern) \n\nReturns the first pattern match in each string as a matrix with a column for each group in the pattern\n\nstr_match(string, pattern)\n\n\n3.1.3 Mutate\n\nReplaces substrings by identifying the substrings with str_sub() and assigning them to the results\n\nstr_sub() &lt;- value \n\nReplaces the first matched pattern in each string\n\nstr_replace(string, pattern, replacement)  \n\nReplaces all matched patterns in each string\n\nstr_replace_all(string, pattern, replacement) \n\nConverts strings to lowercase\n\nstr_to_lower(string) \n\nConverts strings to uppercase\n\nstr_to_upper(string) \n\nConverts strings to title case\n\nstr_to_title(string) \n\n\n3.1.4 Join and split\n\nRepeats strings n times\n\nstr_dup(string, n)\n\nSplits a vector of strings into a matrix of substrings\n\nstr_split_fixed(string, pattern, n)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Getting Started with R Cheat Sheet</span>"
+    ]
+  },
+  {
+    "objectID": "installation.html",
+    "href": "installation.html",
+    "title": "1  Installing R and RStudio on Linux",
+    "section": "",
+    "text": "1.1 Debian/Ubuntu/Linux Mint\nYou can just install the R-base package using the following code or Use your package manager to install R and R-studio.\napt-get install r-base (as superuser)\nor\nsudo apt-get install r-base",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Installing R and RStudio on Linux</span>"
+    ]
+  },
+  {
+    "objectID": "installation.html#install-rstudio-on-linux",
+    "href": "installation.html#install-rstudio-on-linux",
+    "title": "1  Installing R and RStudio on Linux",
+    "section": "1.2 Install RStudio on Linux",
+    "text": "1.2 Install RStudio on Linux\nNext comes installing RStudio. To install RStudio, go to download RStudio, click on the download button for the RStudio desktop, click the link for the latest R version for your OS, and save the .deb file.\nDownload the correct version of R-Studio from https://www.rstudio.com/products/rstudio/download/#download\napt install -f ./filename.deb (as superuser)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Installing R and RStudio on Linux</span>"
+    ]
+  },
+  {
+    "objectID": "installation.html#install-rstudio-on-windows",
+    "href": "installation.html#install-rstudio-on-windows",
+    "title": "1  Installing R and RStudio on Linux",
+    "section": "2.1 Install RStudio on Windows",
+    "text": "2.1 Install RStudio on Windows\nStep – 1: With R-base installed, let’s move on to installing RStudio. To begin, go to download RStudio and click on the download button for the RStudio desktop.\nStep – 2: Click on the link for the Windows version of RStudio and save the .exe file.\nStep – 3: Run the .exe and follow the installation instructions.\n- 3.a. Click Next on the welcome window. - 3.b. Enter/browse the path to the installation folder and click Next to proceed. - 3.c. Select the folder for the start menu shortcut, click on Do not Create shortcuts, and click Next. - 3.d. Wait for the installation process to complete. - 3.e. Click Finish to end the installation.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Installing R and RStudio on Linux</span>"
+    ]
+  },
+  {
+    "objectID": "installation.html#install-r-on-mac",
+    "href": "installation.html#install-r-on-mac",
+    "title": "1  Installing R and RStudio on Linux",
+    "section": "3.1 Install R on Mac",
+    "text": "3.1 Install R on Mac\nStep – 1: Go to CRAN R Project Website.\nStep – 2: Click the Download for (Mac) OS X link.\nStep – 3: Click on the link for the pkg file of the latest R version and save it.\nStep – 4: Double-click the downloaded file and follow the installation instructions.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Installing R and RStudio on Linux</span>"
+    ]
+  },
+  {
+    "objectID": "installation.html#install-rstudio-on-mac-os-x",
+    "href": "installation.html#install-rstudio-on-mac-os-x",
+    "title": "1  Installing R and RStudio on Linux",
+    "section": "3.2 Install RStudio on Mac OS X",
+    "text": "3.2 Install RStudio on Mac OS X\nStep – 1: With the r-base installed, you must install RStudio. To do that, go to download RStudio and click on the download button for the RStudio desktop.\nStep – 2: Click on the link for the Mac OS X version of RStudio and save the .dmg file.\nStep – 3: Double-click the downloaded file and then drag and drop it into your applications folder.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Installing R and RStudio on Linux</span>"
     ]
   }
 ]

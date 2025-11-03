@@ -8,7 +8,8 @@ book:
   date: "11/09/2022"
   chapters:
     - index.qmd
-    - getting-start-with-R.md
+    - installation.Rmd
+    - getting-start-with-R.Rmd
     - 01-intro-to-r.Rmd
     - 02-starting-with-data.Rmd
     - data-frame.Rmd

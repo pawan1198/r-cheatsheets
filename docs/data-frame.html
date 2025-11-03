@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-09-19">
 
-<title>4&nbsp; data frame – R Cheatsheets</title>
+<title>4&nbsp; Data Frame – R Cheatsheets</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -119,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-frame.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">data frame</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-frame.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Frame</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -173,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-frame.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">data frame</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Frame</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -222,8 +221,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#data-frames" id="toc-data-frames" class="nav-link active" data-scroll-target="#data-frames"><span class="header-section-number">5</span> Data Frames</a></li>
-  <li><a href="#summarize-the-data" id="toc-summarize-the-data" class="nav-link" data-scroll-target="#summarize-the-data"><span class="header-section-number">6</span> Summarize the Data</a></li>
+  <li><a href="#summarize-the-data" id="toc-summarize-the-data" class="nav-link active" data-scroll-target="#summarize-the-data"><span class="header-section-number">4.1</span> Summarize the Data</a></li>
+  <li><a href="#access-items" id="toc-access-items" class="nav-link" data-scroll-target="#access-items"><span class="header-section-number">4.2</span> Access Items</a></li>
+  <li><a href="#add-columns" id="toc-add-columns" class="nav-link" data-scroll-target="#add-columns"><span class="header-section-number">4.3</span> Add Columns</a></li>
+  <li><a href="#amount-of-rows-and-columns" id="toc-amount-of-rows-and-columns" class="nav-link" data-scroll-target="#amount-of-rows-and-columns"><span class="header-section-number">4.4</span> Amount of Rows and Columns</a></li>
+  <li><a href="#data-frame-length" id="toc-data-frame-length" class="nav-link" data-scroll-target="#data-frame-length"><span class="header-section-number">4.5</span> Data Frame Length</a></li>
+  <li><a href="#combining-data-frames" id="toc-combining-data-frames" class="nav-link" data-scroll-target="#combining-data-frames"><span class="header-section-number">4.6</span> Combining Data Frames</a></li>
   </ul>
 </nav>
     </div>
@@ -232,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">data frame</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Frame</span></h1>
 </div>
 
 
@@ -240,12 +243,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 19, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -255,12 +252,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="data-frames" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Data Frames</h1>
 <p>Data Frames are data displayed in a format as a table.</p>
 <p>Data Frames can have different types of data inside it. While the first column can be character, the second and third can be numeric or logical. However, each column should have the same type of data.</p>
 <p>Use the data.frame() function to create a data frame:</p>
-<p>Example # Create a data frame</p>
+<p>Example<br>
+Create a data frame</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Data_Frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span> (</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Training =</span> <span class="fu">c</span>(<span class="st">"Strength"</span>, <span class="st">"Stamina"</span>, <span class="st">"Other"</span>),</span>
@@ -276,9 +272,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3    Other   120       45</code></pre>
 </div>
 </div>
-</section>
-<section id="summarize-the-data" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Summarize the Data</h1>
+<section id="summarize-the-data" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="summarize-the-data"><span class="header-section-number">4.1</span> Summarize the Data</h2>
 <p>Use the summary() function to summarize the data from a Data Frame:</p>
 <p>Example</p>
 <div class="cell">
@@ -307,7 +302,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>You will learn more about the summary() function in the statistical part of the R tutorial.</p>
-<p>Access Items We can use single brackets [ ], double brackets [[ ]] or $ to access columns from a data frame:</p>
+</section>
+<section id="access-items" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="access-items"><span class="header-section-number">4.2</span> Access Items</h2>
+<p>We can use single brackets [ ], double brackets [[ ]] or $ to access columns from a data frame:</p>
 <p>Example</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Data_Frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span> (</span>
@@ -354,7 +352,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 4 Strength   110      110</code></pre>
 </div>
 </div>
-<p>Add Columns Use the cbind() function to add new columns in a Data Frame:</p>
+</section>
+<section id="add-columns" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="add-columns"><span class="header-section-number">4.3</span> Add Columns</h2>
+<p>Use the cbind() function to add new columns in a Data Frame:</p>
 <p>Example</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Data_Frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span> (</span>
@@ -395,7 +396,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3   120       45</code></pre>
 </div>
 </div>
-<p>Amount of Rows and Columns Use the dim() function to find the amount of rows and columns in a Data Frame:</p>
+</section>
+<section id="amount-of-rows-and-columns" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="amount-of-rows-and-columns"><span class="header-section-number">4.4</span> Amount of Rows and Columns</h2>
+<p>Use the dim() function to find the amount of rows and columns in a Data Frame:</p>
 <p>Example</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Data_Frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span> (</span>
@@ -427,7 +431,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
-<p>Data Frame Length Use the length() function to find the number of columns in a Data Frame (similar to ncol()):</p>
+</section>
+<section id="data-frame-length" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="data-frame-length"><span class="header-section-number">4.5</span> Data Frame Length</h2>
+<p>Use the length() function to find the number of columns in a Data Frame (similar to ncol()):</p>
 <p>Example</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Data_Frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span> (</span>
@@ -441,7 +448,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
-<p>Combining Data Frames Use the rbind() function to combine two or more data frames in R vertically:</p>
+</section>
+<section id="combining-data-frames" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="combining-data-frames"><span class="header-section-number">4.6</span> Combining Data Frames</h2>
+<p>Use the rbind() function to combine two or more data frames in R vertically:</p>
 <p>Example</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Data_Frame1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span> (</span>

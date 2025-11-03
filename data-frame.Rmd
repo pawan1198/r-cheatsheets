@@ -1,22 +1,21 @@
 ---
-title: "data frame"
+title: "Data Frame"
 output: html_document
-date: "2023-09-19"
+source: Rmd
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Data Frames
 Data Frames are data displayed in a format as a table.
 
 Data Frames can have different types of data inside it. While the first column can be character, the second and third can be numeric or logical. However, each column should have the same type of data.
 
 Use the data.frame() function to create a data frame:
 
-Example
-# Create a data frame
+Example  
+Create a data frame
 ```{r}
 Data_Frame <- data.frame (
   Training = c("Strength", "Stamina", "Other"),
@@ -27,7 +26,7 @@ Data_Frame <- data.frame (
 Data_Frame
 ```
 
-# Summarize the Data
+## Summarize the Data
 Use the summary() function to summarize the data from a Data Frame:
 
 Example
@@ -45,7 +44,8 @@ summary(Data_Frame)
 
 You will learn more about the summary() function in the statistical part of the R tutorial.
 
-Access Items
+## Access Items
+
 We can use single brackets [ ], double brackets [[ ]] or $ to access columns from a data frame:
 
 Example
@@ -80,7 +80,7 @@ New_row_DF <- rbind(Data_Frame, c("Strength", 110, 110))
 New_row_DF
 ```
 
-Add Columns
+## Add Columns
 Use the cbind() function to add new columns in a Data Frame:
 
 Example
@@ -116,7 +116,7 @@ Data_Frame_New <- Data_Frame[-c(1), -c(1)]
 Data_Frame_New
 ```
 
-Amount of Rows and Columns
+## Amount of Rows and Columns
 Use the dim() function to find the amount of rows and columns in a Data Frame:
 
 Example
@@ -142,7 +142,7 @@ Data_Frame <- data.frame (
 ncol(Data_Frame)
 nrow(Data_Frame)
 ```
-Data Frame Length
+## Data Frame Length
 Use the length() function to find the number of columns in a Data Frame (similar to ncol()):
 
 Example
@@ -156,7 +156,7 @@ Data_Frame <- data.frame (
 length(Data_Frame)
 ```
 
-Combining Data Frames
+## Combining Data Frames
 Use the rbind() function to combine two or more data frames in R vertically:
 
 Example
