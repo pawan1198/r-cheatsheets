@@ -8,8 +8,14 @@ book:
   date: "11/03/2025"
   chapters:
     - index.qmd
-    - 00-intro.Rmd
+    - getting-start-with-R.md
     - 01-intro-to-r.Rmd
+    - 02-starting-with-data.Rmd
+    - data-frame.Rmd
+    - data-types.Rmd
+    - 03-dplyr.Rmd
+    - 04-tidyr.Rmd
+    - 05-ggplot2.Rmd
     - summary.qmd
     - references.qmd
 

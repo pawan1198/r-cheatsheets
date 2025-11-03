@@ -1,19 +1,8 @@
-[<img src="https://www.r-project.org/Rlogo.png" align="right" width="200">](https://www.r-project.org/about.html)
-## Author
-[Pawan](author.md)
 # Getting Started with R Cheat Sheet
 
 R is one of the most popular programming languages in data science and is widely used across various industries and academia. It’s open-source, easy to learn, and capable of handling complex data and statistical manipulations, making it the preferred computing environment for many data scientists today.
 
 This cheat sheet will cover an overview of getting started with R. 
-
-You can find some useful cheatsheets [here](cheatsheets.md)  
-[Installation of R and RStudio](episodes/installation.md)  
-[Data Types in R](episodes/data-types-exported.html)  
-[Data Frame in R](episodes/data-frame-exported.html)  
-[Reshaping Data in R](episodes/reshaping-data-exported.html)  
-
-
 
 # Using Packages in R
 R packages are collections of functions and tools developed by the R community. They increase the power of R by improving existing base R functionalities or adding new ones.
