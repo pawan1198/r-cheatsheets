@@ -1,0 +1,265 @@
+# Appendix B: Quarto Cross-Reference Guide {#sec-appendix-b .unnumbered}
+
+This appendix provides a complete reference for Quarto's cross-referencing system, covering figures, tables, equations, sections, and theorems.
+
+## How Cross-References Work {#sec-crossref-overview .unnumbered}
+
+Quarto's cross-reference system has two parts:
+
+1. A **label** on the item being referenced (must start with `fig-`, `tbl-`, `eq-`, `sec-`, etc.)
+2. A **reference** in text using `@label`
+
+Quarto then numbers items automatically and inserts the number wherever `@label` appears.
+
+## Figures {#sec-crossref-figures .unnumbered}
+
+### ggplot2 / Base R Figures {#sec-fig-code .unnumbered}
+
+````markdown
+```{{r}}
+#| label: fig-yield-trend
+#| fig-cap: "Annual wheat yield trend in Punjab (2010–2023)."
+#| fig-alt: "Line chart showing increasing wheat yield over time."
+#| fig-width: 8
+#| fig-height: 4.5
+
+ggplot(wheat_data, aes(x = year, y = yield)) +
+  geom_line() + ...
+```
+````
+
+Reference in text: `As shown in @fig-yield-trend, yields have increased...`
+
+**Rendered:** "As shown in Figure 1, yields have increased..."
+
+### Multiple Figures (Sub-figures) {#sec-subfigs .unnumbered}
+
+````markdown
+```{{r}}
+#| label: fig-comparison
+#| fig-cap: "Yield comparison across crops."
+#| fig-subcap:
+#|   - "Wheat yields by state"
+#|   - "Rice yields by state"
+#| layout-ncol: 2
+
+plot_wheat
+plot_rice
+```
+````
+
+Reference sub-figures: `@fig-comparison-1` and `@fig-comparison-2`.
+
+### Static Images {#sec-fig-static .unnumbered}
+
+```markdown
+![Caption for the image.](images/my-figure.png){#fig-my-image width=80%}
+```
+
+Reference: `@fig-my-image`.
+
+---
+
+## Tables {#sec-crossref-tables .unnumbered}
+
+### knitr Tables {#sec-tbl-knitr .unnumbered}
+
+````markdown
+```{{r}}
+#| label: tbl-summary-stats
+#| tbl-cap: "Summary statistics for the wheat yield dataset."
+
+knitr::kable(summary_table)
+```
+````
+
+Reference: `@tbl-summary-stats`.
+
+### gt Tables {#sec-tbl-gt .unnumbered}
+
+````markdown
+```{{r}}
+#| label: tbl-regression-results
+#| tbl-cap: "Regression coefficients for the yield model."
+
+library(gt)
+my_table |> gt()
+```
+````
+
+### Markdown Tables {#sec-tbl-markdown .unnumbered}
+
+```markdown
+| State  | Yield (qt/ha) | Area (000 ha) |
+|--------|---------------|---------------|
+| Punjab | 50.2          | 3520          |
+
+: Summary of wheat production {#tbl-wheat-states}
+```
+
+Reference: `@tbl-wheat-states`.
+
+---
+
+## Equations {#sec-crossref-equations .unnumbered}
+
+### Display Equations {#sec-eq-display .unnumbered}
+
+```markdown
+The linear model is:
+
+$$
+Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
+$$ {#eq-linear-model}
+
+where $\varepsilon_i \sim N(0, \sigma^2)$.
+```
+
+Reference: `As shown in @eq-linear-model...`
+
+### Inline Math {#sec-eq-inline .unnumbered}
+
+Inline equations use single dollar signs: `$\hat{\beta} = (X^TX)^{-1}X^Ty$`
+
+### Common LaTeX Math Symbols {#sec-latex-symbols .unnumbered}
+
+```{r}
+#| label: tbl-latex
+#| echo: false
+#| tbl-cap: "Common LaTeX math symbols used in statistics"
+
+symbols <- data.frame(
+  Symbol = c("$\\mu$", "$\\sigma$", "$\\sigma^2$", "$\\bar{x}$",
+             "$\\hat{\\beta}$", "$\\sum$", "$\\prod$", "$\\int$",
+             "$\\alpha$", "$\\beta$", "$\\epsilon$", "$\\varepsilon$",
+             "$\\sim$", "$\\approx$", "$\\neq$", "$\\leq$",
+             "$H_0$", "$H_1$", "$\\chi^2$", "$\\infty$"),
+  Meaning = c("Population mean", "Population SD", "Population variance",
+              "Sample mean", "Estimated coefficient", "Summation",
+              "Product", "Integral", "Significance level / Type I error",
+              "Regression coefficient", "Error term", "Residual",
+              "Distributed as", "Approximately equal", "Not equal",
+              "Less than or equal", "Null hypothesis", "Alternative hypothesis",
+              "Chi-squared", "Infinity"),
+  LaTeX = c("\\mu", "\\sigma", "\\sigma^2", "\\bar{x}",
+            "\\hat{\\beta}", "\\sum", "\\prod", "\\int",
+            "\\alpha", "\\beta", "\\epsilon", "\\varepsilon",
+            "\\sim", "\\approx", "\\neq", "\\leq",
+            "H_0", "H_1", "\\chi^2", "\\infty")
+)
+
+knitr::kable(symbols, col.names = c("Symbol", "Meaning", "LaTeX Code"))
+```
+
+---
+
+## Sections {#sec-crossref-sections .unnumbered}
+
+Section cross-references use the section's label (the `{#sec-...}` anchor):
+
+```markdown
+## Methods {#sec-methods}
+
+... content ...
+
+As described in @sec-methods, we used...
+```
+
+::: {.callout-tip}
+## Quarto Auto-Labels
+
+Quarto automatically creates labels for headings based on their text. "## My Analysis" gets the label `#sec-my-analysis`. You only need to specify `{#sec-...}` explicitly if you want a custom label.
+:::
+
+---
+
+## Theorems and Proofs {#sec-theorems .unnumbered}
+
+```markdown
+::: {#thm-clt}
+## Central Limit Theorem
+
+Let $X_1, X_2, \ldots, X_n$ be i.i.d. random variables with mean $\mu$ and 
+variance $\sigma^2$. Then as $n \to \infty$:
+
+$$
+\frac{\bar{X}_n - \mu}{\sigma/\sqrt{n}} \xrightarrow{d} N(0, 1)
+$$
+:::
+
+Reference: @thm-clt states that...
+```
+
+Other theorem-type blocks: `{#def-...}` (Definition), `{#lem-...}` (Lemma), `{#cor-...}` (Corollary), `{#prp-...}` (Proposition), `{#exm-...}` (Example).
+
+---
+
+## Citations {#sec-citations-ref .unnumbered}
+
+### Basic Citations {#sec-basic-cite .unnumbered}
+
+```markdown
+<!-- Inline citation -->
+@wickham2016r found that...
+
+<!-- Parenthetical citation -->
+The Grammar of Graphics [@wilkinson2005grammar] describes...
+
+<!-- Multiple citations -->
+Several studies [@ref1; @ref2; @ref3] have shown...
+
+<!-- Suppress author name -->
+The package [-@wickham2016r] provides...
+
+<!-- Page numbers -->
+@wickham2016r [p. 42] states...
+```
+
+### `.bib` File Format {#sec-bib-format .unnumbered}
+
+```bibtex
+@book{wickham2016r,
+  title     = {R for Data Science},
+  author    = {Wickham, Hadley and Grolemund, Garrett},
+  year      = {2016},
+  publisher = {O'Reilly Media},
+  url       = {https://r4ds.had.co.nz}
+}
+
+@article{wilkinson2005grammar,
+  title   = {The Grammar of Graphics},
+  author  = {Wilkinson, Leland},
+  year    = {2005},
+  journal = {Springer},
+  doi     = {10.1007/0-387-28695-0}
+}
+```
+
+---
+
+## Cross-Reference Prefixes Summary {#sec-prefix-summary .unnumbered}
+
+```{r}
+#| label: tbl-prefixes
+#| echo: false
+#| tbl-cap: "Quarto cross-reference label prefixes and their usage."
+
+prefixes <- data.frame(
+  Type = c("Figure", "Table", "Equation", "Section", "Listing (code)",
+           "Theorem", "Lemma", "Corollary", "Proposition",
+           "Definition", "Example", "Exercise"),
+  Prefix = c("fig-", "tbl-", "eq-", "sec-", "lst-",
+             "thm-", "lem-", "cor-", "prp-",
+             "def-", "exm-", "exr-"),
+  Example_Label = c("#fig-scatter", "#tbl-summary", "#eq-linear",
+                    "#sec-methods", "#lst-clean-code",
+                    "#thm-clt", "#lem-helper", "#cor-result", "#prp-main",
+                    "#def-pvalue", "#exm-ttest", "#exr-exercise1"),
+  Reference = c("@fig-scatter", "@tbl-summary", "@eq-linear",
+                "@sec-methods", "@lst-clean-code",
+                "@thm-clt", "@lem-helper", "@cor-result", "@prp-main",
+                "@def-pvalue", "@exm-ttest", "@exr-exercise1")
+)
+
+knitr::kable(prefixes, col.names = c("Type", "Prefix", "Example Label", "Reference Syntax"))
+```

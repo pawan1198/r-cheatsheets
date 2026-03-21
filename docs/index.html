@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
-
+<meta charset="UTF-8">
+<meta name="generator" content="quarto-1.8.27">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Pawan">
-<meta name="dcterms.date" content="2022-11-09">
-
-<title>R Cheatsheets</title>
+<title>R for Statistical Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,8 +17,42 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
-
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -32,7 +61,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./getting-start-with-R.html" rel="next">
+<link href="./part-1/01-intro.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -40,11 +69,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8b4baf804e461d9b72633f0de59a0cac.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-f1aadacce99040138bbb613f9330654f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8b4baf804e461d9b72633f0de59a0cac.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b31cf1804eca660fad3cafdbe48792a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-2c296131701888b5f36c09685351349c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-03027bcd119858a248add005f8d8e1bd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2c296131701888b5f36c09685351349c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -70,17 +102,174 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-
+}</script><style>html{ scroll-behavior: smooth; }</style>
 </head>
-
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -91,17 +280,15 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">R Cheatsheets</a> 
+      <a href="./">R for Statistical Analysis</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/pawan1198/r-cheatsheets" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -111,105 +298,211 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part I: Foundations &amp; The Quarto Workflow</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting-start-with-R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R Cheat Sheet</span></span></a>
+  <a href="./part-1/01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the R Ecosystem</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-intro-to-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R</span></span></a>
+  <a href="./part-1/02-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Your First Reproducible Document with Quarto</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-starting-with-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Starting with Data</span></span></a>
+  <a href="./part-1/03-data-import.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Import and Export</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part II: Data Wrangling and Visualization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-frame.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Frame</span></span></a>
+  <a href="./part-2/04-dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Manipulation with dplyr and tidyr</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-types.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">data in R</span></span></a>
+  <a href="./part-2/05-ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Visualization with ggplot2</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part III: Statistical Analysis (Core)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Wrangling with dplyr</span></span></a>
+  <a href="./part-3/06-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Descriptive Statistics and Exploratory Data Analysis</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-tidyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Wrangling with tidyr</span></span></a>
+  <a href="./part-3/08-hypothesis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-ggplot2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Visualisation with ggplot2</span></span></a>
+  <a href="./part-3/10-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Linear Regression Models</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part IV: Advanced Statistical Modeling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  <a href="./part-4/11-glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Generalized Linear Models</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+  <a href="./part-4/12-mixed-effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mixed Effects Models</span></span></a>
   </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./part-4/13-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multivariate Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./part-4/14-timeseries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Time Series Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Part V: Advanced R Programming &amp; Quarto Publishing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./part-5/15-efficient-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Writing Efficient R Code</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./part-5/16-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Creating Your Own Functions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./part-5/18-best-practices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Best Practices and Reproducibility</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/appendix-a.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix A: RStudio Cheat Sheet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/appendix-b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix B: Quarto Cross-Reference Guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/appendix-c.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix C: Common R Packages for Data Science</span></a>
+  </div>
+</li>
+      </ul>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
-  <li><a href="#author" id="toc-author" class="nav-link" data-scroll-target="#author">Author</a></li>
-  <li><a href="#getting-started-with-r-cheat-sheet" id="toc-getting-started-with-r-cheat-sheet" class="nav-link" data-scroll-target="#getting-started-with-r-cheat-sheet">Getting Started with R Cheat Sheet</a></li>
-  <li><a href="#the-advantages-of-r-for-statistical-analysis" id="toc-the-advantages-of-r-for-statistical-analysis" class="nav-link" data-scroll-target="#the-advantages-of-r-for-statistical-analysis">The Advantages of R for Statistical Analysis</a></li>
-  <li><a href="#comprehensive-statistical-libraries" id="toc-comprehensive-statistical-libraries" class="nav-link" data-scroll-target="#comprehensive-statistical-libraries">1. Comprehensive Statistical Libraries</a></li>
-  <li><a href="#strong-community-support" id="toc-strong-community-support" class="nav-link" data-scroll-target="#strong-community-support">2. Strong Community Support</a></li>
-  <li><a href="#data-visualization-capabilities" id="toc-data-visualization-capabilities" class="nav-link" data-scroll-target="#data-visualization-capabilities">3. Data Visualization Capabilities</a></li>
-  <li><a href="#flexibility-and-extensibility" id="toc-flexibility-and-extensibility" class="nav-link" data-scroll-target="#flexibility-and-extensibility">4. Flexibility and Extensibility</a></li>
-  <li><a href="#reproducibility-and-documentation" id="toc-reproducibility-and-documentation" class="nav-link" data-scroll-target="#reproducibility-and-documentation">5. Reproducibility and Documentation</a></li>
-  <li><a href="#statistical-modeling-and-machine-learning" id="toc-statistical-modeling-and-machine-learning" class="nav-link" data-scroll-target="#statistical-modeling-and-machine-learning">6. Statistical Modeling and Machine Learning</a></li>
-  <li><a href="#integration-with-other-tools" id="toc-integration-with-other-tools" class="nav-link" data-scroll-target="#integration-with-other-tools">7. Integration with Other Tools</a></li>
-  <li><a href="#educational-resources-and-learning-curve" id="toc-educational-resources-and-learning-curve" class="nav-link" data-scroll-target="#educational-resources-and-learning-curve">8. Educational Resources and Learning Curve</a></li>
-  <li><a href="#industry-adoption-and-job-market-demand" id="toc-industry-adoption-and-job-market-demand" class="nav-link" data-scroll-target="#industry-adoption-and-job-market-demand">9. Industry Adoption and Job Market Demand</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">10. Conclusion</a></li>
+<li>
+<a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
+  <ul class="collapse">
+<li><a href="#welcome-to-the-book" id="toc-welcome-to-the-book" class="nav-link" data-scroll-target="#welcome-to-the-book">Welcome to the Book</a></li>
+  <li><a href="#core-philosophy" id="toc-core-philosophy" class="nav-link" data-scroll-target="#core-philosophy">Core Philosophy</a></li>
+  <li><a href="#how-to-read-this-book" id="toc-how-to-read-this-book" class="nav-link" data-scroll-target="#how-to-read-this-book">How to Read This Book</a></li>
+  <li><a href="#software-requirements" id="toc-software-requirements" class="nav-link" data-scroll-target="#software-requirements">Software Requirements</a></li>
+  <li><a href="#conventions-used" id="toc-conventions-used" class="nav-link" data-scroll-target="#conventions-used">Conventions Used</a></li>
+  <li><a href="#about-the-author" id="toc-about-the-author" class="nav-link" data-scroll-target="#about-the-author">About the Author</a></li>
   </ul>
-</nav>
+</li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/pawan1198/r-cheatsheets/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/pawan1198/r-cheatsheets/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">R Cheatsheets</h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">R for Statistical Analysis</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">From Basic to Advanced Understanding</p>
 </div>
 
 
@@ -226,7 +519,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 9, 2022</p>
+      <p class="date">03 21, 2026</p>
     </div>
   </div>
   
@@ -235,74 +528,164 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
+</header><section id="preface" class="level1 unnumbered"><h1 class="unnumbered">Preface</h1>
+<section id="welcome-to-the-book" class="level2"><h2 class="anchored" data-anchor-id="welcome-to-the-book">Welcome to the Book</h2>
+<p>This book is an attempt to bring together three things that matter deeply to modern data analysis: <strong>rigorous statistical thinking</strong>, <strong>the R programming language</strong>, and <strong>reproducible research workflows</strong> powered by Quarto.</p>
+<p>Whether you are a student encountering regression for the first time, a researcher who has been “copying and pasting” R code from Stack Overflow for years, or a data scientist looking to formalise your workflow, this book is written for you.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What Makes This Book Different?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every single output — every table, every figure, every number in the text — is generated by live R code embedded in this document. Nothing is copy-pasted. This means you can trust the outputs, and more importantly, you can <em>change</em> the code and see what happens.</p>
+</div>
+</div>
+</section><section id="core-philosophy" class="level2"><h2 class="anchored" data-anchor-id="core-philosophy">Core Philosophy</h2>
+<p><strong>Reproducibility First.</strong> The reproducibility crisis in science is, at least partially, a tooling crisis. When analyses live in opaque spreadsheets or undocumented scripts, they cannot be checked, extended, or trusted. Quarto provides a framework where code, prose, and output live together in a single, auditable document.</p>
+<p><strong>Quarto as the Engine.</strong> Quarto is not just the tool used to <em>publish</em> this book — it is part of the curriculum. By the time you finish, you will know how to write papers, reports, websites, and presentations that anyone can replicate from a single source file.</p>
+<p><strong>Dual Workflow.</strong> This book teaches the modern <strong>Tidyverse</strong> ecosystem — <code>dplyr</code>, <code>ggplot2</code>, <code>tidyr</code>, <code>purrr</code> — as the primary path. But it never leaves base R behind. Understanding base R ensures you can read legacy code, work in constrained environments, and truly understand what the tidyverse is abstracting over.</p>
+</section><section id="how-to-read-this-book" class="level2"><h2 class="anchored" data-anchor-id="how-to-read-this-book">How to Read This Book</h2>
+<p>The book is divided into five parts:</p>
+<table class="caption-top table">
+<thead><tr class="header">
+<th>Part</th>
+<th>Focus</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>I</td>
+<td>Foundations &amp; Quarto Workflow</td>
+</tr>
+<tr class="even">
+<td>II</td>
+<td>Data Wrangling &amp; Visualization</td>
+</tr>
+<tr class="odd">
+<td>III</td>
+<td>Core Statistical Analysis</td>
+</tr>
+<tr class="even">
+<td>IV</td>
+<td>Advanced Statistical Modeling</td>
+</tr>
+<tr class="odd">
+<td>V</td>
+<td>Advanced R Programming &amp; Publishing</td>
+</tr>
+</tbody>
+</table>
+<p>You can read linearly or jump to the chapter most relevant to your needs. Each chapter begins with a list of <strong>learning objectives</strong> and ends with <strong>exercises</strong>.</p>
+</section><section id="software-requirements" class="level2"><h2 class="anchored" data-anchor-id="software-requirements">Software Requirements</h2>
+<p>To follow along with the examples, you will need:</p>
+<ol type="1">
+<li>
+<strong>R</strong> (version 4.3 or later) — <a href="https://cran.r-project.org">https://cran.r-project.org</a>
+</li>
+<li>
+<strong>RStudio</strong> (version 2023.06 or later) — <a href="https://posit.co/download/rstudio-desktop/">https://posit.co/download/rstudio-desktop/</a>
+</li>
+<li>
+<strong>Quarto</strong> (version 1.4 or later) — <a href="https://quarto.org/docs/get-started/">https://quarto.org/docs/get-started/</a>
+</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Run this once to install all packages used in this book</span></span>
+<span><span class="va">packages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="co"># Data import / wrangling</span></span>
+<span>  <span class="st">"tidyverse"</span>, <span class="st">"data.table"</span>, <span class="st">"readxl"</span>, <span class="st">"haven"</span>,</span>
+<span>  <span class="co"># Visualization</span></span>
+<span>  <span class="st">"ggplot2"</span>, <span class="st">"plotly"</span>, <span class="st">"corrplot"</span>, <span class="st">"ggfortify"</span>,</span>
+<span>  <span class="co"># Statistics &amp; Modeling</span></span>
+<span>  <span class="st">"skimr"</span>, <span class="st">"lme4"</span>, <span class="st">"car"</span>, <span class="st">"multcomp"</span>, <span class="st">"emmeans"</span>,</span>
+<span>  <span class="co"># Regression tables</span></span>
+<span>  <span class="st">"modelsummary"</span>, <span class="st">"gtsummary"</span>, <span class="st">"broom"</span>,</span>
+<span>  <span class="co"># Multivariate</span></span>
+<span>  <span class="st">"factoextra"</span>, <span class="st">"cluster"</span>,</span>
+<span>  <span class="co"># Time Series</span></span>
+<span>  <span class="st">"forecast"</span>, <span class="st">"tsibble"</span>, <span class="st">"feasts"</span>,</span>
+<span>  <span class="co"># Utilities</span></span>
+<span>  <span class="st">"renv"</span>, <span class="st">"here"</span>, <span class="st">"janitor"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="va">packages</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section><section id="conventions-used" class="level2"><h2 class="anchored" data-anchor-id="conventions-used">Conventions Used</h2>
+<p>Throughout the book, the following conventions apply:</p>
+<ul>
+<li>
+<code>code()</code> — inline R code or function names</li>
+<li>
+<strong>Bold</strong> — new statistical or conceptual terms at first introduction</li>
+<li>
+<em>Italics</em> — emphasis or titles</li>
+<li>
+<code>#&gt;</code> — output printed to the console</li>
+</ul>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Tip Boxes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These highlight practical advice, shortcuts, or best practices.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Warning Boxes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These flag common mistakes or potential confusion points.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Important Boxes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These highlight critical concepts you must not skip.</p>
+</div>
+</div>
+</section><section id="about-the-author" class="level2"><h2 class="anchored" data-anchor-id="about-the-author">About the Author</h2>
+<p>Pawan is an independent economic researcher and data analyst with over seven years of experience in social and economic research, focusing on India’s food and energy economy. His work spans field surveys, data analysis, visualization, and reproducible research workflows.</p>
+<hr>
+<p><em>This book was written entirely in Quarto. The source files are available at <a href="https://github.com/pawan1198/r-cheatsheets">github.com/pawan1198/r-stats-book</a>.</em></p>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p><a href="https://www.r-project.org/about.html"><img src="https://www.r-project.org/Rlogo.png" align="right" width="200"></a></p>
-</section>
-<section id="author" class="level1">
-<h1>Author</h1>
-<p><a href="author.md">Pawan</a></p>
-</section>
-<section id="getting-started-with-r-cheat-sheet" class="level1">
-<h1>Getting Started with R Cheat Sheet</h1>
-<p>R is one of the most popular programming languages in data science and is widely used across various industries and academia. It’s open-source, easy to learn, and capable of handling complex data and statistical manipulations, making it the preferred computing environment for many data scientists today.</p>
-<p>This cheat sheet will cover an overview of getting started with R.</p>
-<p>You can find some useful cheatsheets <a href="cheatsheets.md">here</a></p>
-</section>
-<section id="the-advantages-of-r-for-statistical-analysis" class="level1">
-<h1>The Advantages of R for Statistical Analysis</h1>
-<p>R has emerged as one of the most powerful and versatile programming languages in data analysis and statistical computing. It’s Developed by statisticians for statisticians, R is specifically designed to handle complex data analysis tasks, making it an ideal choice for researchers, data scientists, and analysts across various fields. This essay explores the numerous advantages of R for statistical analysis, including its extensive libraries, community support, data visualization capabilities, and flexibility.</p>
-</section>
-<section id="comprehensive-statistical-libraries" class="level1">
-<h1>1. Comprehensive Statistical Libraries</h1>
-<p>One of the most significant advantages of R is its collection of packages and libraries tailored for statistical analysis. The Comprehensive R Archive Network (CRAN) hosts thousands of packages that cover a wide range of statistical techniques, from basic descriptive statistics to advanced machine learning algorithms.<br>
-For instance, packages like data.table, dplyr and tidyr facilitate data manipulation and cleaning, while ggplot2 provides powerful tools for data visualization. More specialized packages, such as base-R for mixed and various statistical in-builts functions and survival for survival analysis, enable users to conduct sophisticated analyses with relative ease. The availability of these packages means that R can be used for virtually any statistical task, making it a one-stop solution for data analysis.</p>
-</section>
-<section id="strong-community-support" class="level1">
-<h1>2. Strong Community Support</h1>
-<p>R boasts a vibrant and active community of users and developers who contribute to its growth and evolution. This community support is invaluable for both novice and experienced users. Online forums, such as Stack Overflow and R-bloggers, statictiaclglobe provide platforms for users to ask questions, share insights, and collaborate on projects. Additionally, the R community regularly organizes conferences, workshops, and meetups, fostering an environment of continuous learning and knowledge sharing. The collaborative nature of the R community also means that users can access a wealth of resources, including tutorials, documentation, and example datasets. This support network is particularly beneficial for those new to statistical analysis, as it allows them to learn from others’ experiences and quickly overcome challenges.</p>
-</section>
-<section id="data-visualization-capabilities" class="level1">
-<h1>3. Data Visualization Capabilities</h1>
-<p>Effective data visualization is a crucial aspect of statistical analysis, as it helps to communicate findings clearly and intuitively. R in this area, offering a range of powerful visualization tools that enable users to create high-quality graphics. The&nbsp;ggplot2&nbsp;package, in particular, has gained widespread acclaim for its ability to produce complex and aesthetically pleasing visualizations with minimal code. With&nbsp;ggplot2, users can create a variety of plots, including scatter plots, line graphs, histograms, and box plots, all while maintaining control over the aesthetics and layout. The grammar of the graphics approach used by&nbsp;ggplot2&nbsp;allows for layering of visual elements, making it easy to add annotations, customize scales, and combine multiple plots into a single visualization. This flexibility ensures that users can effectively convey their analytical results, making R an excellent choice for presenting data-driven insights.</p>
-</section>
-<section id="flexibility-and-extensibility" class="level1">
-<h1>4. Flexibility and Extensibility</h1>
-<p>R is an open-source language, which means that users have the freedom to modify and extend its capabilities. This flexibility is particularly advantageous for researchers and analysts who may need to implement custom statistical methods or algorithms. Users can write their functions or modify existing ones to suit their specific needs, allowing for a high degree of customization in their analyses. Moreover, R can easily integrate with other programming languages, such as Python and C++, enabling users to leverage the strengths of multiple languages in their projects. This interoperability allows for the incorporation of R into larger data processing pipelines, making it a versatile tool in a data scientist’s toolkit.</p>
-</section>
-<section id="reproducibility-and-documentation" class="level1">
-<h1>5. Reproducibility and Documentation</h1>
-<p>Reproducibility is a cornerstone of scientific research, and R provides several tools to ensure that analyses can be easily replicated. The use of R Markdown allows users to create dynamic documents that combine code, output, and narrative text in a single file. This feature not only enhances the clarity of the analysis but also facilitates the sharing of results with others. R Markdown documents can be rendered in various formats, including HTML, PDF, and Word, making it easy to present findings professionally. Additionally, the integration of code and documentation ensures that analyses are transparent and reproducible, which is essential for building trust in research findings.</p>
-</section>
-<section id="statistical-modeling-and-machine-learning" class="level1">
-<h1>6. Statistical Modeling and Machine Learning</h1>
-<p>R is particularly well-suited for statistical modeling and machine learning applications. The language provides a rich set of tools for fitting various statistical models, including linear regression, generalized linear models, and time series analysis. The&nbsp;caret&nbsp;package, for example, offers a unified interface for training and evaluating machine learning models, making it easier for users to experiment with different algorithms and tuning parameters. Furthermore, R’s ability to handle large datasets and perform complex calculations efficiently makes it a strong contender for big data applications. With the advent of packages like&nbsp;data.table&nbsp;and&nbsp;dplyr, R can process large volumes of data quickly, allowing analysts to derive insights from big data without sacrificing performance.</p>
-</section>
-<section id="integration-with-other-tools" class="level1">
-<h1>7. Integration with Other Tools</h1>
-<p>R’s versatility extends to its ability to integrate seamlessly with various data sources and tools. It can connect to databases such as MySQL, PostgreSQL, and SQLite, enabling users to perform analyses directly on data stored in relational databases. Additionally, R can read and write data in multiple formats, including CSV, Excel, and JSON, making it easy to import and export data as needed. Moreover, R can be integrated with web applications and dashboards through packages like&nbsp;Shiny, which allows users to create interactive web applications for data visualization and analysis. This capability is particularly useful for sharing insights with stakeholders who may not have a technical background, as it enables them to explore data and results intuitively.</p>
-</section>
-<section id="educational-resources-and-learning-curve" class="level1">
-<h1>8. Educational Resources and Learning Curve</h1>
-<p>For those new to statistical analysis, R offers a wealth of educational resources that can help users get up to speed quickly. Numerous online courses, tutorials, and textbooks are available, catering to different learning styles and levels of expertise. The availability of these resources makes it easier for individuals to learn R and apply it to their statistical analyses. While R has a reputation for having a steeper learning curve compared to some other programming languages, its syntax is logical and consistent, which can facilitate the learning process. Once users become familiar with the basics, they often find that R’s capabilities and flexibility far outweigh the initial challenges.</p>
-</section>
-<section id="industry-adoption-and-job-market-demand" class="level1">
-<h1>9. Industry Adoption and Job Market Demand</h1>
-<p>R has gained significant traction in various industries, particularly in fields such as finance, healthcare, and academia. Many organizations recognize the value of R for data analysis and statistical modeling, leading to an increasing demand for professionals skilled in R. This trend is reflected in job postings that frequently list R as a required or preferred skill for data analyst and data scientist positions. As more companies adopt data-driven decision-making practices, proficiency in R can enhance career prospects and open doors to new opportunities. The language’s strong reputation in the statistical community further solidifies its position as a valuable asset for anyone looking to advance their career in data analysis.</p>
-</section>
-<section id="conclusion" class="level1">
-<h1>10. Conclusion</h1>
-<p>In conclusion, R stands out as a powerful and flexible tool for statistical analysis, offering a wide range of advantages that cater to the needs of researchers, analysts, and data scientists. Its comprehensive libraries, strong community support, exceptional data visualization capabilities, and flexibility make it an ideal choice for tackling complex data analysis tasks. Furthermore, R’s emphasis on reproducibility and documentation ensures that analyses are transparent and trustworthy. As the demand for data analysis continues to grow across various industries, R’s relevance and utility are likely to persist. By leveraging R’s capabilities, users can unlock valuable insights from their data, ultimately driving informed decision-making and contributing to advancements in their respective fields. Whether you are a seasoned statistician or a newcomer to data analysis, R provides the tools and resources necessary to succeed in the ever-evolving landscape of data science.</p>
+<!-- -->
 
-
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -371,6 +754,57 @@ For instance, packages like data.table, dplyr and tidyr facilitate data manipula
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -700,19 +1134,139 @@ For instance, packages like data.table, dplyr and tidyr facilitate data manipula
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./getting-start-with-R.html" class="pagination-link" aria-label="Getting Started with R Cheat Sheet">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with R Cheat Sheet</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./part-1/01-intro.html" class="pagination-link" aria-label="Introduction to the R Ecosystem">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the R Ecosystem</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Preface {.unnumbered}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">"#&gt;"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.align =</span> <span class="st">"center"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Welcome to the Book</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>This book is an attempt to bring together three things that matter deeply to modern data analysis: **rigorous statistical thinking**, **the R programming language**, and **reproducible research workflows** powered by Quarto.</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>Whether you are a student encountering regression for the first time, a researcher who has been "copying and pasting" R code from Stack Overflow for years, or a data scientist looking to formalise your workflow, this book is written for you.</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## What Makes This Book Different?</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>Every single output — every table, every figure, every number in the text — is generated by live R code embedded in this document. Nothing is copy-pasted. This means you can trust the outputs, and more importantly, you can *change* the code and see what happens.</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Core Philosophy</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>**Reproducibility First.** The reproducibility crisis in science is, at least partially, a tooling crisis. When analyses live in opaque spreadsheets or undocumented scripts, they cannot be checked, extended, or trusted. Quarto provides a framework where code, prose, and output live together in a single, auditable document.</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>**Quarto as the Engine.** Quarto is not just the tool used to *publish* this book — it is part of the curriculum. By the time you finish, you will know how to write papers, reports, websites, and presentations that anyone can replicate from a single source file.</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>**Dual Workflow.** This book teaches the modern **Tidyverse** ecosystem — <span class="in">`dplyr`</span>, <span class="in">`ggplot2`</span>, <span class="in">`tidyr`</span>, <span class="in">`purrr`</span> — as the primary path. But it never leaves base R behind. Understanding base R ensures you can read legacy code, work in constrained environments, and truly understand what the tidyverse is abstracting over.</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to Read This Book</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>The book is divided into five parts:</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Part <span class="pp">|</span> Focus <span class="pp">|</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|-------|</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> I    <span class="pp">|</span> Foundations &amp; Quarto Workflow <span class="pp">|</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> II   <span class="pp">|</span> Data Wrangling &amp; Visualization <span class="pp">|</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> III  <span class="pp">|</span> Core Statistical Analysis <span class="pp">|</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> IV   <span class="pp">|</span> Advanced Statistical Modeling <span class="pp">|</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> V    <span class="pp">|</span> Advanced R Programming &amp; Publishing <span class="pp">|</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>You can read linearly or jump to the chapter most relevant to your needs. Each chapter begins with a list of **learning objectives** and ends with **exercises**.</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## Software Requirements</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>To follow along with the examples, you will need:</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**R** (version 4.3 or later) — <span class="co">[</span><span class="ot">https://cran.r-project.org</span><span class="co">](https://cran.r-project.org)</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**RStudio** (version 2023.06 or later) — <span class="co">[</span><span class="ot">https://posit.co/download/rstudio-desktop/</span><span class="co">](https://posit.co/download/rstudio-desktop/)</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Quarto** (version 1.4 or later) — <span class="co">[</span><span class="ot">https://quarto.org/docs/get-started/</span><span class="co">](https://quarto.org/docs/get-started/)</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Run this once to install all packages used in this book</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Data import / wrangling</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>, <span class="st">"data.table"</span>, <span class="st">"readxl"</span>, <span class="st">"haven"</span>,</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Visualization</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ggplot2"</span>, <span class="st">"plotly"</span>, <span class="st">"corrplot"</span>, <span class="st">"ggfortify"</span>,</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Statistics &amp; Modeling</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>  <span class="st">"skimr"</span>, <span class="st">"lme4"</span>, <span class="st">"car"</span>, <span class="st">"multcomp"</span>, <span class="st">"emmeans"</span>,</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Regression tables</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>  <span class="st">"modelsummary"</span>, <span class="st">"gtsummary"</span>, <span class="st">"broom"</span>,</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Multivariate</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>  <span class="st">"factoextra"</span>, <span class="st">"cluster"</span>,</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Time Series</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>  <span class="st">"forecast"</span>, <span class="st">"tsibble"</span>, <span class="st">"feasts"</span>,</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Utilities</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>  <span class="st">"renv"</span>, <span class="st">"here"</span>, <span class="st">"janitor"</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(packages)</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conventions Used</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>Throughout the book, the following conventions apply:</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`code()`</span> — inline R code or function names</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Bold** — new statistical or conceptual terms at first introduction</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*Italics* — emphasis or titles</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`#&gt;`</span> — output printed to the console</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tip Boxes</span></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>These highlight practical advice, shortcuts, or best practices.</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## Warning Boxes</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>These flag common mistakes or potential confusion points.</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a><span class="fu">## Important Boxes</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>These highlight critical concepts you must not skip.</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="fu">## About the Author</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>Pawan is an independent economic researcher and data analyst with over seven years of experience in social and economic research, focusing on India's food and energy economy. His work spans field surveys, data analysis, visualization, and reproducible research workflows.</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>*This book was written entirely in Quarto. The source files are available at [github.com/pawan1198/r-stats-book](https://github.com/pawan1198/r-cheatsheets).*</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2022 Pawan</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/pawan1198/r-cheatsheets/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/pawan1198/r-cheatsheets/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
 
 
-
-
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

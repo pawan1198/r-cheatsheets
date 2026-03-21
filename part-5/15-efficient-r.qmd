@@ -1,0 +1,245 @@
+# Writing Efficient R Code {#sec-efficient-r}
+
+```{r}
+#| label: setup-ch15
+#| include: false
+library(tidyverse)
+library(purrr)
+library(microbenchmark)
+```
+
+::: {.callout-note}
+## Learning Objectives
+
+By the end of this chapter, you will be able to:
+
+- Use control structures: if-else, for loops, while loops
+- Apply the `apply` family of functions for vectorised operations
+- Use `purrr::map()` for functional programming
+- Profile code performance and identify bottlenecks
+- Write faster R code using vectorisation
+:::
+
+## Control Structures {#sec-control-structures}
+
+### If-Else Statements {#sec-ifelse}
+
+```{r}
+#| label: ifelse-demo
+
+# Basic if-else
+classify_bmi <- function(bmi) {
+  if (bmi < 18.5) {
+    "Underweight"
+  } else if (bmi < 25.0) {
+    "Normal"
+  } else if (bmi < 30.0) {
+    "Overweight"
+  } else {
+    "Obese"
+  }
+}
+
+classify_bmi(22.3)
+classify_bmi(31.5)
+
+# Vectorised version using dplyr::case_when
+bmi_values <- c(17.2, 22.3, 27.8, 33.1, 19.5)
+
+dplyr::case_when(
+  bmi_values < 18.5 ~ "Underweight",
+  bmi_values < 25.0 ~ "Normal",
+  bmi_values < 30.0 ~ "Overweight",
+  TRUE              ~ "Obese"
+)
+```
+
+::: {.callout-tip}
+## Prefer Vectorised Operations
+
+In R, applying a function to each element of a vector using a loop is almost always slower than using vectorised operations. Use `ifelse()` or `case_when()` instead of `if` inside a loop.
+:::
+
+### For Loops {#sec-for-loops}
+
+```{r}
+#| label: for-loops
+
+# A for loop to read and process multiple files
+# (demonstrated conceptually)
+
+results <- list()
+for (i in 1:5) {
+  results[[i]] <- tibble(
+    simulation = i,
+    mean_val   = mean(rnorm(100, mean = i * 10)),
+    sd_val     = sd(rnorm(100))
+  )
+}
+
+bind_rows(results)
+```
+
+### While Loops {#sec-while-loops}
+
+```{r}
+#| label: while-loops
+
+# Newton-Raphson: find root of f(x) = x^2 - 2 (i.e., sqrt(2))
+x    <- 1.0
+tol  <- 1e-10
+iter <- 0
+
+while (abs(x^2 - 2) > tol) {
+  x    <- x - (x^2 - 2) / (2 * x)
+  iter <- iter + 1
+}
+
+cat(sprintf("sqrt(2) ≈ %.10f (converged in %d iterations)\n", x, iter))
+```
+
+## The Apply Family {#sec-apply-family}
+
+The `apply` family avoids explicit loops and is often more readable (though not always faster):
+
+```{r}
+#| label: apply-demo
+
+# apply: applies a function over rows (MARGIN=1) or columns (MARGIN=2)
+mat <- matrix(rnorm(20), nrow = 4)
+apply(mat, MARGIN = 1, mean)   # Row means
+apply(mat, MARGIN = 2, sd)     # Column SDs
+
+# lapply: applies to each element of a list, returns a list
+datasets <- list(mtcars = mtcars, iris = iris, airquality = airquality)
+lapply(datasets, nrow)
+
+# sapply: like lapply but simplifies the result
+sapply(datasets, nrow)          # Returns named vector
+sapply(datasets, function(d) c(rows = nrow(d), cols = ncol(d)))
+
+# vapply: like sapply but type-safe (recommended for production code)
+vapply(datasets, nrow, FUN.VALUE = integer(1))
+
+# tapply: apply by group
+tapply(iris$Sepal.Length, iris$Species, mean)
+```
+
+## Functional Programming with `purrr` {#sec-purrr}
+
+`purrr` provides a consistent, type-safe interface for functional programming:
+
+```{r}
+#| label: purrr-demo
+
+# map: always returns a list
+map(1:5, ~ .x^2)
+
+# map_dbl: returns a double vector
+map_dbl(mtcars, mean)
+
+# map_df: returns a data frame
+iris |>
+  group_split(Species) |>
+  map_dfr(~ tibble(
+    species    = unique(.x$Species),
+    mean_sepal = mean(.x$Sepal.Length),
+    n          = nrow(.x)
+  ))
+```
+
+```{r}
+#| label: purrr-map2
+
+# map2: iterate over two vectors simultaneously
+x_vals <- 1:5
+y_vals <- 6:10
+map2_dbl(x_vals, y_vals, ~ .x + .y)
+
+# pmap: iterate over any number of inputs
+params <- list(
+  mean = c(0, 5, 10),
+  sd   = c(1, 2, 3),
+  n    = c(100, 100, 100)
+)
+pmap(params, rnorm) |> map_dbl(mean)
+```
+
+```{r}
+#| label: purrr-practical
+
+# Practical: fit a model for each species, extract R-squared
+iris |>
+  group_split(Species) |>
+  map_dfr(function(df) {
+    m <- lm(Sepal.Length ~ Sepal.Width + Petal.Length, data = df)
+    tibble(
+      species   = unique(df$Species),
+      r_squared = summary(m)$r.squared,
+      n         = nrow(df)
+    )
+  })
+```
+
+## Vectorisation and Performance {#sec-performance}
+
+```{r}
+#| label: vectorisation
+
+# Slow: loop over elements
+sum_loop <- function(x) {
+  total <- 0
+  for (val in x) total <- total + val
+  total
+}
+
+# Fast: vectorised
+n <- 1e6
+x <- rnorm(n)
+
+bench::mark(
+  loop   = sum_loop(x),
+  base_r = sum(x),
+  check  = FALSE
+)
+```
+
+```{r}
+#| label: memory-preallocation
+
+# Anti-pattern: growing a vector in a loop
+slow_grow <- function(n) {
+  x <- c()
+  for (i in 1:n) x <- c(x, i^2)
+  x
+}
+
+# Better: pre-allocate
+fast_prealloc <- function(n) {
+  x <- numeric(n)
+  for (i in 1:n) x[i] <- i^2
+  x
+}
+
+# Best: fully vectorised
+fastest <- function(n) (1:n)^2
+
+bench::mark(
+  slow   = slow_grow(1000),
+  better = fast_prealloc(1000),
+  best   = fastest(1000),
+  check  = TRUE
+)
+```
+
+## Exercises {#sec-ch15-exercises}
+
+1. Write a function using a `for` loop that takes a data frame and returns the number of missing values in each column. Then write the same function using `sapply()`. Then using `purrr::map_int()`.
+
+2. Use `purrr::map_dfr()` to fit a linear regression of `mpg ~ wt` separately for each number of cylinders in `mtcars`. Return a data frame with the intercept, slope, and R-squared for each group.
+
+3. Benchmark three approaches to computing row means of a 1000×100 matrix: (a) a for loop, (b) `apply()`, (c) `rowMeans()`. Which is fastest?
+
+4. Use `purrr::possibly()` to handle errors gracefully when applying a function that might fail on some inputs.
+
+5. **Challenge:** Read 12 monthly data files (simulate them using `write_csv()`), process each one, and combine into a single data frame using `purrr::map_dfr()` and `here::here()`.

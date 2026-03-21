@@ -1,0 +1,290 @@
+# Appendix C: Common R Packages for Data Science {#sec-appendix-c .unnumbered}
+
+This appendix catalogs the R packages used throughout this book, organised by task, with brief descriptions and installation commands.
+
+## Installing All Book Packages {#sec-install-all .unnumbered}
+
+```r
+# Run this once to install every package used in this book
+pkgs <- c(
+  # Core tidyverse
+  "tidyverse", "tibble", "dplyr", "tidyr", "readr",
+  "ggplot2", "purrr", "stringr", "forcats", "lubridate",
+
+  # Data import
+  "readxl", "haven", "jsonlite", "googlesheets4",
+  "writexl", "DBI", "RSQLite", "RPostgres",
+
+  # Data cleaning
+  "janitor", "skimr", "naniar",
+
+  # Visualisation
+  "plotly", "corrplot", "GGally", "ggfortify",
+  "patchwork", "scales", "RColorBrewer", "viridis",
+  "ggthemes", "ggrepel",
+
+  # Statistics
+  "moments", "effectsize", "car", "multcomp", "emmeans",
+
+  # Regression and modelling
+  "broom", "modelsummary", "gtsummary", "gt",
+  "lme4", "broom.mixed", "MASS", "performance",
+
+  # Multivariate
+  "factoextra", "cluster", "FactoMineR",
+
+  # Time series
+  "forecast", "tseries", "tsibble", "feasts", "fable",
+
+  # Machine learning
+  "caret", "tidymodels",
+
+  # Functional programming / utilities
+  "purrr", "furrr", "bench", "microbenchmark",
+  "here", "renv", "fs", "glue",
+
+  # Quarto / reporting
+  "knitr", "rmarkdown", "quarto",
+
+  # Debugging / style
+  "lintr", "styler",
+
+  # Datasets
+  "gapminder", "palmerpenguins", "nycflights13"
+)
+
+# Install packages not already installed
+new_pkgs <- pkgs[!pkgs %in% installed.packages()[, "Package"]]
+if (length(new_pkgs)) install.packages(new_pkgs)
+```
+
+---
+
+## Package Catalogue {#sec-pkg-catalogue .unnumbered}
+
+### Data Import and Export {#sec-pkg-import .unnumbered}
+
+```{r}
+#| label: tbl-import-pkgs
+#| echo: false
+#| tbl-cap: "Packages for data import and export."
+
+import_pkgs <- data.frame(
+  Package = c("readr", "readxl", "haven", "writexl", "jsonlite",
+              "DBI", "RSQLite", "RPostgres", "googlesheets4", "httr2"),
+  Function = c(
+    "Read CSV, TSV, and delimited text files",
+    "Read Excel files (.xls, .xlsx) without Java",
+    "Read SPSS (.sav), Stata (.dta), SAS (.sas7bdat) files",
+    "Write data frames to Excel without Java",
+    "Parse and generate JSON",
+    "Unified database interface",
+    "Interface to SQLite databases",
+    "Interface to PostgreSQL databases",
+    "Read and write Google Sheets",
+    "HTTP requests for web APIs"
+  ),
+  Install = c(
+    "tidyverse", "tidyverse", "install.packages('haven')",
+    "install.packages('writexl')", "install.packages('jsonlite')",
+    "install.packages('DBI')", "install.packages('RSQLite')",
+    "install.packages('RPostgres')", "install.packages('googlesheets4')",
+    "install.packages('httr2')"
+  )
+)
+knitr::kable(import_pkgs, col.names = c("Package", "Purpose", "Install"))
+```
+
+### Data Wrangling {#sec-pkg-wrangle .unnumbered}
+
+```{r}
+#| label: tbl-wrangle-pkgs
+#| echo: false
+#| tbl-cap: "Packages for data manipulation and cleaning."
+
+wrangle_pkgs <- data.frame(
+  Package = c("dplyr", "tidyr", "data.table", "janitor", "skimr",
+              "lubridate", "stringr", "forcats", "naniar", "validate"),
+  Purpose = c(
+    "Core data manipulation: filter, select, mutate, summarise",
+    "Reshape data: pivot_longer, pivot_wider, separate, unite",
+    "High-performance data manipulation for large datasets",
+    "Clean data frame names and values (clean_names)",
+    "Rich summary statistics with skim()",
+    "Parse, manipulate, and arithmetic on dates and times",
+    "Consistent string manipulation functions",
+    "Tools for working with categorical (factor) variables",
+    "Visualise and analyse missing data patterns",
+    "Validate data against rules"
+  )
+)
+knitr::kable(wrangle_pkgs, col.names = c("Package", "Purpose"))
+```
+
+### Visualisation {#sec-pkg-viz .unnumbered}
+
+```{r}
+#| label: tbl-viz-pkgs
+#| echo: false
+#| tbl-cap: "Packages for data visualisation."
+
+viz_pkgs <- data.frame(
+  Package = c("ggplot2", "plotly", "patchwork", "corrplot",
+              "GGally", "ggrepel", "ggthemes", "viridis",
+              "scales", "ggfortify", "leaflet"),
+  Purpose = c(
+    "Grammar of Graphics — the core visualisation package",
+    "Interactive charts; converts ggplot2 with ggplotly()",
+    "Combine multiple ggplot2 plots with / and |",
+    "Visualise correlation matrices",
+    "Pairs plots, parallel coordinates, and ggplot2 extensions",
+    "Non-overlapping text labels for scatter plots",
+    "Additional themes (Economist, Tufte, FiveThirtyEight, ...)",
+    "Perceptually uniform colour palettes (colourblind-safe)",
+    "Format axis labels (dollar, percent, comma, ...)",
+    "autoplot() for time series, PCA, survival objects",
+    "Interactive choropleth and point maps"
+  )
+)
+knitr::kable(viz_pkgs, col.names = c("Package", "Purpose"))
+```
+
+### Statistical Modelling {#sec-pkg-models .unnumbered}
+
+```{r}
+#| label: tbl-model-pkgs
+#| echo: false
+#| tbl-cap: "Packages for statistical modelling and inference."
+
+model_pkgs <- data.frame(
+  Package = c("stats", "car", "multcomp", "emmeans", "lme4",
+              "MASS", "survival", "nlme", "mgcv", "glmnet",
+              "broom", "modelsummary", "gtsummary", "effectsize",
+              "performance", "see"),
+  Purpose = c(
+    "Base R statistics: lm, glm, t.test, aov, etc.",
+    "Companion to Applied Regression: ANOVA, VIF, leveneTest",
+    "Multiple comparisons and simultaneous inference",
+    "Estimated marginal means for factorial designs",
+    "Linear and generalised linear mixed models",
+    "Negative binomial regression, stepwise selection, LDA",
+    "Survival analysis: Kaplan-Meier, Cox regression",
+    "Mixed effects models with correlation structures",
+    "Generalised additive models (GAMs)",
+    "LASSO, Ridge, and Elastic Net regression",
+    "Tidy model outputs: tidy, glance, augment",
+    "Publication-quality regression tables",
+    "Clinical summary tables with gtsummary",
+    "Standardised effect sizes (Cohen's d, eta-squared, ...)",
+    "Model quality indices: R², AIC, ICC, RMSE",
+    "Visualisation for easystats packages"
+  )
+)
+knitr::kable(model_pkgs, col.names = c("Package", "Purpose"))
+```
+
+### Time Series {#sec-pkg-ts .unnumbered}
+
+```{r}
+#| label: tbl-ts-pkgs
+#| echo: false
+#| tbl-cap: "Packages for time series analysis and forecasting."
+
+ts_pkgs <- data.frame(
+  Package = c("forecast", "tseries", "tsibble", "feasts",
+              "fable", "prophet", "xts", "zoo"),
+  Purpose = c(
+    "ARIMA, ETS, Holt-Winters forecasting; auto.arima()",
+    "Unit root tests (adf.test), ARCH effects",
+    "Tidy time series data structure",
+    "Feature extraction and visualisation for tsibble",
+    "Tidy forecasting framework (ARIMA, ETS, ...)",
+    "Facebook's additive forecasting model (trends + seasonality)",
+    "Extensible time series for irregular data",
+    "Ordered observations for irregular time series"
+  )
+)
+knitr::kable(ts_pkgs, col.names = c("Package", "Purpose"))
+```
+
+### Reproducibility and Workflow {#sec-pkg-repro .unnumbered}
+
+```{r}
+#| label: tbl-repro-pkgs
+#| echo: false
+#| tbl-cap: "Packages for reproducible research workflows."
+
+repro_pkgs <- data.frame(
+  Package = c("renv", "here", "targets", "quarto", "knitr",
+              "rmarkdown", "lintr", "styler", "usethis", "devtools"),
+  Purpose = c(
+    "Reproducible package environments with lockfile",
+    "File paths relative to project root",
+    "Make-style pipeline for complex, cached workflows",
+    "Render Quarto documents from R",
+    "R code chunks in documents; kable() for tables",
+    "Dynamic documents with R Markdown",
+    "Static code analysis and style checking",
+    "Automatic code reformatting to tidyverse style",
+    "Automate project and package setup tasks",
+    "Package development tools"
+  )
+)
+knitr::kable(repro_pkgs, col.names = c("Package", "Purpose"))
+```
+
+### Datasets {#sec-pkg-data .unnumbered}
+
+```{r}
+#| label: tbl-data-pkgs
+#| echo: false
+#| tbl-cap: "Packages that provide datasets for learning and examples."
+
+data_pkgs <- data.frame(
+  Package = c("gapminder", "palmerpenguins", "nycflights13",
+              "ISLR2", "wooldridge", "AER", "datasets"),
+  Key_Datasets = c(
+    "gapminder: GDP, life expectancy, population for 142 countries, 1952–2007",
+    "penguins: measurements for 344 penguins of 3 species",
+    "flights, airlines, airports, planes, weather (2013)",
+    "Auto, Boston, Caravan, Wage, and many others (ISLR textbook)",
+    "100+ datasets for Wooldridge's Econometrics textbook",
+    "CPS1985, Fatalities, PSID, and many applied econometrics datasets",
+    "mtcars, iris, airquality, USArrests, etc. (built into R)"
+  )
+)
+knitr::kable(data_pkgs, col.names = c("Package", "Key Datasets"))
+```
+
+---
+
+## Package Discovery {#sec-pkg-discovery .unnumbered}
+
+Finding the right package for a new task:
+
+- **CRAN Task Views**: [cran.r-project.org/web/views/](https://cran.r-project.org/web/views/) — curated lists by topic (Econometrics, TimeSeries, Spatial, ...)
+- **rOpenSci**: [ropensci.org](https://ropensci.org) — peer-reviewed packages for scientific data
+- **Posit Community**: [community.rstudio.com](https://community.rstudio.com)
+- **R-bloggers**: [r-bloggers.com](https://www.r-bloggers.com)
+- **Stack Overflow**: tag `[r]` for questions
+
+---
+
+## Getting Package Help {#sec-pkg-help .unnumbered}
+
+```r
+# Built-in help
+?dplyr::filter
+help(package = "ggplot2")
+vignette("dplyr")                  # Package tutorial
+vignette(package = "tidyr")        # List all vignettes
+
+# Check package version
+packageVersion("ggplot2")
+
+# List all functions in a package
+ls("package:dplyr")
+
+# Package news (changelog)
+news(package = "ggplot2")
+```

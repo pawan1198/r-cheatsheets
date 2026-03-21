@@ -3,32 +3,103 @@ project:
   output-dir: docs
 
 book:
-  title: "R Cheatsheets"
+  title: "R for Statistical Analysis"
+  subtitle: "From Basic to Advanced Understanding"
   author: "Pawan"
-  date: "11/09/2022"
+  date: last-modified
+  date-format: "03 21, 2026"
+  repo-url: https://github.com/pawan1198/r-cheatsheets
+  repo-actions: [edit, issue]
+  search: true
+  sidebar:
+    style: docked
+    background: light
   chapters:
     - index.qmd
-    - installation.Rmd
-    - getting-start-with-R.Rmd
-    - 01-intro-to-r.Rmd
-    - 02-starting-with-data.Rmd
-    - data-frame.Rmd
-    - data-types.Rmd
-    - 03-dplyr.Rmd
-    - 04-tidyr.Rmd
-    - 05-ggplot2.Rmd
-    - summary.qmd
-    - references.qmd
+    - part: "Part I: Foundations & The Quarto Workflow"
+      chapters:
+        - part-1/01-intro.qmd
+        - part-1/02-quarto.qmd
+        - part-1/03-data-import.qmd
+    - part: "Part II: Data Wrangling and Visualization"
+      chapters:
+        - part-2/04-dplyr.qmd
+        #- part-2/04b-datatable.qmd
+        - part-2/05-ggplot2.qmd
+    - part: "Part III: Statistical Analysis (Core)"
+      chapters:
+        - part-3/06-eda.qmd
+        #- part-3/07-inference.qmd
+        - part-3/08-hypothesis.qmd
+        #- part-3/09-anova.qmd
+        - part-3/10-regression.qmd
+    - part: "Part IV: Advanced Statistical Modeling"
+      chapters:
+        - part-4/11-glm.qmd
+        - part-4/12-mixed-effects.qmd
+        - part-4/13-multivariate.qmd
+        - part-4/14-timeseries.qmd
+    - part: "Part V: Advanced R Programming & Quarto Publishing"
+      chapters:
+        - part-5/15-efficient-r.qmd
+        - part-5/16-functions.qmd
+        #- part-5/17-advanced-quarto.qmd
+        - part-5/18-best-practices.qmd
+  appendices:
+    - appendices/appendix-a.qmd
+    - appendices/appendix-b.qmd
+    - appendices/appendix-c.qmd
+  page-footer:
+    left: "© 2022 Pawan"
+    right: "Built with [Quarto](https://quarto.org)"
 
 bibliography: references.bib
+csl: apa.csl
 
 format:
   html:
     theme:
-      - cosmo
-      - brand
+      light: [flatly, style.css]
+      dark: [darkly, style-dark.css]
+    code-fold: true
+    code-tools: true
+    code-link: true
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    fig-align: center
+    fig-cap-location: bottom
+    callout-appearance: minimal
+    smooth-scroll: true
+    highlight-style: github
   pdf:
     documentclass: scrreprt
+    classoption: ["oneside", "open=any"]
+    papersize: a4
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    colorlinks: true
+    keep-tex: false
+    geometry:
+      - top=30mm
+      - left=25mm
+      - right=25mm
+      - bottom=30mm
+    include-in-header:
+      text: |
+        \usepackage{fancyhdr}
+        \usepackage{booktabs}
+        \usepackage{longtable}
+        \usepackage{float}
 
+execute:
+  echo: true
+  warning: false
+  message: false
+  cache: false
 
-
+knitr:
+  opts_chunk:
+    comment: "#>"
+    collapse: true

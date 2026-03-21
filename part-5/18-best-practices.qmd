@@ -1,0 +1,357 @@
+# Best Practices and Reproducibility {#sec-best-practices}
+
+```{r}
+#| label: setup-ch18
+#| include: false
+library(tidyverse)
+```
+
+::: {.callout-note}
+## Learning Objectives
+
+By the end of this chapter, you will be able to:
+
+- Organise a research project using a consistent directory structure
+- Use `renv` to create a reproducible package environment
+- Implement basic Git version control from within RStudio
+- Write clean, readable R code following community conventions
+- Apply the principles of a reproducible research workflow
+:::
+
+## Project-Oriented Workflows {#sec-projects}
+
+The foundation of reproducible research is a **self-contained project**. Every file needed to reproduce an analysis should live in one directory, with no hard-coded paths to files elsewhere on your computer.
+
+### Recommended Directory Structure {#sec-dir-structure}
+
+```
+my-research-project/
+├── _quarto.yml          # (if a Quarto book/website)
+├── my-project.Rproj     # RStudio project file
+├── renv.lock            # Package snapshot (managed by renv)
+├── README.md            # Project overview
+│
+├── data/
+│   ├── raw/             # Original, immutable data — never modify
+│   └── processed/       # Cleaned, derived data
+│
+├── R/                   # Reusable R functions
+│   ├── utils.R
+│   └── plotting.R
+│
+├── analysis/            # Analysis scripts or .qmd files
+│   ├── 01-clean.qmd
+│   ├── 02-eda.qmd
+│   └── 03-modelling.qmd
+│
+├── output/
+│   ├── figures/
+│   ├── tables/
+│   └── reports/
+│
+└── docs/                # Rendered output (for GitHub Pages)
+```
+
+::: {.callout-important}
+## The Two Rules of Raw Data
+
+1. **Never modify raw data.** Put it in `data/raw/` and treat it as read-only.
+2. **Always document its provenance.** Add a `data/raw/README.md` recording where the data came from, when it was downloaded, and what it contains.
+:::
+
+### The `here` Package Revisited {#sec-here-revisited}
+
+```{r}
+#| label: here-revisited
+
+library(here)
+
+# Paths always relative to the .Rproj location
+raw_data_path    <- here("data", "raw", "crop_yields_2023.csv")
+clean_data_path  <- here("data", "processed", "crop_yields_clean.rds")
+figure_path      <- here("output", "figures", "yield_trend.png")
+
+# These paths work on any machine, any OS
+cat(raw_data_path, "\n")
+```
+
+### Naming Conventions {#sec-naming}
+
+Consistent file and variable naming pays dividends in readability:
+
+```r
+# Files: use lowercase with hyphens or underscores, be descriptive
+# Good:
+01-data-cleaning.qmd
+02-eda-wheat-prices.qmd
+fig-yield-by-state.png
+
+# Bad:
+analysis.R
+Final_FINAL_v3.qmd
+myfig.png
+
+# Objects: use snake_case consistently
+# Good:
+wheat_yield_2023 <- read_csv(...)
+mean_yield_state <- ...
+
+# Bad:
+WheatYield <- ...
+meanyield.2023 <- ...
+x <- ...
+```
+
+## Version Control with Git {#sec-git}
+
+**Git** tracks every change to your files, allows you to revert to any previous state, and enables collaboration. **GitHub** hosts Git repositories online.
+
+### Basic Git Workflow {#sec-git-workflow}
+
+```bash
+# Initialise a new repository
+git init
+
+# Check status
+git status
+
+# Stage files for commit
+git add .                         # Stage all changed files
+git add analysis/01-clean.qmd     # Stage one file
+
+# Commit with a message
+git commit -m "Add data cleaning script for wheat yields"
+
+# View history
+git log --oneline
+
+# Push to GitHub
+git remote add origin https://github.com/username/my-project.git
+git push -u origin main
+```
+
+### Branching {#sec-branches}
+
+```bash
+# Create a new branch for an experiment
+git checkout -b feature/add-poisson-model
+
+# Make changes, commit...
+git commit -m "Add Poisson regression for hospital admissions"
+
+# Merge back to main
+git checkout main
+git merge feature/add-poisson-model
+```
+
+### Git in RStudio {#sec-git-rstudio}
+
+RStudio provides a GUI for Git:
+
+1. *Tools → Version Control → Project Setup* — enables Git for a project
+2. The **Git pane** (Environment panel, Git tab) shows changed files
+3. Click **Diff** to see exactly what changed
+4. Check boxes to **Stage**, then click **Commit**
+5. Use **Pull** before starting work; **Push** when done
+
+::: {.callout-tip}
+## What to Put in `.gitignore`
+
+Some files should not be tracked. Create a `.gitignore` file:
+
+```
+# R artefacts
+.Rhistory
+.RData
+.Rproj.user/
+
+# Large data files (share via cloud or DOI instead)
+data/raw/*.csv
+data/raw/*.xlsx
+
+# Rendered outputs (can be regenerated)
+_book/
+docs/
+*.pdf
+
+# renv package library (renv.lock is enough)
+renv/library/
+```
+:::
+
+## Package Management with `renv` {#sec-renv}
+
+`renv` creates a **project-specific package library** and records exact package versions, so anyone (including future-you) can reproduce your exact environment.
+
+```{r}
+#| eval: false
+
+library(renv)
+
+# 1. Initialise renv in your project
+renv::init()
+# Creates: renv/ directory, renv.lock, .Rprofile
+
+# 2. Install packages as usual
+install.packages("gapminder")
+
+# 3. Snapshot the current state
+renv::snapshot()
+# Updates renv.lock with all current package versions
+
+# 4. On a new machine or after cloning from GitHub
+renv::restore()
+# Installs exactly the packages recorded in renv.lock
+```
+
+The `renv.lock` file looks like this:
+
+```json
+{
+  "R": {
+    "Version": "4.3.2",
+    "Repositories": [{"Name": "CRAN", "URL": "https://cloud.r-project.org"}]
+  },
+  "Packages": {
+    "ggplot2": {
+      "Package": "ggplot2",
+      "Version": "3.4.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "..."
+    }
+  }
+}
+```
+
+::: {.callout-tip}
+## Commit `renv.lock`, not `renv/library/`
+
+Add `renv.lock` to Git to share the package snapshot. Add `renv/library/` to `.gitignore` — it is large and platform-specific.
+:::
+
+## Writing Clean R Code {#sec-clean-code}
+
+### The tidyverse Style Guide {#sec-style}
+
+```{r}
+#| eval: false
+
+# Spacing: spaces around operators and after commas
+x <- 1 + 2          # Good
+x<-1+2              # Bad
+
+# Line length: max ~80 characters; break long pipes
+result <- my_data |>
+  filter(year == 2023) |>
+  group_by(state) |>
+  summarise(mean_yield = mean(yield, na.rm = TRUE))
+
+# Not:
+result <- my_data |> filter(year == 2023) |> group_by(state) |> summarise(mean_yield = mean(yield, na.rm = TRUE))
+
+# Comments: explain WHY, not WHAT
+# Compute yield index relative to national average
+yield_index <- state_yield / national_avg_yield   # Good comment
+
+x <- state_yield / national_avg_yield   # divide state by national avg   # Bad comment
+
+# Function naming: use verbs
+compute_yield_index()   # Good
+yield_index_function()  # Bad
+yi()                    # Bad
+```
+
+### Using `lintr` and `styler` {#sec-linting}
+
+```{r}
+#| eval: false
+
+# lintr: check code style automatically
+install.packages("lintr")
+lintr::lint("analysis/01-clean.R")    # Check one file
+lintr::lint_dir("R/")                 # Check all files in a directory
+
+# styler: automatically reformat code to tidyverse style
+install.packages("styler")
+styler::style_file("analysis/01-clean.R")
+styler::style_dir("analysis/")
+```
+
+## A Complete Reproducible Workflow {#sec-full-workflow}
+
+Putting it all together, a fully reproducible analysis follows this sequence:
+
+```{r}
+#| eval: false
+#| label: full-workflow
+
+# 1. PROJECT SETUP (once)
+# - Create RStudio Project
+# - Initialise Git: git init
+# - Initialise renv: renv::init()
+# - Create directory structure
+
+# 2. DATA ACQUISITION (data/raw/ — never modified)
+# - Download/receive raw data
+# - Document provenance in data/raw/README.md
+# - Commit: git commit -m "Add raw data files"
+
+# 3. DATA CLEANING (analysis/01-clean.qmd)
+library(tidyverse)
+library(here)
+library(janitor)
+
+raw <- read_csv(here("data", "raw", "crop_yields_raw.csv"),
+                na = c("", "NA", "N/A", "--"))
+clean <- raw |>
+  clean_names() |>
+  filter(!is.na(state)) |>
+  mutate(year = as.integer(year))
+
+saveRDS(clean, here("data", "processed", "crop_yields_clean.rds"))
+
+# 4. ANALYSIS (analysis/02-eda.qmd, 03-model.qmd, ...)
+# - Load from data/processed/
+# - All outputs go to output/
+
+# 5. SNAPSHOT AND COMMIT
+# renv::snapshot()
+# git add .
+# git commit -m "Add EDA chapter with yield distributions"
+
+# 6. PUBLISH
+# quarto render
+# quarto publish gh-pages
+```
+
+## The Turing Test for Reproducibility {#sec-turing-test}
+
+A useful heuristic: **could a stranger reproduce your analysis from scratch?** More concretely:
+
+1. Clone your GitHub repository onto a fresh computer
+2. Run `renv::restore()` to install packages
+3. Run `quarto render` or execute scripts in order
+4. Do you get identical results?
+
+If yes, your work is reproducible. If no, something is missing.
+
+::: {.callout-important}
+## The Three Enemies of Reproducibility
+
+1. **Hard-coded paths**: `read_csv("C:/Users/pawan/Desktop/data.csv")` — use `here()` instead
+2. **Random numbers without `set.seed()`**: results change every run
+3. **Undocumented package versions**: `install.packages("ggplot2")` installs the *current* version, which changes over time — use `renv`
+:::
+
+## Exercises {#sec-ch18-exercises}
+
+1. Create a new RStudio Project with the recommended directory structure. Initialise `renv` and install three packages. Take a snapshot. List what is recorded in `renv.lock`.
+
+2. Initialise Git in your project. Make three commits — one for the project structure, one after adding a data file, and one after writing an analysis script. View the log with `git log --oneline`.
+
+3. Apply `lintr::lint_dir()` to any existing R script you have written. Fix at least three style issues it identifies.
+
+4. Write a `README.md` for a hypothetical project. It should include: project title, objective, data sources, how to reproduce the analysis, and required R version.
+
+5. **Challenge:** Take any analysis you have done in a previous chapter and make it fully reproducible: clean directory structure, `renv.lock`, `.gitignore`, parameterised Quarto report, and published to GitHub. Share the URL.

@@ -1,0 +1,456 @@
+# Your First Reproducible Document with Quarto {#sec-quarto}
+
+```{r}
+#| label: setup-ch2
+#| include: false
+library(tidyverse)
+```
+
+::: {.callout-note}
+## Learning Objectives
+
+By the end of this chapter, you will be able to:
+
+- Explain what Quarto is and how it differs from R Markdown
+- Describe the anatomy of a `.qmd` file
+- Use YAML headers to control document metadata and output options
+- Control code chunk behaviour using chunk options
+- Render a document to HTML, PDF, and Word
+- Create a simple reproducible report from a real dataset
+:::
+
+## Why Quarto? {#sec-why-quarto}
+
+For many years, R users relied on **R Markdown** (`.Rmd`) to write reproducible documents. Quarto is its successor — created by Posit (formerly RStudio) to be language-agnostic (it works with R, Python, Julia, and Observable JS) and to consolidate years of lessons learned from R Markdown.
+
+The key conceptual shift is this: **your document and your analysis are the same file**. You do not write your analysis in R, copy the output, and paste it into a Word document. You write prose and code together in one `.qmd` file, and Quarto renders the whole thing into a polished output.
+
+::: {.callout-tip}
+## Quarto vs. R Markdown
+
+If you are coming from R Markdown, here are the key differences:
+
+| Feature | R Markdown | Quarto |
+|---------|-----------|--------|
+| File extension | `.Rmd` | `.qmd` |
+| Chunk options | In `{}` header | YAML-style `#\|` comments |
+| Language support | Primarily R | R, Python, Julia, Observable |
+| Publishing | Various packages | Built-in (`quarto publish`) |
+| Books/websites | `bookdown`, `distill` | Built-in project types |
+
+Quarto can even render old `.Rmd` files without changes.
+:::
+
+## Anatomy of a `.qmd` File {#sec-anatomy}
+
+Every Quarto document has three components: a **YAML header**, **Markdown prose**, and **code chunks**.
+
+### The YAML Header {#sec-yaml}
+
+The document begins with a **YAML header** delimited by triple dashes (`---`). It controls the document's metadata and output format.
+
+```yaml
+---
+title: "My First Report"
+author: "Pawan Kumar"
+date: last-modified
+format:
+  html:
+    toc: true
+    code-fold: true
+  pdf:
+    toc: true
+---
+```
+
+YAML is whitespace-sensitive. Indentation matters. Common YAML options include:
+
+```{r}
+#| label: tbl-yaml-options
+#| echo: false
+#| tbl-cap: "Common Quarto YAML options"
+
+yaml_opts <- data.frame(
+  Option = c("title", "author", "date", "format", "execute", "bibliography", "toc", "number-sections"),
+  Purpose = c(
+    "Document title",
+    "Author name(s)",
+    "Publication date (use `last-modified` to auto-update)",
+    "Output format (html, pdf, docx)",
+    "Default code execution options",
+    "Path to .bib file for citations",
+    "Include table of contents",
+    "Number section headings"
+  )
+)
+knitr::kable(yaml_opts)
+```
+
+### Markdown Prose {#sec-markdown}
+
+Everything outside of code chunks is **Markdown** — a lightweight markup language that uses plain-text symbols to indicate formatting.
+
+```markdown
+# Heading 1
+## Heading 2
+### Heading 3
+
+**Bold text**
+*Italic text*
+`inline code`
+
+- Bullet point 1
+- Bullet point 2
+  - Nested bullet
+
+1. Numbered item
+2. Numbered item
+
+[Link text](https://example.com)
+
+> This is a blockquote.
+
+| Col 1 | Col 2 |
+|-------|-------|
+| A     | 1     |
+| B     | 2     |
+```
+
+### Code Chunks {#sec-chunks}
+
+Code chunks are enclosed in triple backticks with `{r}` to specify the language:
+
+````markdown
+```{{r}}
+#| label: my-first-chunk
+#| echo: true
+#| eval: true
+
+mean(c(10, 20, 30, 40))
+```
+````
+
+The `#|` prefix marks **chunk options** — YAML-style directives that control how the chunk behaves.
+
+## Code Chunk Options {#sec-chunk-options}
+
+Chunk options are the most powerful way to control your document's output. They are written as YAML comments at the top of each chunk:
+
+```{r}
+#| label: tbl-chunk-options
+#| echo: false
+#| tbl-cap: "Most important Quarto chunk options"
+
+chunk_opts <- data.frame(
+  Option = c("label", "echo", "eval", "include", "warning", "message",
+             "output", "fig-cap", "fig-width", "fig-height", "cache"),
+  Type = c("string", "logical", "logical", "logical", "logical", "logical",
+           "logical", "string", "number", "number", "logical"),
+  Default = c("none", "true", "true", "true", "true", "true",
+              "true", "none", "7", "5", "false"),
+  Effect = c(
+    "Unique chunk identifier — required for cross-references",
+    "Show the code in the output?",
+    "Run the code?",
+    "Include chunk (code + output) in document?",
+    "Show R warnings?",
+    "Show R messages?",
+    "Show printed output (text)?",
+    "Figure caption",
+    "Figure width in inches",
+    "Figure height in inches",
+    "Cache chunk results to disk"
+  )
+)
+knitr::kable(chunk_opts, col.names = c("Option", "Type", "Default", "Effect"))
+```
+
+### Demonstration: Controlling Output
+
+Here is the same code with different chunk options to show the effect:
+
+**Show code and output (`echo: true`, `output: true`):**
+
+```{r}
+#| label: demo-echo-true
+#| echo: true
+summary(mtcars$mpg)
+```
+
+**Show output only (`echo: false`):**
+
+```{r}
+#| label: demo-echo-false
+#| echo: false
+cat("This code was hidden, but it ran. Mean MPG:", round(mean(mtcars$mpg), 2))
+```
+
+**Show code only, do not run (`eval: false`):**
+
+```{r}
+#| label: demo-eval-false
+#| eval: false
+# This code block will not be executed
+very_slow_function_that_takes_hours()
+```
+
+**Neither shown nor run (`include: false`):**
+
+```{r}
+#| label: demo-include-false
+#| include: false
+# This chunk is completely invisible in the output
+x <- 42
+```
+
+The variable `x` was set to `r x` in the hidden chunk above — we can use it inline!
+
+### Global Options with `execute`
+
+Rather than setting options in every chunk, set defaults in the YAML header:
+
+```yaml
+execute:
+  echo: true
+  warning: false
+  message: false
+  cache: false
+```
+
+Individual chunks can then override these defaults as needed.
+
+## Inline Code {#sec-inline}
+
+One of the most powerful features of Quarto is **inline code** — R expressions embedded directly in your prose using backticks:
+
+```markdown
+The dataset contains `` `r nrow(mtcars)` `` rows and 
+`` `r ncol(mtcars)` `` columns. The mean fuel efficiency 
+is `` `r round(mean(mtcars$mpg), 1)` `` miles per gallon.
+```
+
+This renders as:
+
+The dataset contains `r nrow(mtcars)` rows and `r ncol(mtcars)` columns. The mean fuel efficiency is `r round(mean(mtcars$mpg), 1)` miles per gallon.
+
+::: {.callout-important}
+## Never Hard-Code Numbers in Your Reports
+
+If your dataset changes, inline code updates automatically. Hard-coded numbers go stale and introduce errors. Always compute values from code.
+:::
+
+## Rendering Documents {#sec-rendering}
+
+### From RStudio
+
+Click the **Render** button (or press `Ctrl+Shift+K`). RStudio will render to the format specified in the YAML header.
+
+### From the Terminal
+
+```bash
+# Render to the default format
+quarto render document.qmd
+
+# Render to a specific format
+quarto render document.qmd --to html
+quarto render document.qmd --to pdf
+quarto render document.qmd --to docx
+
+# Render all files in a project
+quarto render
+```
+
+### Multiple Output Formats
+
+To render to multiple formats simultaneously, specify them all in the YAML:
+
+```yaml
+format:
+  html:
+    toc: true
+  pdf:
+    toc: true
+  docx:
+    reference-doc: template.docx
+```
+
+## Cross-References {#sec-crossref}
+
+Quarto has a built-in cross-reference system. Label a figure or table, then reference it from anywhere in the document.
+
+**Figures:**
+
+````markdown
+```{{r}}
+#| label: fig-mpg-hist
+#| fig-cap: "Distribution of fuel efficiency in the mtcars dataset"
+
+hist(mtcars$mpg, main = "", xlab = "Miles per Gallon")
+```
+````
+
+Then reference it as: `As shown in @fig-mpg-hist...`
+
+```{r}
+#| label: fig-mpg-hist
+#| fig-cap: "Distribution of fuel efficiency in the mtcars dataset."
+#| fig-alt: "Histogram showing distribution of MPG values"
+
+hist(mtcars$mpg,
+     main = "",
+     xlab = "Miles per Gallon",
+     col  = "#3498db",
+     border = "white")
+```
+
+As shown in @fig-mpg-hist, fuel efficiency follows an approximately normal distribution with a slight right skew.
+
+**Tables:**
+
+````markdown
+```{{r}}
+#| label: tbl-mtcars-summary
+#| tbl-cap: "Summary statistics for mtcars"
+
+knitr::kable(summary(mtcars[, 1:4]))
+```
+````
+
+Reference as: `@tbl-mtcars-summary shows...`
+
+## Callout Blocks {#sec-callouts}
+
+Callout blocks draw attention to important information:
+
+```markdown
+::: {.callout-note}
+## Note Title
+This is a note.
+:::
+
+::: {.callout-tip}
+## Tip Title
+This is a tip.
+:::
+
+::: {.callout-warning}
+## Warning Title
+This is a warning.
+:::
+
+::: {.callout-important}
+## Important Title
+This is important.
+:::
+
+::: {.callout-caution}
+## Caution Title
+Proceed with caution.
+:::
+```
+
+## Hands-On Exercise: Your First Report {#sec-first-report}
+
+Let us create a complete mini-report using the `mtcars` dataset. This exercise brings together everything in this chapter.
+
+Create a new file `my-first-report.qmd` and add the following:
+
+```yaml
+---
+title: "Motor Trend Cars: A Brief Analysis"
+author: "Your Name"
+date: last-modified
+format:
+  html:
+    toc: true
+    code-fold: true
+    theme: flatly
+execute:
+  warning: false
+  message: false
+---
+```
+
+Then add these sections with code:
+
+```{r}
+#| label: first-report-setup
+
+# Load the data
+data(mtcars)
+
+# Add row names as a column
+mtcars_df <- mtcars |>
+  tibble::rownames_to_column("car") |>
+  tibble::as_tibble()
+
+# How large is the dataset?
+n_cars <- nrow(mtcars_df)
+n_vars <- ncol(mtcars_df)
+```
+
+The `mtcars` dataset contains data on `r n_cars` cars and `r n_vars` variables, extracted from the 1974 *Motor Trend* magazine.
+
+```{r}
+#| label: tbl-mtcars-head
+#| tbl-cap: "First six rows of the mtcars dataset"
+
+knitr::kable(head(mtcars_df[, 1:7]))
+```
+
+```{r}
+#| label: fig-mpg-cyl
+#| fig-cap: "Fuel efficiency varies substantially by number of cylinders."
+
+library(ggplot2)
+
+ggplot(mtcars_df, aes(x = factor(cyl), y = mpg, fill = factor(cyl))) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(width = 0.2, alpha = 0.5) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    x     = "Number of Cylinders",
+    y     = "Miles per Gallon",
+    fill  = "Cylinders",
+    title = "Fuel Efficiency by Number of Cylinders"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+```
+
+@fig-mpg-cyl shows that cars with 4 cylinders achieve substantially better fuel efficiency than 6- or 8-cylinder cars.
+
+::: {.callout-note}
+## Try It Yourself
+
+Extend this report by adding a scatter plot of `mpg` vs `wt` (weight). Add a linear regression line using `geom_smooth(method = "lm")`. What does the relationship tell you?
+:::
+
+## Publishing Your Document {#sec-publishing}
+
+Once you have a document you are proud of, Quarto makes publishing straightforward:
+
+```bash
+# Publish to Quarto Pub (free hosting)
+quarto publish quarto-pub document.qmd
+
+# Publish to GitHub Pages
+quarto publish gh-pages
+
+# Publish to Netlify
+quarto publish netlify
+```
+
+For RStudio users: *File → Publish Document* provides a GUI for publishing to RPubs or Connect.
+
+## Exercises {#sec-ch2-exercises}
+
+1. Create a new `.qmd` file. Write a YAML header that renders to both HTML and PDF. Set `warning: false` and `message: false` globally.
+
+2. Load the `airquality` dataset. Create a report with three sections: (a) an overview of the data using `str()` and inline code reporting the number of rows; (b) a histogram of ozone levels; (c) a cross-reference to that histogram in your prose.
+
+3. Demonstrate the difference between `echo: false` and `include: false` in the same document. Explain what you see in the output.
+
+4. Use a callout block to highlight one important finding from your `airquality` analysis.
+
+5. **Challenge:** Parameterise your report so that the variable being analysed (ozone, wind, or temperature) can be changed by modifying a single value at the top of the YAML. (Hint: look up Quarto parameters with `params:`.)

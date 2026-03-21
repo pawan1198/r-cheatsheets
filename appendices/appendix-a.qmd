@@ -1,0 +1,281 @@
+# Appendix A: RStudio Cheat Sheet {#sec-appendix-a .unnumbered}
+
+This appendix provides a quick reference for the most commonly used RStudio keyboard shortcuts and essential R syntax patterns.
+
+## RStudio Keyboard Shortcuts {#sec-shortcuts .unnumbered}
+
+### Console and Script {#sec-shortcuts-console .unnumbered}
+
+| Action | Windows / Linux | macOS |
+|--------|----------------|-------|
+| Run current line / selection | `Ctrl+Enter` | `Cmd+Return` |
+| Run entire script | `Ctrl+Shift+Enter` | `Cmd+Shift+Return` |
+| Source script without echo | `Ctrl+Shift+S` | `Cmd+Shift+S` |
+| Clear console | `Ctrl+L` | `Ctrl+L` |
+| Move cursor to console | `Ctrl+2` | `Ctrl+2` |
+| Move cursor to source editor | `Ctrl+1` | `Ctrl+1` |
+| Insert pipe `\|>` | `Ctrl+Shift+M` | `Cmd+Shift+M` |
+| Insert assignment `<-` | `Alt+-` | `Option+-` |
+| Comment/uncomment lines | `Ctrl+Shift+C` | `Cmd+Shift+C` |
+| Reindent lines | `Ctrl+I` | `Cmd+I` |
+
+### File and Project {#sec-shortcuts-file .unnumbered}
+
+| Action | Windows / Linux | macOS |
+|--------|----------------|-------|
+| New file | `Ctrl+Shift+N` | `Cmd+Shift+N` |
+| Save file | `Ctrl+S` | `Cmd+S` |
+| Render Quarto document | `Ctrl+Shift+K` | `Cmd+Shift+K` |
+| Find and replace | `Ctrl+H` | `Cmd+H` |
+| Find in files | `Ctrl+Shift+F` | `Cmd+Shift+F` |
+| Go to line | `Ctrl+G` | `Cmd+G` |
+| Go to function definition | `F2` | `F2` |
+
+### Code Editing {#sec-shortcuts-edit .unnumbered}
+
+| Action | Windows / Linux | macOS |
+|--------|----------------|-------|
+| Autocomplete | `Tab` | `Tab` |
+| Multi-cursor (column select) | `Ctrl+Alt+Click` | `Ctrl+Option+Click` |
+| Duplicate line | `Ctrl+D` | `Cmd+D` |
+| Move line up/down | `Alt+↑/↓` | `Option+↑/↓` |
+| Delete line | `Ctrl+D` | `Cmd+D` |
+| Fold code section | `Alt+L` | `Cmd+Option+L` |
+| Unfold all | `Alt+Shift+O` | `Cmd+Option+Shift+O` |
+
+### R Markdown / Quarto {#sec-shortcuts-quarto .unnumbered}
+
+| Action | Windows / Linux | macOS |
+|--------|----------------|-------|
+| Insert code chunk | `Ctrl+Alt+I` | `Cmd+Option+I` |
+| Run current chunk | `Ctrl+Shift+Enter` | `Cmd+Shift+Enter` |
+| Run all chunks above | `Ctrl+Alt+P` | `Cmd+Option+P` |
+| Render / Knit | `Ctrl+Shift+K` | `Cmd+Shift+K` |
+
+---
+
+## Essential R Syntax Reference {#sec-syntax-ref .unnumbered}
+
+### Data Types and Structures {#sec-types .unnumbered}
+
+```r
+# Atomic types
+TRUE; FALSE                     # logical
+1L; 42L                         # integer
+3.14; 2.718                     # double (numeric)
+"hello"; 'world'                # character
+NA; NA_real_; NA_character_     # missing values
+NULL                            # absence of value
+Inf; -Inf; NaN                  # special numeric values
+
+# Type checking and conversion
+is.numeric(x); is.character(x); is.logical(x)
+as.numeric("3.14"); as.character(42); as.logical(0)
+class(x); typeof(x); str(x)
+
+# Vectors
+x <- c(1, 2, 3, 4, 5)
+seq(1, 10, by = 2)              # 1 3 5 7 9
+seq(0, 1, length.out = 5)       # 0.00 0.25 0.50 0.75 1.00
+rep(c(1, 2), times = 3)        # 1 2 1 2 1 2
+rep(c(1, 2), each = 3)         # 1 1 1 2 2 2
+
+# Subsetting
+x[1]                            # First element
+x[c(1, 3)]                      # Elements 1 and 3
+x[-2]                           # All except element 2
+x[x > 3]                        # Conditional subset
+x[c(TRUE, FALSE, TRUE, ...)]    # Logical subsetting
+
+# Lists
+lst <- list(a = 1, b = "hello", c = 1:5)
+lst$a; lst[["a"]]; lst[[1]]    # Access elements
+
+# Data frames / tibbles
+df <- data.frame(x = 1:3, y = c("a", "b", "c"))
+df$x; df[["x"]]                 # Single column as vector
+df["x"]                         # Single column as data frame
+df[1, ]                         # First row
+df[df$x > 1, ]                  # Row filter
+```
+
+### Common Operations {#sec-ops .unnumbered}
+
+```r
+# Arithmetic
++  -  *  /  ^  %%  %/%
+
+# Comparison
+>  <  >=  <=  ==  !=
+
+# Logical
+&   # AND (vectorised)
+|   # OR  (vectorised)
+!   # NOT
+&&  # AND (scalar, short-circuit)
+||  # OR  (scalar, short-circuit)
+%in%  # Element membership: x %in% c(1, 2, 3)
+
+# String operations (base R)
+nchar("hello")                  # 5
+toupper("hello"); tolower("HELLO")
+paste("a", "b", sep = "-")     # "a-b"
+paste0("prefix", 1:3)          # "prefix1" "prefix2" "prefix3"
+substr("hello", 1, 3)          # "hel"
+grepl("ell", "hello")           # TRUE
+gsub("l", "L", "hello")        # "heLLo"
+
+# String operations (stringr)
+library(stringr)
+str_length("hello")
+str_to_upper("hello")
+str_c("a", "b", sep = "-")
+str_sub("hello", 1, 3)
+str_detect("hello", "ell")
+str_replace_all("hello", "l", "L")
+str_split("a,b,c", ",")
+str_pad("5", width = 3, pad = "0")  # "005"
+str_trim("  hello  ")
+
+# Date operations (lubridate)
+library(lubridate)
+today(); now()
+ymd("2023-07-15"); dmy("15/07/2023")
+year(today()); month(today()); day(today())
+today() + days(30)
+interval(ymd("2023-01-01"), ymd("2023-12-31")) / years(1)
+```
+
+### dplyr Quick Reference {#sec-dplyr-ref .unnumbered}
+
+```r
+library(dplyr)
+
+# Core verbs
+filter(df, condition)           # Subset rows
+select(df, col1, col2)          # Subset columns
+mutate(df, new_col = expr)      # Add/modify columns
+arrange(df, col)                # Sort rows
+summarise(df, stat = expr)      # Aggregate
+group_by(df, col) |> ...        # Group for subsequent operations
+rename(df, new = old)           # Rename columns
+relocate(df, col, .before = x)  # Reorder columns
+distinct(df, col)               # Unique rows
+slice(df, 1:10)                 # Select rows by position
+slice_sample(df, n = 10)        # Random sample of rows
+slice_max(df, col, n = 5)       # Top 5 rows by column
+
+# Joins
+left_join(x, y, by = "key")
+right_join(x, y, by = "key")
+inner_join(x, y, by = "key")
+full_join(x, y, by = "key")
+anti_join(x, y, by = "key")    # Rows in x not in y
+
+# Helper functions inside select/filter
+starts_with("col"); ends_with("name"); contains("str")
+where(is.numeric); matches("regex")
+between(x, 1, 10); near(x, pi)
+n(); n_distinct(); row_number(); rank()
+lag(x); lead(x); cumsum(x); cummean(x)
+```
+
+### ggplot2 Quick Reference {#sec-ggplot-ref .unnumbered}
+
+```r
+library(ggplot2)
+
+# Template
+ggplot(data, aes(x, y, colour, fill, size, shape, linetype, alpha)) +
+  geom_*() +
+  scale_*() +
+  coord_*() +
+  facet_*() +
+  labs(title, subtitle, caption, x, y, colour) +
+  theme_*()
+
+# Common geoms
+geom_point()          # Scatter plot
+geom_line()           # Line chart
+geom_col()            # Bar chart (pre-summarised)
+geom_bar()            # Bar chart (counts)
+geom_histogram()      # Histogram
+geom_density()        # Density curve
+geom_boxplot()        # Box plot
+geom_violin()         # Violin plot
+geom_smooth()         # Trend line (lm, loess, gam)
+geom_abline()         # Reference line
+geom_vline()          # Vertical line
+geom_hline()          # Horizontal line
+geom_text()           # Text labels
+geom_label()          # Text labels with background
+geom_errorbar()       # Error bars
+geom_ribbon()         # Shaded confidence band
+
+# Scales
+scale_x_log10(); scale_y_log10()
+scale_x_continuous(breaks, labels, limits)
+scale_colour_manual(values = c(...))
+scale_colour_brewer(palette = "Set2")
+scale_fill_gradient(low, high)
+scale_size_continuous(range = c(1, 10))
+
+# Facets
+facet_wrap(~ var, nrow = 2, scales = "free")
+facet_grid(rows ~ cols, scales = "free_y")
+
+# Themes
+theme_minimal(); theme_bw(); theme_classic(); theme_void()
+theme(
+  plot.title     = element_text(size = 14, face = "bold"),
+  axis.text.x    = element_text(angle = 45, hjust = 1),
+  legend.position = "bottom",   # "top", "left", "right", "none"
+  panel.grid.minor = element_blank()
+)
+```
+
+---
+
+## Statistical Tests Quick Reference {#sec-tests-ref .unnumbered}
+
+```{r}
+#| label: tbl-stat-tests
+#| echo: false
+#| tbl-cap: "Quick reference for common statistical tests in R"
+
+tests <- data.frame(
+  Situation = c(
+    "One sample mean vs. known value",
+    "Two independent group means",
+    "Two paired measurements",
+    "Three+ group means",
+    "Two group medians (non-normal)",
+    "Paired medians (non-normal)",
+    "Three+ group medians (non-normal)",
+    "Two categorical variables",
+    "Categorical goodness of fit",
+    "Normality check",
+    "Equal variances check"
+  ),
+  R_Function = c(
+    "t.test(x, mu = μ₀)",
+    "t.test(x, y, var.equal = FALSE)",
+    "t.test(x, y, paired = TRUE)",
+    "aov(y ~ group); summary()",
+    "wilcox.test(x, y)",
+    "wilcox.test(x, y, paired = TRUE)",
+    "kruskal.test(y ~ group)",
+    "chisq.test(table)",
+    "chisq.test(x, p = probs)",
+    "shapiro.test(x)",
+    "leveneTest(y ~ group)"
+  ),
+  Package = c(
+    "base", "base", "base", "base",
+    "base", "base", "base", "base", "base",
+    "base", "car"
+  )
+)
+
+knitr::kable(tests, col.names = c("Situation", "R Function", "Package"))
+```

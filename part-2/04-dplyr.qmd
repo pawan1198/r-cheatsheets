@@ -1,0 +1,480 @@
+# Data Manipulation with dplyr and tidyr {#sec-dplyr}
+
+```{r}
+#| label: setup-ch4
+#| include: false
+library(tidyverse)
+```
+
+::: {.callout-note}
+## Learning Objectives
+
+By the end of this chapter, you will be able to:
+
+- Understand the philosophy of tidy data
+- Use the six core `dplyr` verbs fluently
+- Chain operations with the pipe operator (`|>`)
+- Perform grouped summaries with `group_by()` and `summarise()`
+- Reshape data between wide and long formats with `tidyr`
+- Use `data.table` for high-performance operations on large datasets
+:::
+
+## The Tidyverse Philosophy: Tidy Data {#sec-tidy-data}
+
+**Tidy data** is a consistent way of organising tabular data that makes analysis much easier. Hadley Wickham formalised the concept in his 2014 paper. The three rules of tidy data are:
+
+1. Each **variable** forms a **column**
+2. Each **observation** forms a **row**
+3. Each **type of observational unit** forms a **table**
+
+Most real-world data violates at least one of these rules. The tidyverse is designed to make it easy to tidy messy data.
+
+```{r}
+#| label: tidy-vs-messy
+
+# Messy: crop yields spread across year columns
+messy_yield <- tibble(
+  state   = c("Punjab", "Haryana", "UP"),
+  crop    = c("Wheat", "Wheat", "Rice"),
+  `2021`  = c(48.2, 45.1, 30.5),
+  `2022`  = c(49.5, 46.3, 31.2),
+  `2023`  = c(50.1, 47.8, 32.1)
+)
+print(messy_yield)
+
+# Tidy: each row is one observation (state × crop × year)
+tidy_yield <- messy_yield |>
+  pivot_longer(
+    cols      = `2021`:`2023`,
+    names_to  = "year",
+    values_to = "yield_qtl_ha"
+  ) |>
+  mutate(year = as.integer(year))
+print(tidy_yield)
+```
+
+## The Pipe Operator {#sec-pipe}
+
+The **pipe operator** `|>` (base R, version 4.1+) passes the result on its left as the first argument to the function on its right. This enables readable, left-to-right chains of operations.
+
+```{r}
+#| label: pipe-demo
+
+# Without pipe: nested, reads inside-out
+result <- round(mean(sqrt(c(4, 9, 16, 25))), 2)
+
+# With pipe: linear, reads left-to-right
+result <- c(4, 9, 16, 25) |>
+  sqrt() |>
+  mean() |>
+  round(2)
+
+print(result)
+```
+
+::: {.callout-tip}
+## `|>` vs `%>%`
+
+The `|>` is the native R pipe introduced in R 4.1.0. The `%>%` is the magrittr pipe (from the `magrittr` package, loaded with `dplyr`). They are nearly identical for most uses. This book uses `|>` throughout to avoid loading an extra dependency.
+
+The main difference: `|>` always passes to the *first* argument; `%>%` allows using `.` as a placeholder for other positions.
+:::
+
+## Core dplyr Verbs {#sec-dplyr-verbs}
+
+`dplyr` provides **six core verbs** that cover the vast majority of data manipulation needs.
+
+### `filter()` — Subset Rows {#sec-filter}
+
+```{r}
+#| label: filter-demo
+
+data(gapminder, package = "gapminder")
+
+# Single condition
+india <- gapminder |>
+  filter(country == "India")
+
+# Multiple conditions (AND)
+south_asia_2007 <- gapminder |>
+  filter(continent == "Asia", year == 2007, lifeExp > 70)
+
+# OR condition
+india_china <- gapminder |>
+  filter(country %in% c("India", "China"))
+
+# Negation
+not_africa <- gapminder |>
+  filter(continent != "Africa")
+
+# Filter with string matching
+# filter(str_detect(country, "^I"))   # Countries starting with I
+
+nrow(india)
+nrow(south_asia_2007)
+```
+
+### `select()` — Subset Columns {#sec-select}
+
+```{r}
+#| label: select-demo
+
+# Select by name
+gapminder |>
+  select(country, year, lifeExp) |>
+  head(4)
+
+# Select a range
+gapminder |>
+  select(country:lifeExp) |>
+  head(4)
+
+# Drop columns with -
+gapminder |>
+  select(-continent) |>
+  head(4)
+
+# Helper functions
+gapminder |>
+  select(starts_with("c")) |>
+  head(4)
+
+gapminder |>
+  select(ends_with("p")) |>
+  head(4)
+
+gapminder |>
+  select(where(is.numeric)) |>
+  head(4)
+```
+
+### `mutate()` — Create or Modify Columns {#sec-mutate}
+
+```{r}
+#| label: mutate-demo
+
+gapminder_ext <- gapminder |>
+  mutate(
+    gdp_total      = gdpPercap * pop,               # New column
+    log_gdp        = log(gdpPercap),                # Log transformation
+    lifeExp_decade = lifeExp %/% 10 * 10,           # Decade bins
+    high_income    = gdpPercap > median(gdpPercap), # Logical column
+    pop_millions   = pop / 1e6                      # Rescale
+  )
+
+gapminder_ext |>
+  select(country, year, gdpPercap, gdp_total, high_income) |>
+  head(5)
+```
+
+### `arrange()` — Sort Rows {#sec-arrange}
+
+```{r}
+#| label: arrange-demo
+
+# Ascending (default)
+gapminder |>
+  filter(year == 2007) |>
+  arrange(lifeExp) |>
+  head(5)
+
+# Descending
+gapminder |>
+  filter(year == 2007) |>
+  arrange(desc(gdpPercap)) |>
+  head(5)
+
+# Multiple sort keys
+gapminder |>
+  arrange(continent, desc(year), lifeExp) |>
+  head(5)
+```
+
+### `summarise()` — Compute Summary Statistics {#sec-summarise}
+
+```{r}
+#| label: summarise-demo
+
+gapminder |>
+  filter(year == 2007) |>
+  summarise(
+    n_countries    = n(),
+    mean_lifeExp   = mean(lifeExp),
+    median_lifeExp = median(lifeExp),
+    sd_lifeExp     = sd(lifeExp),
+    min_lifeExp    = min(lifeExp),
+    max_lifeExp    = max(lifeExp)
+  )
+```
+
+### `group_by()` + `summarise()` — Grouped Summaries {#sec-group-by}
+
+This combination is the workhorse of data analysis — compute statistics *within* groups:
+
+```{r}
+#| label: group-by-demo
+
+gapminder |>
+  filter(year == 2007) |>
+  group_by(continent) |>
+  summarise(
+    n_countries  = n(),
+    mean_gdp     = mean(gdpPercap),
+    mean_lifeExp = mean(lifeExp),
+    total_pop    = sum(pop)
+  ) |>
+  arrange(desc(mean_lifeExp))
+```
+
+```{r}
+#| label: group-mutate-demo
+
+# group_by + mutate: compute relative to group (not summarise)
+gapminder |>
+  filter(year == 2007) |>
+  group_by(continent) |>
+  mutate(
+    gdp_rel_to_continent = gdpPercap / mean(gdpPercap),
+    gdp_rank_in_continent = rank(desc(gdpPercap))
+  ) |>
+  filter(country %in% c("India", "China", "Japan")) |>
+  select(country, continent, gdpPercap, gdp_rel_to_continent, gdp_rank_in_continent)
+```
+
+### `rename()` and `relocate()` {#sec-rename-relocate}
+
+```{r}
+#| label: rename-demo
+
+gapminder |>
+  rename(
+    gdp_per_capita = gdpPercap,
+    life_expectancy = lifeExp,
+    population = pop
+  ) |>
+  relocate(population, .before = life_expectancy) |>
+  head(3)
+```
+
+## Joining Data Frames {#sec-joins}
+
+Real analysis almost always involves combining multiple tables. `dplyr` provides a family of **join** functions:
+
+```{r}
+#| label: joins-demo
+
+# Example: join crop yields with state population data
+crop_yield <- tibble(
+  state  = c("Punjab", "Haryana", "UP", "MP"),
+  crop   = c("Wheat", "Wheat", "Rice", "Soybean"),
+  yield  = c(50.2, 47.8, 32.1, 12.5)
+)
+
+state_pop <- tibble(
+  state      = c("Punjab", "Haryana", "UP", "Rajasthan"),
+  population = c(27.7, 25.4, 199.8, 68.5)  # millions
+)
+
+# Inner join: only rows with matches in BOTH tables
+inner_join(crop_yield, state_pop, by = "state")
+
+# Left join: all rows from crop_yield, NA for non-matches
+left_join(crop_yield, state_pop, by = "state")
+
+# Full join: all rows from both tables
+full_join(crop_yield, state_pop, by = "state")
+```
+
+## Reshaping Data with `tidyr` {#sec-tidyr}
+
+### `pivot_longer()` — Wide to Long {#sec-pivot-longer}
+
+```{r}
+#| label: pivot-longer-demo
+
+# Monthly rainfall data (wide format — common in reports)
+rainfall_wide <- tibble(
+  station = c("Ludhiana", "Chandigarh", "Amritsar"),
+  Jan = c(28, 32, 25),
+  Feb = c(35, 38, 30),
+  Mar = c(22, 19, 18),
+  Apr = c(8, 7, 6)
+)
+
+print(rainfall_wide)
+
+# Convert to long (tidy) format
+rainfall_long <- rainfall_wide |>
+  pivot_longer(
+    cols      = Jan:Apr,
+    names_to  = "month",
+    values_to = "rainfall_mm"
+  )
+
+print(rainfall_long)
+```
+
+### `pivot_wider()` — Long to Wide {#sec-pivot-wider}
+
+```{r}
+#| label: pivot-wider-demo
+
+# Convert back to wide (useful for creating summary tables)
+rainfall_long |>
+  pivot_wider(
+    names_from  = month,
+    values_from = rainfall_mm
+  )
+
+# A more complex example: multiple variables
+panel_long <- tibble(
+  state = rep(c("Punjab", "Haryana"), each = 3),
+  year  = rep(2021:2023, 2),
+  gdp   = c(6.5, 6.8, 7.1, 5.2, 5.4, 5.7),
+  pop   = c(27.5, 27.7, 27.9, 25.2, 25.4, 25.6)
+)
+
+panel_wide <- panel_long |>
+  pivot_wider(
+    names_from  = year,
+    values_from = c(gdp, pop),
+    names_sep   = "_"
+  )
+
+print(panel_wide)
+```
+
+### Handling Missing Values {#sec-missing}
+
+```{r}
+#| label: missing-demo
+
+df_with_na <- tibble(
+  x = c(1, NA, 3, NA, 5),
+  y = c("a", "b", NA, "d", "e")
+)
+
+# Detect missing
+is.na(df_with_na$x)
+sum(is.na(df_with_na$x))   # Count NAs
+
+# Drop rows with any NA
+df_with_na |> drop_na()
+
+# Drop rows with NA in specific columns
+df_with_na |> drop_na(x)
+
+# Fill NAs
+df_with_na |>
+  mutate(x_filled = replace_na(x, 0))
+
+# Fill forward/backward
+df_with_na |>
+  mutate(x_forward = tidyr::fill(pick(x), x)$x)
+```
+
+## `data.table` for Large Datasets {#sec-datatable}
+
+For datasets with millions of rows, `data.table` offers dramatically faster performance than `dplyr`.
+
+```{r}
+#| label: datatable-demo
+library(data.table)
+
+# Convert to data.table
+mtcars_dt <- as.data.table(mtcars)
+
+# Syntax: DT[i, j, by]
+# i = row filter, j = column operations, by = grouping
+
+# Filter rows
+mtcars_dt[cyl == 6]
+
+# Select columns
+mtcars_dt[, .(mpg, cyl, hp)]
+
+# Add/modify column
+mtcars_dt[, mpg_per_hp := mpg / hp]
+
+# Group by and summarise
+mtcars_dt[, .(mean_mpg = mean(mpg), count = .N), by = cyl]
+```
+
+::: {.callout-tip}
+## When to Use `data.table`
+
+- Datasets with **>1 million rows**: `data.table` is 5–50× faster than `dplyr`
+- Memory-constrained environments: `data.table` modifies objects in-place
+- Production pipelines requiring maximum speed
+
+For typical research datasets (<100,000 rows), `dplyr`'s more readable syntax is preferred.
+:::
+
+## A Complete Data Wrangling Pipeline {#sec-pipeline}
+
+```{r}
+#| label: full-pipeline
+
+# Simulate a realistic messy dataset
+set.seed(42)
+raw_data <- tibble(
+  district   = rep(c("Ludhiana", "Amritsar", "Jalandhar", "Patiala"), each = 5),
+  year       = rep(2019:2023, 4),
+  wheat_prod = round(runif(20, 800, 1500)),
+  rice_prod  = round(runif(20, 200, 600)),
+  area_ha    = round(runif(20, 100, 300)),
+  notes      = sample(c("verified", "estimated", NA), 20, replace = TRUE)
+)
+
+# Full wrangling pipeline
+clean_data <- raw_data |>
+  # 1. Filter recent years only
+  filter(year >= 2021) |>
+  # 2. Handle missing notes
+  mutate(notes = replace_na(notes, "unknown")) |>
+  # 3. Create derived variables
+  mutate(
+    total_prod      = wheat_prod + rice_prod,
+    productivity    = total_prod / area_ha,
+    high_yield      = productivity > median(productivity)
+  ) |>
+  # 4. Reshape to long format
+  pivot_longer(
+    cols      = ends_with("_prod"),
+    names_to  = "crop",
+    values_to = "production"
+  ) |>
+  mutate(crop = str_remove(crop, "_prod")) |>
+  # 5. Summarise by district and crop
+  group_by(district, crop) |>
+  summarise(
+    mean_production = round(mean(production), 1),
+    total_years     = n(),
+    .groups         = "drop"
+  ) |>
+  # 6. Sort
+  arrange(crop, desc(mean_production))
+
+print(clean_data)
+```
+
+## Exercises {#sec-ch4-exercises}
+
+1. Using the `gapminder` dataset, find the five countries with the highest GDP per capita in 2007. Show only the country name, continent, and GDP per capita.
+
+2. Compute the average life expectancy per continent for each decade (1950s, 1960s, ..., 2000s). *Hint:* Create a decade variable using integer division.
+
+3. The following dataset is in wide format. Convert it to tidy (long) format, then compute the mean score per student:
+
+```r
+scores <- tibble(
+  student = c("Aarav", "Bhavna", "Chirag"),
+  maths   = c(85, 92, 78),
+  english = c(72, 88, 95),
+  science = c(90, 76, 83)
+)
+```
+
+4. Join the `crop_yield` and `state_pop` tibbles from @sec-joins using a `right_join()`. What is the result? How does it differ from `left_join()`?
+
+5. **Challenge:** Download state-wise crop production data from data.gov.in. Import, clean (handle NAs, standardise column names), reshape to tidy format, and compute the top 5 producing states for each crop in the most recent year available.

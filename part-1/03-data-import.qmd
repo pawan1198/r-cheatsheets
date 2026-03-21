@@ -1,0 +1,397 @@
+# Data Import and Export {#sec-data-import}
+
+```{r}
+#| label: setup-ch3
+#| include: false
+library(tidyverse)
+library(readxl)
+```
+
+::: {.callout-note}
+## Learning Objectives
+
+By the end of this chapter, you will be able to:
+
+- Import data from CSV, Excel, and other flat-file formats
+- Read data from databases using DBI
+- Handle common data import problems (encoding, separators, missing values)
+- Export data in multiple formats
+- Save and load R objects using `.RDS` and `.RData`
+:::
+
+## Reading Flat Files {#sec-flat-files}
+
+**Flat files** are text-based files where each row is a record and columns are separated by a delimiter (comma, tab, semicolon, etc.).
+
+### CSV Files with `readr` {#sec-readr}
+
+The `readr` package (part of the tidyverse) provides fast, consistent functions for reading delimited text files.
+
+```{r}
+#| label: readr-demo
+#| eval: false
+
+library(readr)
+
+# Read a comma-separated file
+df <- read_csv("data/survey_results.csv")
+
+# Read with explicit options
+df <- read_csv(
+  "data/survey_results.csv",
+  col_types  = cols(
+    id       = col_integer(),
+    name     = col_character(),
+    score    = col_double(),
+    date     = col_date(format = "%Y-%m-%d")
+  ),
+  na         = c("", "NA", "N/A", "missing"),
+  skip       = 2,          # Skip first 2 rows
+  n_max      = 1000        # Read at most 1000 rows
+)
+```
+
+The most important `read_csv()` arguments:
+
+```{r}
+#| label: tbl-readr-args
+#| echo: false
+#| tbl-cap: "Key arguments for `readr::read_csv()`"
+
+args_df <- data.frame(
+  Argument = c("file", "col_types", "col_names", "na", "skip", "n_max", "locale"),
+  Purpose = c(
+    "Path to the file or a URL",
+    "Column type specification",
+    "Column names (TRUE = first row, FALSE = no header, character vector = explicit names)",
+    "Character vector of strings to treat as NA",
+    "Number of rows to skip before reading",
+    "Maximum number of rows to read",
+    "Locale for numbers, dates, and encoding"
+  )
+)
+knitr::kable(args_df)
+```
+
+### Base R vs. readr
+
+```{r}
+#| label: base-vs-readr
+
+# Base R — still valid, slower for large files
+# df_base <- read.csv("data.csv", stringsAsFactors = FALSE)
+
+# readr — faster, returns a tibble, better defaults
+# df_readr <- readr::read_csv("data.csv")
+
+# Key differences:
+# - read.csv() converts strings to factors by default (unless stringsAsFactors = FALSE)
+# - read_csv() never converts strings to factors
+# - read_csv() is significantly faster for large files
+# - read_csv() provides column type messages on import
+
+# Create sample data to demonstrate
+sample_data <- data.frame(
+  name    = c("Ravi", "Priya", "Suresh"),
+  score   = c(85.5, 92.1, 78.3),
+  passed  = c(TRUE, TRUE, FALSE),
+  date    = as.Date(c("2024-01-15", "2024-01-16", "2024-01-17"))
+)
+
+# Write to temp file and re-read
+tmp <- tempfile(fileext = ".csv")
+write_csv(sample_data, tmp)
+reimported <- read_csv(tmp, show_col_types = FALSE)
+print(reimported)
+```
+
+### Tab-Separated and Other Delimiters
+
+```{r}
+#| eval: false
+
+# Tab-separated values
+df_tsv <- read_tsv("data/results.tsv")
+
+# Semicolon-separated (common in European data where comma is decimal separator)
+df_semi <- read_csv2("data/results.csv")     # Uses ; as separator, , as decimal
+df_semi <- read_delim("data/results.csv", delim = ";")
+
+# Fixed-width files
+df_fwf <- read_fwf("data/fixed_width.txt",
+                   fwf_widths(c(10, 8, 5), c("name", "date", "value")))
+```
+
+### URLs and Remote Files
+
+```{r}
+#| eval: false
+
+# Read directly from a URL
+df_web <- read_csv("https://raw.githubusercontent.com/datasets/wheat-prices/master/data/wheat-prices.csv")
+
+# From a compressed file
+df_gz <- read_csv("data/large_file.csv.gz")
+```
+
+## Reading Excel Files {#sec-excel}
+
+Excel files are ubiquitous in government and corporate data. The `readxl` package handles them cleanly without requiring Excel to be installed.
+
+```{r}
+#| eval: false
+library(readxl)
+
+# Read the first sheet
+df_excel <- read_excel("data/crop_production.xlsx")
+
+# Specify a sheet by name or position
+df_sheet2 <- read_excel("data/crop_production.xlsx", sheet = "Punjab")
+df_sheet2 <- read_excel("data/crop_production.xlsx", sheet = 2)
+
+# Read a specific cell range
+df_range <- read_excel("data/crop_production.xlsx",
+                       sheet = "Summary",
+                       range = "A1:D50")
+
+# Skip rows and handle custom NAs
+df_clean <- read_excel(
+  "data/survey.xlsx",
+  skip = 3,
+  na   = c("", "N/A", "-", ".")
+)
+
+# List all sheet names
+excel_sheets("data/crop_production.xlsx")
+```
+
+::: {.callout-tip}
+## When Excel Dates Appear as Numbers
+
+Excel stores dates as the number of days since January 1, 1900. If your date column imports as a numeric, use:
+
+```r
+df$date_column <- as.Date(df$date_column, origin = "1899-12-30")
+```
+:::
+
+## Connecting to Databases {#sec-databases}
+
+For large datasets, it is more efficient to query a database than to load everything into memory.
+
+```{r}
+#| eval: false
+library(DBI)
+library(RSQLite)     # Or RPostgres, RMySQL, odbc, etc.
+
+# Connect to a SQLite database
+con <- dbConnect(RSQLite::SQLite(), "data/my_database.sqlite")
+
+# List tables
+dbListTables(con)
+
+# Query a table
+df_query <- dbGetQuery(con, "SELECT * FROM crop_data WHERE year = 2023")
+
+# Use dplyr syntax with dbplyr (lazy evaluation — SQL runs in the database)
+library(dbplyr)
+crop_tbl <- tbl(con, "crop_data")
+
+result <- crop_tbl |>
+  filter(year == 2023, state == "Punjab") |>
+  select(crop, yield, area) |>
+  collect()   # Pull results into R memory
+
+# Always close the connection
+dbDisconnect(con)
+```
+
+## Reading Other Formats {#sec-other-formats}
+
+```{r}
+#| eval: false
+
+# SPSS files
+library(haven)
+df_spss <- read_spss("data/survey.sav")
+
+# Stata files
+df_stata <- read_stata("data/panel_data.dta")
+
+# SAS files
+df_sas <- read_sas("data/clinical_trial.sas7bdat")
+
+# JSON
+library(jsonlite)
+df_json <- fromJSON("data/api_response.json", flatten = TRUE)
+
+# Google Sheets (requires authentication)
+library(googlesheets4)
+gs4_auth()
+df_gsheet <- read_sheet("https://docs.google.com/spreadsheets/d/YOUR_ID")
+```
+
+## Writing Data {#sec-writing}
+
+### Writing Flat Files
+
+```{r}
+#| eval: false
+
+# Write CSV (tidyverse way)
+write_csv(df, "output/results.csv")
+
+# Write with NA representation
+write_csv(df, "output/results.csv", na = "")
+
+# Write TSV
+write_tsv(df, "output/results.tsv")
+
+# Base R equivalent
+write.csv(df, "output/results.csv", row.names = FALSE)
+```
+
+### Writing Excel Files
+
+```{r}
+#| eval: false
+
+library(writexl)
+
+# Write a single data frame to Excel
+write_xlsx(df, "output/results.xlsx")
+
+# Write multiple data frames as separate sheets
+write_xlsx(
+  list(
+    "Summary"  = summary_df,
+    "Raw Data" = raw_df,
+    "Models"   = model_results_df
+  ),
+  "output/full_report.xlsx"
+)
+```
+
+## Saving R Objects {#sec-rds-rdata}
+
+Sometimes you want to save R objects — models, processed datasets, or lists — in a format that preserves all R-specific attributes.
+
+### `.RDS` Files — Single Objects
+
+**`.RDS`** (R Data Serialisation) stores a *single* R object:
+
+```{r}
+#| label: rds-demo
+#| eval: false
+
+# Save
+model_fit <- lm(mpg ~ wt + hp, data = mtcars)
+saveRDS(model_fit, "output/model_fit.rds")
+
+# Load — assign to any name you want
+m <- readRDS("output/model_fit.rds")
+summary(m)
+
+# RDS is ideal for:
+# - Saving trained models
+# - Caching slow computations
+# - Passing objects between scripts
+```
+
+### `.RData` Files — Multiple Objects
+
+**`.RData`** stores *multiple* named objects from your workspace:
+
+```{r}
+#| eval: false
+
+x <- 1:10
+y <- "hello"
+df <- mtcars
+
+# Save multiple objects
+save(x, y, df, file = "output/my_workspace.RData")
+
+# Save entire workspace
+save.image("output/full_workspace.RData")
+
+# Load — objects are restored with their original names
+load("output/my_workspace.RData")   # x, y, df are now in your environment
+```
+
+::: {.callout-warning}
+## `.RDS` vs. `.RData`
+
+Prefer `.RDS` over `.RData` for most purposes because:
+
+- `.RDS` is explicit: you choose the name when loading (`m <- readRDS(...)`)
+- `.RData` silently overwrites existing objects with the same name on load
+- `.RDS` is easier to use in pipelines and package code
+:::
+
+## The `here` Package: Robust File Paths {#sec-here}
+
+Hard-coded file paths break when you move your project or collaborate with others. The `here` package solves this by always building paths relative to the **project root**.
+
+```{r}
+#| label: here-demo
+
+library(here)
+
+# here() finds the project root (where the .Rproj file lives)
+here()
+
+# Build a path relative to the project root
+here("data", "survey_results.csv")   # Works on Windows, Mac, and Linux
+here("output", "figures", "plot1.png")
+```
+
+::: {.callout-tip}
+## The Golden Rule of File Paths
+
+**Never use `setwd()` in a script.** It makes your script non-portable. Instead, use RStudio Projects and the `here` package for all file paths.
+:::
+
+## Data Import Workflow {#sec-import-workflow}
+
+A typical data import workflow looks like this:
+
+```{r}
+#| label: import-workflow
+#| eval: false
+
+library(tidyverse)
+library(here)
+library(janitor)   # For clean_names()
+
+# 1. Import
+raw <- read_csv(
+  here("data", "raw", "crop_yields_2023.csv"),
+  na          = c("", "NA", "-", ".."),
+  show_col_types = FALSE
+)
+
+# 2. Inspect
+glimpse(raw)
+skimr::skim(raw)
+
+# 3. Clean column names to snake_case
+df <- raw |>
+  janitor::clean_names()   # "Total Area (ha)" → "total_area_ha"
+
+# 4. Save the cleaned version
+write_csv(df, here("data", "processed", "crop_yields_2023_clean.csv"))
+saveRDS(df, here("data", "processed", "crop_yields_2023_clean.rds"))
+```
+
+## Exercises {#sec-ch3-exercises}
+
+1. Download a CSV file of your choice from the Indian government's open data portal ([data.gov.in](https://data.gov.in)) and import it using `read_csv()`. Report on how many rows and columns it has, and what column types were inferred.
+
+2. Practice handling import problems: create a CSV file in a text editor where the decimal separator is a comma and the column separator is a semicolon. Import it using the appropriate `readr` function.
+
+3. Save the `penguins` dataset (from `palmerpenguins`) to an RDS file. Then load it back in a fresh R session and verify it is identical to the original using `identical()`.
+
+4. Use the `here` package to set up a consistent file path structure for a hypothetical project with `data/raw/`, `data/processed/`, and `output/` directories.
+
+5. **Challenge:** Scrape or download monthly petrol price data for India (e.g., from the PPAC website). Import it and write a brief summary report in Quarto showing price trends.

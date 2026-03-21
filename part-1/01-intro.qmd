@@ -1,0 +1,406 @@
+# Introduction to the R Ecosystem {#sec-intro}
+
+```{r}
+#| label: setup-ch1
+#| include: false
+library(tidyverse)
+```
+
+::: {.callout-note}
+## Learning Objectives
+
+By the end of this chapter, you will be able to:
+
+- Explain what R is and why it is used in data science and research
+- Compare R with Python, SAS, and SPSS
+- Navigate the RStudio IDE confidently
+- Install and load R packages
+- Create and manipulate R's fundamental data structures
+:::
+
+## What Is R?
+
+**R** is a programming language and environment designed specifically for statistical computing and data visualisation. It was created by Ross Ihaka and Robert Gentleman at the University of Auckland in the early 1990s, and is today maintained by the **R Core Team** with contributions from thousands of developers worldwide.
+
+R is free and open-source, distributed under the GNU General Public Licence. This means it costs nothing to use, and anyone can inspect, modify, or extend it.
+
+::: {.callout-tip}
+## Why Researchers Love R
+
+The reason R is so popular in academia and research is not just that it is free — it is that the statistical community *builds* in R. New statistical methods are almost always published as R packages on CRAN (the Comprehensive R Archive Network) before they appear in any commercial software.
+:::
+
+### R vs. Python, SAS, and SPSS {#sec-comparison}
+
+All four tools can perform statistical analysis. The differences matter, though:
+
+| Feature | R | Python | SAS | SPSS |
+|---------|---|--------|-----|------|
+| Cost | Free | Free | Expensive | Expensive |
+| Statistical depth | ★★★★★ | ★★★★☆ | ★★★★★ | ★★★☆☆ |
+| Visualisation | ★★★★★ | ★★★★☆ | ★★★☆☆ | ★★☆☆☆ |
+| Machine Learning | ★★★☆☆ | ★★★★★ | ★★★☆☆ | ★★☆☆☆ |
+| Reproducibility | ★★★★★ | ★★★★☆ | ★★★☆☆ | ★★☆☆☆ |
+| Community (Stats) | ★★★★★ | ★★★☆☆ | ★★★☆☆ | ★★☆☆☆ |
+
+: Comparison of Statistical Software {#tbl-software-comparison}
+
+**The bottom line:** If your work is primarily statistical analysis and research, R is the best tool. If you need deep machine learning or production deployment pipelines, Python is often the better choice. SAS and SPSS are legacy tools found mainly in industries with long-standing institutional inertia.
+
+## The R GUI vs. RStudio IDE {#sec-rstudio}
+
+When you install R, you get a minimal **graphical user interface (GUI)** — essentially a console where you can type commands. This is functional but inconvenient for any serious work.
+
+**RStudio** (now rebranded as **Posit**) is an **Integrated Development Environment (IDE)** that wraps around R and makes it vastly more productive. It is the tool used throughout this book.
+
+### The Four Panes of RStudio
+
+RStudio organises itself into four panes (@fig-rstudio-layout):
+
+```{r}
+#| label: fig-rstudio-layout
+#| echo: false
+#| fig-cap: "Conceptual layout of the RStudio IDE with its four main panes."
+#| fig-alt: "Diagram showing the four panes of RStudio IDE"
+
+# We'll describe the layout using a simple diagram
+layout_df <- data.frame(
+  pane = c("Source Editor", "Console", "Environment/History", "Files/Plots/Help"),
+  position = c("Top-Left", "Bottom-Left", "Top-Right", "Bottom-Right"),
+  purpose = c(
+    "Write and save scripts (.R, .qmd)",
+    "Run code interactively",
+    "See objects in memory",
+    "Navigate files, view plots"
+  )
+)
+
+knitr::kable(layout_df, col.names = c("Pane", "Position", "Primary Purpose"),
+             caption = "The four panes of RStudio")
+```
+
+**Pane 1 — Source Editor (top-left):** Where you write scripts. Files with the `.R` extension are plain R scripts; `.qmd` files are Quarto documents (covered in @sec-quarto).
+
+**Pane 2 — Console (bottom-left):** The live R session. Code runs here. You can also type directly into the console for quick experiments, but anything you want to keep should go in a script.
+
+**Pane 3 — Environment / History (top-right):** Lists every object currently in R's memory — data frames, vectors, models, and so on. The *History* tab shows every command you have run.
+
+**Pane 4 — Files / Plots / Packages / Help (bottom-right):** A multi-purpose panel. Use *Files* to navigate your project directory, *Plots* to see graphics, *Packages* to manage installed packages, and *Help* to read documentation.
+
+### RStudio Projects
+
+One of the most important habits to develop is using **RStudio Projects**. A project is simply a directory with a `.Rproj` file that tells RStudio where the "root" of your work is.
+
+To create a new project: *File → New Project → New Directory → New Project*.
+
+::: {.callout-important}
+## Always Work Inside a Project
+
+Using RStudio Projects ensures that `setwd()` is never needed. All file paths become relative to the project root, making your work portable and reproducible on any machine.
+:::
+
+## Installing and Managing Packages {#sec-packages}
+
+Base R is powerful, but its real strength comes from the ecosystem of **packages** — collections of functions, data, and documentation that extend R's capabilities.
+
+### Installing Packages
+
+```{r}
+#| eval: false
+
+# Install a single package from CRAN
+install.packages("ggplot2")
+
+# Install multiple packages at once
+install.packages(c("dplyr", "tidyr", "readr"))
+
+# Install a development version from GitHub
+# remotes::install_github("tidyverse/ggplot2")
+```
+
+::: {.callout-warning}
+## `install.packages()` vs `library()`
+
+`install.packages()` downloads a package to your computer — you do this **once**.
+
+`library()` loads a package into the current R session — you do this **every time** you start a new session or write a script that uses that package.
+:::
+
+### Loading Packages
+
+```{r}
+#| label: load-packages-demo
+# Load a package for use in the current session
+library(ggplot2)
+library(dplyr)
+
+# Check which packages are currently loaded
+# search()
+```
+
+### The Tidyverse Meta-Package
+
+The **tidyverse** is a curated collection of packages that share a common design philosophy. Installing and loading it gives you eight core packages at once:
+
+```{r}
+#| eval: false
+install.packages("tidyverse")
+```
+
+```{r}
+library(tidyverse)
+# Loads: ggplot2, dplyr, tidyr, readr, purrr, tibble, stringr, forcats
+```
+
+### Package Management with `renv`
+
+For serious projects, use `renv` to create a **project-specific package library**. This freezes the exact version of every package, so your analysis will produce identical results even years later.
+
+```{r}
+#| eval: false
+install.packages("renv")
+renv::init()        # Initialise renv for the current project
+renv::snapshot()    # Record current package versions
+renv::restore()     # Reinstall packages from the snapshot
+```
+
+## Introduction to R Objects {#sec-objects}
+
+Everything in R is an **object**. Understanding the different types of objects is fundamental to using R effectively.
+
+### Vectors {#sec-vectors}
+
+The most basic object in R is a **vector** — an ordered collection of values of the same type.
+
+```{r}
+#| label: vectors-demo
+
+# Numeric vector
+heights <- c(165, 172, 158, 180, 169)
+print(heights)
+
+# Character vector
+cities <- c("Delhi", "Mumbai", "Kolkata", "Chennai")
+print(cities)
+
+# Logical vector
+above_170 <- heights > 170
+print(above_170)
+
+# Integer vector (note the L suffix)
+counts <- c(1L, 5L, 3L, 7L, 2L)
+class(counts)
+```
+
+**Subsetting vectors** uses square brackets `[]`:
+
+```{r}
+#| label: vector-subsetting
+
+# First element
+heights[1]
+
+# Elements 2 through 4
+heights[2:4]
+
+# Elements matching a condition
+heights[heights > 170]
+
+# Using a logical vector to subset
+heights[above_170]
+```
+
+### Factors {#sec-factors}
+
+**Factors** represent categorical variables. They look like characters but store the data as integers internally, which is more memory-efficient and important for statistical modelling.
+
+```{r}
+#| label: factors-demo
+
+income_group <- factor(
+  c("Low", "Medium", "High", "Medium", "Low", "High"),
+  levels = c("Low", "Medium", "High"),
+  ordered = TRUE
+)
+
+print(income_group)
+levels(income_group)
+table(income_group)
+```
+
+### Matrices {#sec-matrices}
+
+A **matrix** is a two-dimensional vector — all elements must be of the same type.
+
+```{r}
+#| label: matrices-demo
+
+# Create a 3x3 matrix
+m <- matrix(1:9, nrow = 3, ncol = 3)
+print(m)
+
+# Matrix operations
+m[2, 3]          # Row 2, column 3
+m[1, ]           # Entire first row
+m[, 2]           # Entire second column
+t(m)             # Transpose
+m %*% m          # Matrix multiplication
+```
+
+### Lists {#sec-lists}
+
+A **list** is a collection of objects that can be of *different* types — including other lists. Lists are the most flexible data structure in R.
+
+```{r}
+#| label: lists-demo
+
+survey_result <- list(
+  respondent_id = 101,
+  name = "Aisha",
+  age = 28,
+  responses = c(4, 5, 3, 5, 4),
+  completed = TRUE
+)
+
+# Accessing list elements
+survey_result$name
+survey_result[["age"]]
+survey_result[[4]]         # Fourth element (responses)
+length(survey_result)
+```
+
+### Data Frames {#sec-dataframes}
+
+The **data frame** is the workhorse of data analysis in R. It is a list of vectors of equal length — think of it as a spreadsheet or database table.
+
+```{r}
+#| label: dataframes-demo
+
+# Create a data frame manually
+crop_data <- data.frame(
+  state    = c("Punjab", "Haryana", "UP", "MP", "Rajasthan"),
+  crop     = c("Wheat", "Wheat", "Rice", "Soybean", "Mustard"),
+  yield_qt = c(50.2, 47.8, 32.1, 12.5, 10.3),
+  year     = rep(2023, 5)
+)
+
+print(crop_data)
+str(crop_data)       # Structure of the object
+nrow(crop_data)      # Number of rows
+ncol(crop_data)      # Number of columns
+names(crop_data)     # Column names
+```
+
+**Subsetting data frames:**
+
+```{r}
+#| label: df-subsetting
+
+# Single column as vector
+crop_data$yield_qt
+
+# Single column as data frame
+crop_data["state"]
+
+# Rows 1-3, all columns
+crop_data[1:3, ]
+
+# Filter rows by condition
+crop_data[crop_data$yield_qt > 30, ]
+```
+
+### Tibbles: The Modern Data Frame {#sec-tibbles}
+
+The **tibble** (`tbl_df`) is the tidyverse's improved version of the data frame. It prints more cleanly and behaves more predictably.
+
+```{r}
+#| label: tibbles-demo
+
+library(tibble)
+
+crop_tibble <- as_tibble(crop_data)
+print(crop_tibble)
+
+# Tibbles never convert strings to factors by default
+# Tibbles print only the first 10 rows and as many columns as fit
+```
+
+@tbl-object-types summarises the main R object types:
+
+```{r}
+#| label: tbl-object-types
+#| echo: false
+#| tbl-cap: "Summary of core R object types"
+
+obj_types <- data.frame(
+  Type = c("vector", "factor", "matrix", "list", "data.frame", "tibble"),
+  Dimensions = c("1D", "1D", "2D", "1D (heterogeneous)", "2D", "2D"),
+  Types_Allowed = c("One", "One (integer-coded)", "One", "Many", "One per column", "One per column"),
+  Primary_Use = c("Single variable", "Categorical variable", "Linear algebra", "Flexible container", "Dataset", "Modern dataset")
+)
+
+knitr::kable(obj_types,
+             col.names = c("Object", "Dimensions", "Types Allowed", "Primary Use"))
+```
+
+## Basic Operations and Arithmetic {#sec-arithmetic}
+
+R uses standard mathematical operators plus several important ones for data work:
+
+```{r}
+#| label: arithmetic-demo
+
+# Basic arithmetic
+5 + 3       # Addition
+10 - 4      # Subtraction
+6 * 7       # Multiplication
+15 / 4      # Division
+15 %/% 4    # Integer division
+15 %% 4     # Modulo (remainder)
+2^10        # Exponentiation
+
+# Comparison operators
+5 > 3
+5 == 5
+5 != 3
+5 >= 5
+
+# Logical operators
+TRUE & FALSE    # AND
+TRUE | FALSE    # OR
+!TRUE           # NOT
+```
+
+## Getting Help {#sec-help}
+
+R has an excellent built-in help system:
+
+```{r}
+#| eval: false
+
+# Get help for a function
+?mean
+help("lm")
+
+# Search help files
+??regression
+help.search("linear model")
+
+# See examples for a function
+example(plot)
+
+# Find which package a function belongs to
+# apropos("melt")
+```
+
+## Exercises {#sec-ch1-exercises}
+
+1. Install the `palmerpenguins` package and load it. How many rows and columns does the `penguins` dataset have?
+
+2. Create a numeric vector called `temperatures` containing the average monthly temperatures (in Celsius) for a city of your choice. Calculate the mean, median, and standard deviation.
+
+3. Create a data frame with at least four columns describing five agricultural commodities (name, price, quantity produced, state of origin). Subset it to show only commodities produced in your home state.
+
+4. Convert the `species` column in `palmerpenguins::penguins` to a factor and count how many penguins belong to each species.
+
+5. What is the difference between `=` and `<-` for assignment in R? When would you use one vs. the other?

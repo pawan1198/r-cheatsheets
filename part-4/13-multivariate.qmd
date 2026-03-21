@@ -1,0 +1,212 @@
+# Multivariate Analysis {#sec-multivariate}
+
+```{r}
+#| label: setup-ch13
+#| include: false
+library(tidyverse)
+library(factoextra)
+library(cluster)
+set.seed(42)
+```
+
+::: {.callout-note}
+## Learning Objectives
+
+By the end of this chapter, you will be able to:
+
+- Conduct and interpret Principal Component Analysis (PCA)
+- Choose the number of components using a scree plot
+- Perform K-means and hierarchical clustering
+- Evaluate cluster quality and choose the optimal number of clusters
+- Visualise multivariate results with `ggplot2` and `factoextra`
+:::
+
+## Principal Component Analysis {#sec-pca}
+
+**PCA** reduces a high-dimensional dataset to a smaller set of uncorrelated **principal components** that capture the maximum variance in the data.
+
+```{r}
+#| label: pca-data
+
+# Use USArrests dataset — violent crime rates in US states
+data(USArrests)
+head(USArrests)
+```
+
+```{r}
+#| label: pca-fit
+
+# Scale variables before PCA (important when variables have different units)
+pca_result <- prcomp(USArrests, scale. = TRUE, center = TRUE)
+
+# Variance explained
+summary(pca_result)
+```
+
+```{r}
+#| label: fig-scree
+#| fig-cap: "Scree plot: the first two components explain ~62% of total variance."
+#| fig-width: 7
+#| fig-height: 4.5
+
+fviz_eig(pca_result,
+         addlabels = TRUE,
+         barfill    = "#3498db",
+         barcolor   = "white",
+         linecolor  = "#e74c3c",
+         ggtheme    = theme_minimal(base_size = 12)) +
+  labs(title = "Scree Plot: Variance Explained by Each PC")
+```
+
+```{r}
+#| label: fig-pca-biplot
+#| fig-cap: "PCA biplot: states projected onto PC1 and PC2, with variable loadings as arrows."
+#| fig-width: 8
+#| fig-height: 6
+
+fviz_pca_biplot(
+  pca_result,
+  repel      = TRUE,
+  col.var    = "#e74c3c",
+  col.ind    = "#2c3e50",
+  label      = "all",
+  ggtheme    = theme_minimal(base_size = 11)
+) +
+  labs(title = "PCA Biplot: US States by Crime Profile")
+```
+
+### Interpreting PCA {#sec-pca-interpret}
+
+```{r}
+#| label: pca-loadings
+
+# Variable loadings (how much each variable contributes to each PC)
+pca_result$rotation
+
+# State scores on each component
+head(pca_result$x)
+
+# Proportion of variance
+prop_var <- (pca_result$sdev^2) / sum(pca_result$sdev^2)
+cumsum(prop_var)
+```
+
+## K-Means Clustering {#sec-kmeans}
+
+K-means partitions observations into K groups by minimising within-cluster sum of squares.
+
+```{r}
+#| label: kmeans-data
+
+# Scale the data first
+arrests_scaled <- scale(USArrests)
+```
+
+### Choosing K {#sec-choosing-k}
+
+```{r}
+#| label: fig-elbow
+#| fig-cap: "Elbow plot to choose the optimal number of clusters."
+#| fig-width: 7
+#| fig-height: 4
+
+fviz_nbclust(arrests_scaled, kmeans, method = "wss") +
+  geom_vline(xintercept = 4, linetype = "dashed", colour = "#e74c3c") +
+  labs(title = "Elbow Method for Optimal K",
+       x = "Number of Clusters", y = "Total Within SS") +
+  theme_minimal(base_size = 12)
+```
+
+```{r}
+#| label: fig-silhouette
+#| fig-cap: "Average silhouette width — K=4 appears optimal."
+#| fig-width: 7
+#| fig-height: 4
+
+fviz_nbclust(arrests_scaled, kmeans, method = "silhouette") +
+  labs(title = "Silhouette Method") +
+  theme_minimal(base_size = 12)
+```
+
+```{r}
+#| label: kmeans-fit
+
+set.seed(42)
+km_result <- kmeans(arrests_scaled, centers = 4, nstart = 25)
+
+# Cluster sizes
+table(km_result$cluster)
+
+# Cluster centres (in original scale)
+km_result$centers
+```
+
+```{r}
+#| label: fig-kmeans-plot
+#| fig-cap: "K-means clustering of US states on PCA components."
+#| fig-width: 8
+#| fig-height: 6
+
+fviz_cluster(
+  km_result,
+  data        = arrests_scaled,
+  palette     = "Set2",
+  ellipse.type = "convex",
+  repel       = TRUE,
+  ggtheme     = theme_minimal(base_size = 11)
+) +
+  labs(title = "K-Means Clusters (K=4): US States by Crime Profile")
+```
+
+## Hierarchical Clustering {#sec-hierarchical}
+
+Hierarchical clustering builds a **dendrogram** — a tree that shows how observations merge into clusters at different distances.
+
+```{r}
+#| label: hclust-fit
+
+# Compute distance matrix
+dist_matrix <- dist(arrests_scaled, method = "euclidean")
+
+# Hierarchical clustering with complete linkage
+hclust_result <- hclust(dist_matrix, method = "complete")
+```
+
+```{r}
+#| label: fig-dendrogram
+#| fig-cap: "Dendrogram of US states. Cut at K=4 to match K-means."
+#| fig-width: 10
+#| fig-height: 6
+
+fviz_dend(
+  hclust_result,
+  k           = 4,
+  k_colors    = RColorBrewer::brewer.pal(4, "Set2"),
+  rect        = TRUE,
+  label_cols  = "black",
+  cex         = 0.7,
+  ggtheme     = theme_minimal(base_size = 10)
+) +
+  labs(title = "Hierarchical Clustering Dendrogram (Complete Linkage)")
+```
+
+```{r}
+#| label: hclust-groups
+
+# Cut the tree to get 4 clusters
+hclust_groups <- cutree(hclust_result, k = 4)
+table(hclust_groups)
+
+# Compare K-means vs. hierarchical
+table("K-means" = km_result$cluster, "H-clust" = hclust_groups)
+```
+
+## Exercises {#sec-ch13-exercises}
+
+1. Apply PCA to the `mtcars` dataset. How many components are needed to explain 80% of variance? Create a biplot and describe which cars cluster together.
+
+2. Use K-means clustering (choose K using the elbow method) to group countries in the `gapminder` 2007 dataset using `gdpPercap` and `lifeExp`. Map the clusters using a scatter plot coloured by cluster.
+
+3. Compare K-means and hierarchical clustering on the `iris` dataset. How well do the clusters recover the true species labels? Compute accuracy.
+
+4. **Challenge:** Apply PCA to India's district-level agricultural data (multiple crop yields as variables). Create a map (using `sf` package) coloured by cluster membership to show agricultural zones.
