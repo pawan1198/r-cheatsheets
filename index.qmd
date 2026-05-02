@@ -106,4 +106,4 @@ Pawan is an independent economic researcher and data analyst with over seven yea
 
 ---
 
-*This book was written entirely in Quarto. The source files are available at [github.com/pawan1198/r-stats-book](https://github.com/pawan1198/r-cheatsheets).*
+*This book was written entirely in Quarto. The source files are available at [github.com/pawan1198/r-cheatsheets](https://github.com/pawan1198/r-cheatsheets).*
